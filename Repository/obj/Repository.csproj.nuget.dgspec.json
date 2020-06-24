@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\Messenger.csproj": {}
+    "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\Messenger.csproj": {
+    "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\Messenger.csproj",
-        "projectName": "Messenger",
-        "projectPath": "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\Messenger.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\Repository.csproj",
+        "projectName": "Repository",
+        "projectPath": "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\Repository.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -23,14 +23,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netstandard2.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netstandard2.0": {
             "projectReferences": {}
           }
         },
@@ -41,11 +41,13 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netstandard2.0": {
           "dependencies": {
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.3, )"
+              "version": "[2.0.3, )",
+              "autoReferenced": true
             }
           },
           "imports": [
@@ -58,14 +60,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
