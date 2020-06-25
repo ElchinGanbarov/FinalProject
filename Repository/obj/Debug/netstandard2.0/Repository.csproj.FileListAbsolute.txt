@@ -3,3 +3,7 @@ C:\Users\User\Desktop\FinalProject\Repository\bin\Debug\netstandard2.0\Repositor
 C:\Users\User\Desktop\FinalProject\Repository\obj\Debug\netstandard2.0\Repository.csprojAssemblyReference.cache
 C:\Users\User\Desktop\FinalProject\Repository\obj\Debug\netstandard2.0\Repository.AssemblyInfoInputs.cache
 C:\Users\User\Desktop\FinalProject\Repository\obj\Debug\netstandard2.0\Repository.AssemblyInfo.cs
+C:\Users\User\Desktop\FinalProject\Repository\bin\Debug\netstandard2.0\Repository.pdb
+C:\Users\User\Desktop\FinalProject\Repository\obj\Debug\netstandard2.0\Repository.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\FinalProject\Repository\obj\Debug\netstandard2.0\Repository.dll
+C:\Users\User\Desktop\FinalProject\Repository\obj\Debug\netstandard2.0\Repository.pdb
