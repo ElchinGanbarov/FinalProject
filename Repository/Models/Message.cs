@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Repository.Models
 {
@@ -8,6 +6,10 @@ namespace Repository.Models
     {
         public int HubId { get; set; }
         public int AccountId { get; set; }
+
+        [Required]
+        [MinLength(1)]
+        [MaxLength(300)]
         public string Text { get; set; }
 
         public Hub Hub { get; set; }
