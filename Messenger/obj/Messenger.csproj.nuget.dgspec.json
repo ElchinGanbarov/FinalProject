@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\Messenger.csproj": {}
+    "C:\\Users\\Admin\\Desktop\\FinalProject\\Messenger\\Messenger.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\Messenger.csproj": {
+    "C:\\Users\\Admin\\Desktop\\FinalProject\\Messenger\\Messenger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\Messenger.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\FinalProject\\Messenger\\Messenger.csproj",
         "projectName": "Messenger",
-        "projectPath": "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\Messenger.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\FinalProject\\Messenger\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\FinalProject\\Messenger\\Messenger.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\FinalProject\\Messenger\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -32,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\Repository.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\Repository.csproj"
+              "C:\\Users\\Admin\\Desktop\\FinalProject\\Repository\\Repository.csproj": {
+                "projectPath": "C:\\Users\\Admin\\Desktop\\FinalProject\\Repository\\Repository.csproj"
               }
             }
           }
@@ -80,23 +78,21 @@
         }
       }
     },
-    "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\Repository.csproj": {
+    "C:\\Users\\Admin\\Desktop\\FinalProject\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\Repository.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\FinalProject\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\FinalProject\\Repository\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\FinalProject\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\FinalProject\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
