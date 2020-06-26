@@ -32,15 +32,15 @@ namespace Repository.Models
         [Required]
         [MaxLength(100)]
         public string ForgetToken { get; set; }
-        public bool IsOnline { get; set; }
-        public int AccountDetailId { get; set; }
-        public int AccountPrivacyId { get; set; }
-        public int AccountSecurityId { get; set; }
 
-        public AccountDetail Detail { get; set; }
-        public AccountPrivacy Privacy { get; set; }
-        public AccountSecurity Security { get; set; }
+        public bool IsOnline { get; set; }
+
+        public ICollection<AccountDetail> Detail { get; set; }
+        public ICollection<AccountPrivacy> Privacy { get; set; }
+        public ICollection<AccountSecurity> Security { get; set; }
 
         public ICollection<AccountHubs> AccountHubs { get; set; }
+        public ICollection<AccountFavMessages> AccountFavMessages { get; set; }
+        public ICollection<GroupMembers> GroupMembers { get; set; }
     }
 }
