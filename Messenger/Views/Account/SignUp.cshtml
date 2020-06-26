@@ -1,0 +1,54 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+    <body class="authentication-page">
+
+        <!-- Main Layout Start -->
+        <div class="main-layout card-bg-1">
+            <div class="container d-flex flex-column">
+                <div class="row no-gutters text-center align-items-center justify-content-center min-vh-100">
+                    <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+                        <h1 class="font-weight-bold">Sign up</h1>
+                        <p class="text-dark mb-3">We are Different, We Make You Different.</p>
+                        <form class="mb-3" method="post">
+                            <div class="form-group">
+                                <label asp-for="Name" class="sr-only">Name</label>
+                                <input asp-for="Name" class="form-control form-control-md"placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Surname" class="sr-only">Surname</label>
+                                <input asp-for="Surname" class="form-control form-control-md" placeholder="Enter your surname">
+                            </div>
+                            <div class="form-group">
+                                <label  asp-for="Email" class="sr-only">Email Address</label>
+                                <input  asp-for="Email" class="form-control form-control-md" placeholder="Enter your email">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password" class="sr-only">Password</label>
+                                <input asp-for="Password" class="form-control form-control-md" placeholder="Enter your password">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PasswordConfirm"  class="sr-only">Password Confirm </label>
+                                <input asp-for="PasswordConfirm" class="form-control form-control-md" placeholder="Enter your password confirm ">
+                            </div>
+                            <button class="btn btn-primary btn-lg btn-block text-uppercase font-weight-semibold" type="submit">Sign up</button>
+                        </form>
+
+                        <p>Already have an account? <a class="font-weight-semibold" asp-controller="account" asp-action="signin">Sign in</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Layout End -->
+        <!-- Javascript Files -->
+        <script src="~/vendors/jquery/jquery-3.5.0.min.js"></script>
+        <script src="~/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="~/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script src="~/vendors/svg-inject/svg-inject.min.js"></script>
+        <script src="~/vendors/modal-stepes/modal-steps.min.js"></script>
+        <script src="~/js/app.min.js"></script>
+
+    </body>
+
