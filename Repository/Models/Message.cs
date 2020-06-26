@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Repository.Models
 {
@@ -14,5 +15,6 @@ namespace Repository.Models
 
         public Hub Hub { get; set; }
         public Account Account { get; set; }
+        public ICollection<AccountFavMessages> AccountFavMessages { get; set; }
     }
 }
