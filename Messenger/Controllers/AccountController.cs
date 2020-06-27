@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+<<<<<<< HEAD
 using AutoMapper;
 using Messenger.Models;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AuthRepositories;
+=======
+using Microsoft.AspNetCore.Mvc;
+>>>>>>> 23c55aa3d140936fc774e0f33feaa1f602313d8f
 
 namespace Messenger.Controllers
 {
     public class AccountController : Controller
     {
+<<<<<<< HEAD
         private readonly IMapper _mapper;
         private readonly IAuthRepository _authRepository;
         public AccountController(IMapper mapper,IAuthRepository authRepository)
@@ -19,10 +24,13 @@ namespace Messenger.Controllers
             _mapper = mapper;
             _authRepository = authRepository;
         }
+=======
+>>>>>>> 23c55aa3d140936fc774e0f33feaa1f602313d8f
         public IActionResult SignUp()
         {
             return View();
         }
+<<<<<<< HEAD
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult SignUp(RegisterViewModel model)
@@ -53,6 +61,8 @@ namespace Messenger.Controllers
 
             return View(model);
         }
+=======
+>>>>>>> 23c55aa3d140936fc774e0f33feaa1f602313d8f
         public IActionResult SignIn()
         {
             return View();
