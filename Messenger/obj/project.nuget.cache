@@ -1,18 +1,11 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "n+fZC+aUl1UYEVirhOMBWB74VwDqI3GV0hS8aTCIxsrjVPZ25Apk3Od0qSC2IQVfh197AwZtC8tmYvXfiRWMJQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\Desktop\\FinalProject\\Messenger\\Messenger.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
-=======
-  "dgSpecHash": "oxkkgHjN/LBCtON7SfE/yQduoOQRdYrSkhT5P2fBaw/P2yRKp96pCQ1i9oab48Zg6vb8Ztxk8cLP86NFBtnHmw==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Desktop\\FinalProject\\Messenger\\Messenger.csproj",
-  "expectedPackageFiles": [
->>>>>>> 23c55aa3d140936fc774e0f33feaa1f602313d8f
     "C:\\Users\\Admin\\.nuget\\packages\\cloudinarydotnet\\1.11.0\\cloudinarydotnet.1.11.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\cryptohelper\\3.0.2\\cryptohelper.3.0.2.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\2.0.1\\microsoft.aspnetcore.cryptography.internal.2.0.1.nupkg.sha512",

@@ -412,10 +412,5 @@ C:\Users\Admin\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\Admin\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Account\SignUp.cshtml.g.cs
 C:\Users\Admin\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
 C:\Users\Admin\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Account\SignIn.cshtml.g.cs
-<<<<<<< HEAD
 C:\Users\Admin\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Admin\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\Admin\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.csproj.CoreCompileInputs.cache
-C:\Users\Admin\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cache
-=======
->>>>>>> 23c55aa3d140936fc774e0f33feaa1f602313d8f

@@ -21,13 +21,31 @@
     <link rel="icon" type="image/png" sizes="16x16" href="~/favicon-16x16.png">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="~/webfonts/inter/inter.css">
-    <link rel="stylesheet" href="~/css/app.min.css">
+    <link rel="stylesheet" asp-append-version="true" href="~/css/app.min.css">
     <link rel="stylesheet" href="~/css/landing-page.min.css">
     <link rel="stylesheet" href="~/css/inter.css">
 
 
+    
+
 
 </head>
-@RenderBody()
+<body>
+    @RenderBody()
+
+    <script src="~/vendors/jquery/jquery-3.5.0.min.js"></script>
+    <script src="~/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/vendors/svg-inject/svg-inject.min.js"></script>
+    <script src="~/vendors/modal-stepes/modal-steps.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/app.min.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+
+
+
+
 </html>

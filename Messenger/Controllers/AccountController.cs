@@ -2,21 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using AutoMapper;
 using Messenger.Models;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AuthRepositories;
-=======
-using Microsoft.AspNetCore.Mvc;
->>>>>>> 23c55aa3d140936fc774e0f33feaa1f602313d8f
 
 namespace Messenger.Controllers
 {
     public class AccountController : Controller
     {
-<<<<<<< HEAD
         private readonly IMapper _mapper;
         private readonly IAuthRepository _authRepository;
         public AccountController(IMapper mapper,IAuthRepository authRepository)
@@ -24,13 +19,11 @@ namespace Messenger.Controllers
             _mapper = mapper;
             _authRepository = authRepository;
         }
-=======
->>>>>>> 23c55aa3d140936fc774e0f33feaa1f602313d8f
+
         public IActionResult SignUp()
         {
             return View();
         }
-<<<<<<< HEAD
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult SignUp(RegisterViewModel model)
@@ -39,7 +32,7 @@ namespace Messenger.Controllers
 
             if (checkUser)
             {
-                ModelState.AddModelError("register.Email", "Bu E-mail artiq movcuddur");
+                ModelState.AddModelError("Email", "Bu E-mail artiq movcuddur");
             }
             if (ModelState.IsValid)
             {
@@ -47,8 +40,6 @@ namespace Messenger.Controllers
                 user.Token = Guid.NewGuid().ToString();
                 user.Status = true;
                 _authRepository.Register(user);
-
-                Response.Cookies.Delete("token");
 
                 Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions
                 {
@@ -61,9 +52,12 @@ namespace Messenger.Controllers
 
             return View(model);
         }
-=======
->>>>>>> 23c55aa3d140936fc774e0f33feaa1f602313d8f
+
         public IActionResult SignIn()
+        {
+            return View();
+        }
+        public IActionResult SignIn(LoginViewModel model)
         {
             return View();
         }

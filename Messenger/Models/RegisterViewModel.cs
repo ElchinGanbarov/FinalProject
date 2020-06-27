@@ -20,6 +20,10 @@ namespace Messenger.Models
         [MaxLength(50)]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Nomre daxil edin..")]
+        [MaxLength(15)]
+        public string Phone { get; set; }
+
         [Required(ErrorMessage = "Şifrə daxil edin..")]
         [MaxLength(50, ErrorMessage = "Şifrə maximum 50 xarakter ola bilər")]
         [MinLength(6, ErrorMessage = "Şifrə minumum 6 xarakter ola bilər")]
