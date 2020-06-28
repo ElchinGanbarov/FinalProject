@@ -13,6 +13,7 @@ namespace Repository.Repositories.AuthRepositories
         Account CheckByToken(string token);
         void UpdateToken(int id, string token);
         bool CheckEmail(string email);
+        bool CheckPhone(string phone);
     }
     public class AuthRepository : IAuthRepository
     {
@@ -29,6 +30,11 @@ namespace Repository.Repositories.AuthRepositories
         public bool CheckEmail(string email)
         {
             return _context.Accounts.Any(u => u.Email == email);
+        }
+
+        public bool CheckPhone(string phone)
+        {
+            return _context.Accounts.Any(u => u.Phone == phone);
         }
 
         public Account Login(string email, string password)

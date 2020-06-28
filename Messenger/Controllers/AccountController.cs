@@ -29,10 +29,15 @@ namespace Messenger.Controllers
         public IActionResult SignUp(RegisterViewModel model)
         {
             bool checkUser = _authRepository.CheckEmail(model.Email);
+            bool number = _authRepository.CheckPhone(model.Phone);
 
             if (checkUser)
             {
                 ModelState.AddModelError("Email", "Bu E-mail artiq movcuddur");
+            }
+            if (number)
+            {
+                ModelState.AddModelError("Phone", "Bu Nömrə artıq mövcuddur");
             }
             if (ModelState.IsValid)
             {
