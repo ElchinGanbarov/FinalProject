@@ -57,13 +57,48 @@ namespace Messenger.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult SignIn(LoginViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var user = _authRepository.Login(model.Email, model.Password);
+                if (user != null)
+                {
+
+                    user.Token = Guid.NewGuid().ToString();
+                    _authRepository.UpdateToken(user.Id, user.Token);
+                    Response.Cookies.Delete("token");
+                    Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions
+                    {
+                        Expires = model.RememberMe ? DateTime.Now.AddYears(1) : DateTime.Now.AddDays(1),
+                        HttpOnly = true
+                    });
+                    return RedirectToAction("chat1", "pages");
+                }
+
+                ModelState.AddModelError("Password", "E-poct veya Sifre yanlisdir...");
+
+            }
+            return View(model);
         }
         public IActionResult ResetPassword()
         {
             return View();
         }
+        public IActionResult Logout()
+        {
+            Request.Cookies.TryGetValue("token", out string token);
+            var user = _authRepository.CheckByToken(token);
+            if (user.Token!= null)
+            {
+                _authRepository.UpdateToken(user.Id, null);
+            }
+            Response.Cookies.Delete("token");
+            //return PartialView("chat1", "pages");
+            return RedirectToAction("SignIn","Account");
+        }
+
     }
 }

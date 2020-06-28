@@ -63,7 +63,7 @@ namespace Messenger
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=QuickyMessanger}/{action=Index}/{id?}");
+                    pattern: "{controller=pages}/{action=chat1}/{id?}");
             });
         }
     }

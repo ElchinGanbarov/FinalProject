@@ -16,33 +16,41 @@
     <meta name="revised" content="Sunday, July 18th, 2010, 5:15 pm" />
     <title>@ViewData["Title"]</title>
     <!-- Favicon and Touch Icons-->
-    <link rel="apple-touch-icon" sizes="180x180" href="~/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" asp-append-version="true" href="~/css/app.min.css">
+
     <link rel="stylesheet" href="~/css/landing-page.min.css">
     <link rel="stylesheet" href="~/css/inter.css">
-
-
-    
-
-
-</head>
-<body>
-    @RenderBody()
-
+    <link rel="stylesheet" asp-append-version="true" href="~/css/app.min.css">
     <script src="~/vendors/jquery/jquery-3.5.0.min.js"></script>
     <script src="~/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="~/vendors/svg-inject/svg-inject.min.js"></script>
     <script src="~/vendors/modal-stepes/modal-steps.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/app.min.js" asp-append-version="true"></script>
-
+    <script src="~/js/app.min.js"></script>
     @RenderSection("Scripts", required: false)
 
-</body>
+
+
+
+
+</head>
+
+
+@RenderBody()
+
+
+
+
+
+ 
+
+
+
+
 
 
 

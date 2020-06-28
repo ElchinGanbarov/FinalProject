@@ -25,7 +25,6 @@ namespace Repository.Models
         [MaxLength(100)]
         public string Password { get; set; }
 
-        [Required]
         [MaxLength(100)]
         public string Token { get; set; }
 
