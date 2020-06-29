@@ -18,10 +18,14 @@ namespace Messenger.Models
 
         [Required(ErrorMessage ="Epoçt daxil edin..")]
         [MaxLength(50)]
+        [EmailAddress(ErrorMessage = "Duzgun epoct daxil edin..")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Nomre daxil edin..")]
-        [MaxLength(15)]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Nömrəni daxil edin!")]
+        [RegularExpression(@"((\+994[ /]*)?(\d[ /]*){8}\d)",
+                           ErrorMessage = "Nömrəni düzgün daxil edin.")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Şifrə daxil edin..")]
