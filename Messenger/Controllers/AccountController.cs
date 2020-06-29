@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using AutoMapper;
+using Messenger.Filters;
 using Messenger.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ namespace Messenger.Controllers
 {
     public class AccountController : Controller
     {
+        private Repository.Models.Account  _user => RouteData.Values["User"] as Repository.Models.Account;
         private readonly IMapper _mapper;
         private readonly IAuthRepository _authRepository;
         public AccountController(IMapper mapper,IAuthRepository authRepository)
@@ -154,10 +156,13 @@ namespace Messenger.Controllers
         }
 
         //Email Verification Link Click View
+        [TypeFilter(typeof(Auth))]
         [HttpGet]
-        public IActionResult VerifyEmail(Guid guId)
+        public IActionResult VerifyEmail()
         {
-            if (_authRepository.VerifyEmail(guId)) return View();
+            ViewBag.Name = _user.Name;
+            string guId = Request.Path.Value.Substring(21);
+            if (_authRepository.CheckByEmailVerificationCode(guId)) return View();
 
             return View();
         }
