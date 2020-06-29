@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using AutoMapper;
 using Messenger.Models;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AuthRepositories;
@@ -44,7 +47,15 @@ namespace Messenger.Controllers
                 var user = _mapper.Map<RegisterViewModel, Account>(model);
                 user.Token = Guid.NewGuid().ToString();
                 user.Status = true;
+                user.IsEmailVerified = false;
+
+                //email verification code
+                user.EmailActivationCode = Guid.NewGuid();
+
                 _authRepository.Register(user);
+
+                //send verification link email
+                SendVerificationLinkEmail(user.Email, user.EmailActivationCode);
 
                 Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions
                 {
@@ -105,5 +116,50 @@ namespace Messenger.Controllers
             return RedirectToAction("SignIn","Account");
         }
 
+
+
+        //Send Verification Link Email
+        [NonAction]
+        public void SendVerificationLinkEmail(string email, Guid activationCode)
+        {
+            string link = HttpContext.Request.Scheme + "://" + Request.Host + "/account/verifyemail/" + activationCode;
+
+            var fromEmail = new MailAddress("parvinkhp@code.edu.az", "Messanger Application");
+            var fromEmailPassword = "Pervin_1997";
+            var toEmail = new MailAddress(email);
+
+            var subject = "Your Account Successfully Created";
+            var messageBody = "<br/></br></br>Thank you for creating your new Messanger App account! " +
+                "Please, Click the below link to Verify Your Account. " +
+                "<a href='" + link + "'>" + link + "</a>";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = messageBody,
+                IsBodyHtml = true
+            };
+            smtp.Send(message);
+
+        }
+
+        //Email Verification Link Click View
+        [HttpGet]
+        public IActionResult VerifyEmail(Guid guId)
+        {
+            if (_authRepository.VerifyEmail(guId)) return View();
+
+            return View();
+        }
     }
 }

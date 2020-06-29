@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Repository.Models
@@ -30,6 +31,9 @@ namespace Repository.Models
 
         [MaxLength(100)]
         public string ForgetToken { get; set; }
+
+        public bool IsEmailVerified { get; set; }
+        public Guid EmailActivationCode { get; set; }
 
         public bool IsOnline { get; set; }
 

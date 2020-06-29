@@ -14,6 +14,7 @@ namespace Repository.Repositories.AuthRepositories
         void UpdateToken(int id, string token);
         bool CheckEmail(string email);
         bool CheckPhone(string phone);
+        bool VerifyEmail(Guid guId);
     }
     public class AuthRepository : IAuthRepository
     {
@@ -65,5 +66,19 @@ namespace Repository.Repositories.AuthRepositories
             _context.SaveChanges();
         }
 
+        public bool VerifyEmail(Guid guId)
+        {
+            string id = guId.ToString();
+
+            if (guId == null)
+            {
+                return false;
+            }
+            var account = _context.Accounts.Where(a => a.EmailActivationCode == new Guid(id)).FirstOrDefault();
+
+            if (account != null) return true;
+
+            return false;
+        }
     }
 }

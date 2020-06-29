@@ -36,5 +36,10 @@ namespace Messenger.Models
         [Compare("Password", ErrorMessage = "Şifrə və şifrə təsdiqi eyni olmalıdır")]
         [DataType(DataType.Password)]
         public string PasswordConfirm { get; set; }
+
+        public bool IsEmailVerified { get; set; }
+
+        [MaxLength(100)]
+        public string EmailActivationCode { get; set; }
     }
 }
