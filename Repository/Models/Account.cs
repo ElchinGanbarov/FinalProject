@@ -33,7 +33,9 @@ namespace Repository.Models
         public string ForgetToken { get; set; }
 
         public bool IsEmailVerified { get; set; }
-        public Guid EmailActivationCode { get; set; }
+
+        [MaxLength(100)]
+        public string EmailActivationCode { get; set; }
 
         public bool IsOnline { get; set; }
 

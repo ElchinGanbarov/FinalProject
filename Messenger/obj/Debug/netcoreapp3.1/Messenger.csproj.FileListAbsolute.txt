@@ -303,3 +303,4 @@ C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.d
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.pdb
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.genruntimeconfig.cache
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Account\VerifyEmail.cshtml.g.cs
+C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Account\UnVerified.cshtml.g.cs
