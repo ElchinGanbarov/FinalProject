@@ -13,7 +13,7 @@ namespace Repository.Data
         }
 
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<AccountDetail> AccountDetails { get; set; }
+        public DbSet<AccountSocialLink> AccountSocialLinks { get; set; }
         public DbSet<AccountFavMessages> AccountFavMessages { get; set; }
         public DbSet<AccountHubs> AccountHubs { get; set; }
         public DbSet<AccountPrivacy> AccountPrivacies { get; set; }

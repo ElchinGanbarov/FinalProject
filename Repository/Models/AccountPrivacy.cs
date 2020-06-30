@@ -13,11 +13,7 @@ namespace Repository.Models
         public bool LastLogin { get; set; }
         public bool LastSeen { get; set; }
         public bool StatusText { get; set; }
-        public bool Facebook { get; set; }
-        public bool Twitter { get; set; }
-        public bool Instagram { get; set; }
-        public bool Linkedin { get; set; }
-
+        public bool SocialLink { get; set; }
         public Account Account { get; set; }
     }
 }
