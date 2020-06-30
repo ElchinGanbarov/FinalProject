@@ -52,7 +52,7 @@ namespace Messenger.Controllers
                 user.IsEmailVerified = false;
 
                 //email verification code
-                user.EmailActivationCode = Guid.NewGuid();
+                user.EmailActivationCode = Guid.NewGuid().ToString();
 
                 _authRepository.Register(user);
 
@@ -93,6 +93,12 @@ namespace Messenger.Controllers
                         Expires = model.RememberMe ? DateTime.Now.AddYears(1) : DateTime.Now.AddDays(1),
                         HttpOnly = true
                     });
+
+                    if (user.IsEmailVerified == false)
+                    {
+                        return RedirectToAction("unverified", "account");
+                    }
+
                     return RedirectToAction("chat1", "pages");
                 }
 
@@ -122,7 +128,7 @@ namespace Messenger.Controllers
 
         //Send Verification Link Email
         [NonAction]
-        public void SendVerificationLinkEmail(string email, Guid activationCode)
+        public void SendVerificationLinkEmail(string email, string activationCode)
         {
             string link = HttpContext.Request.Scheme + "://" + Request.Host + "/account/verifyemail/" + activationCode;
 
@@ -158,11 +164,61 @@ namespace Messenger.Controllers
         //Email Verification Link Click View
         [TypeFilter(typeof(Auth))]
         [HttpGet]
-        public IActionResult VerifyEmail()
+        public IActionResult VerifyEmail(int? id)
         {
-            ViewBag.Name = _user.Name;
-            string guId = Request.Path.Value.Substring(21);
-            if (_authRepository.CheckByEmailVerificationCode(guId)) return View();
+            if (id == _user.Id)
+            {
+                ViewBag.test = "test";
+            }
+
+
+            if (_user.IsEmailVerified)
+            {
+                ViewBag.VerifiedAccount = true;
+            }
+            else
+            {
+                ViewBag.VerifiedAccount = false;
+            }
+
+            string Url = Request.Path.Value;
+
+            if (Url.Length < 22)
+            {
+                return NotFound();
+            }
+
+            string linkId = Url.Substring(21);
+
+            ViewBag.IsVerified = false;
+
+            if (_user.EmailActivationCode == null)
+            {
+                ViewBag.Message = "Account Verification Link Has Expired !";
+                ViewBag.IsVerified = false;
+
+                return View();
+            }
+
+            if (_user.EmailActivationCode.ToString() == linkId)
+            {
+                ViewBag.Message = "Account Successfully Verified";
+                ViewBag.IsVerified = true;
+
+
+                _authRepository.VerifyUserEmail(_user.Id);
+            }
+
+            return View();
+        }
+
+        [TypeFilter(typeof(Auth))]
+        public IActionResult UnVerified()
+        {
+            if (_user.IsEmailVerified)
+            {
+                return NotFound();
+            }
 
             return View();
         }
