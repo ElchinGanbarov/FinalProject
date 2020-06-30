@@ -57,7 +57,9 @@ namespace Messenger.Controllers
                 _authRepository.Register(user);
 
                 //send verification link email
-                SendVerificationLinkEmail(user.Email, user.EmailActivationCode);
+                string userFullname = user.Name + " " + user.Surname;
+
+                SendVerificationLinkEmail(user.Email, user.EmailActivationCode, userFullname);
 
                 Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions
                 {
@@ -128,18 +130,28 @@ namespace Messenger.Controllers
 
         //Send Verification Link Email
         [NonAction]
-        public void SendVerificationLinkEmail(string email, string activationCode)
+        public void SendVerificationLinkEmail(string email, string activationCode, string userFullname)
         {
             string link = HttpContext.Request.Scheme + "://" + Request.Host + "/account/verifyemail/" + activationCode;
 
-            var fromEmail = new MailAddress("parvinkhp@code.edu.az", "Messanger Application");
+            var fromEmail = new MailAddress("parvinkhp@code.edu.az", "Messenger App");
             var fromEmailPassword = "Pervin_1997";
             var toEmail = new MailAddress(email);
+            var appeal = "Dear, " + userFullname +"! ";
 
             var subject = "Your Account Successfully Created";
-            var messageBody = "<br/></br></br>Thank you for creating your new Messanger App account! " +
-                "Please, Click the below link to Verify Your Account. " +
-                "<a href='" + link + "'>" + link + "</a>";
+            //var messageBody = "<br/></br></br>Thank you for creating your new Messanger App account! " +
+            //    "Please, Click the below link to Verify Your Account. " +
+            //    "<a href='" + link + "'>" + link + "</a>";
+
+
+            var messageBody = " <center><img style='width: 80; padding: 10px 0px' src='http://frontendmatters.org/quicky/assets/media/logo.svg' /></center> </br> " +
+                "<div style=' background-color: #665dfe; padding: 20px 0px;'> " +
+                "<h2 style='padding: 10px 30px; font-size: 29px; color: #fff;'>" + appeal +
+                "Thank you for creating your new Messanger App account! Please, Click the below button to Verify Your Account </h2>" +
+                "<center><a style='display: inline-block; background-color: #28a745; font-weight: bold; color: #fff; padding: 10px; " +
+                "text-align: center; text-decoration: none; border: 1px solid transparent; font-size: 22px; border-radius: 5px; line-height: 1.5;' " +
+                "href=" + link + ">Verify Account</a></center>";
 
             var smtp = new SmtpClient
             {
