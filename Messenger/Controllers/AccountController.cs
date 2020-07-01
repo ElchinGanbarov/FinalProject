@@ -24,7 +24,6 @@ namespace Messenger.Controllers
             _mapper = mapper;
             _authRepository = authRepository;
         }
-
         public IActionResult SignUp()
         {
             return View();
@@ -125,8 +124,6 @@ namespace Messenger.Controllers
             //return PartialView("chat1", "pages");
             return RedirectToAction("SignIn","Account");
         }
-
-
 
         //Send Verification Link Email
         [NonAction]
