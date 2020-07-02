@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -132,18 +133,28 @@ namespace Messenger.Controllers
         [NonAction]
         public void SendVerificationLinkEmail(string email, string activationCode, string userFullname)
         {
+            bool isRetry = false;
+            if (string.IsNullOrEmpty(activationCode) || activationCode == "verified")
+            {
+                activationCode = Guid.NewGuid().ToString();
+                isRetry = true;
+            }
+
             string link = HttpContext.Request.Scheme + "://" + Request.Host + "/account/verifyemail/" + activationCode;
 
             var fromEmail = new MailAddress("parvinkhp@code.edu.az", "Messenger App");
             var fromEmailPassword = "Pervin_1997";
             var toEmail = new MailAddress(email);
             var appeal = "Dear, " + userFullname +"! ";
-
-            var subject = "Your Account Successfully Created";
-            //var messageBody = "<br/></br></br>Thank you for creating your new Messanger App account! " +
-            //    "Please, Click the below link to Verify Your Account. " +
-            //    "<a href='" + link + "'>" + link + "</a>";
-
+            var subject = ""; //in testing proccess!
+            if (isRetry)
+            {
+                subject = "Messenger Account Verify Link";
+            }
+            else
+            {
+                subject = "Messenger Account Successfully Created";
+            }
 
             var messageBody = " <center><img style='width: 80; padding: 10px 0px' src='http://frontendmatters.org/quicky/assets/media/logo.svg' /></center> </br> " +
                 "<div style=' background-color: #665dfe; padding: 20px 0px;'> " +
@@ -178,33 +189,25 @@ namespace Messenger.Controllers
         [HttpGet]
         public IActionResult VerifyEmail(int? id)
         {
-            if (id == _user.Id)
-            {
-                ViewBag.test = "test";
-            }
-
-
-            if (_user.IsEmailVerified)
-            {
-                ViewBag.VerifiedAccount = true;
-            }
-            else
-            {
-                ViewBag.VerifiedAccount = false;
-            }
-
             string Url = Request.Path.Value;
-
             if (Url.Length < 22)
             {
                 return NotFound();
             }
-
             string linkId = Url.Substring(21);
+
+
+            if (_user.IsEmailVerified && _user.EmailActivationCode == "verified")
+            {
+                ViewBag.VerifiedAccount = true;
+                return View();
+            }
+
+            ViewBag.VerifiedAccount = false;
 
             ViewBag.IsVerified = false;
 
-            if (_user.EmailActivationCode == null)
+            if (_user.EmailActivationCode == null || _user.EmailActivationCode == "expired")
             {
                 ViewBag.Message = "Account Verification Link Has Expired !";
                 ViewBag.IsVerified = false;
@@ -217,9 +220,11 @@ namespace Messenger.Controllers
                 ViewBag.Message = "Account Successfully Verified";
                 ViewBag.IsVerified = true;
 
-
                 _authRepository.VerifyUserEmail(_user.Id);
             }
+
+            ViewBag.Message = "Account Verification Link Has Expired !";
+            ViewBag.IsVerified = false;
 
             return View();
         }

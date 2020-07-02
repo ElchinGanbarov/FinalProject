@@ -10,7 +10,6 @@
         <div class="container d-flex flex-column">
             <div class="row no-gutters text-center align-items-center justify-content-center min-vh-100">
                 <div class="col-md-12">
-                    <img />
                     @if (ViewBag.VerifiedAccount)
                     {
                         <h1 class="font-weight-bold">Your account already verified !</h1>
@@ -26,9 +25,10 @@
                         if (ViewBag.IsVerified == false)
                         {
                             <p class="text-dark mb-3">
-                                If you are having trouble getting a confirmation link,
-                                <a class="font-weight-semibold" asp-controller="account" asp-action="signin">try again to get a confirmation link</a>
-                                .
+                                If you are having trouble getting a confirmation link or signin your account 
+                                <a class="font-weight-semibold" asp-controller="account" asp-action="signin">
+                                    try again to get a confirmation link
+                                </a>.
                             </p>
                         }
                         else
@@ -40,7 +40,6 @@
                         }
                     }
                 </div>
-
             </div>
         </div>
     </div>
