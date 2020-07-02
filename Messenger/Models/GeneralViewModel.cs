@@ -8,6 +8,8 @@ namespace Messenger.Models
 {
     public class GeneralViewModel
     {
-        public Account Account { get; set; }
+        public AccountDetailViewModel AccountDetailViewModel { get; set; }
+        public AccountSocialLink AccountSocialLink { get; set; }
+
     }
 }

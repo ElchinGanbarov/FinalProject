@@ -15,6 +15,11 @@ namespace Messenger.Mapping
             CreateMap<RegisterViewModel, Account>();
             CreateMap<Account, RegisterViewModel>();
 
+            CreateMap<Account, AccountDetailViewModel>();
+            CreateMap<AccountDetailViewModel, Account>();
+
+
+
         }
     }
 }

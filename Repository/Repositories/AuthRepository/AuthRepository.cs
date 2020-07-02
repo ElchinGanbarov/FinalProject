@@ -16,6 +16,7 @@ namespace Repository.Repositories.AuthRepositories
         bool CheckPhone(string phone);
         //remove AccountEmailVerficationCode
         void VerifyUserEmail(int accountId);
+        void UpdateAccount(Account _user, Account user);
     }
     public class AuthRepository : IAuthRepository
     {
@@ -38,7 +39,6 @@ namespace Repository.Repositories.AuthRepositories
         {
             return _context.Accounts.Any(u => u.Phone == phone);
         }
-
         public Account Login(string email, string password)
         {
             Account Account = _context.Accounts.FirstOrDefault(u => u.Email == email);
@@ -60,6 +60,20 @@ namespace Repository.Repositories.AuthRepositories
             _context.SaveChanges();
             return Account;
         }
+
+        public void UpdateAccount(Account _user, Account user)
+        {
+            _user.Name = user.Name;
+            _user.Surname = user.Surname;
+            _user.Email = user.Email;
+            _user.Phone = user.Phone;
+            _user.Website = user.Website;
+            _user.Address = user.Address;
+            _user.Birthday = user.Birthday;
+
+            _context.SaveChanges();
+        }
+
         public void UpdateToken(int id, string token)
         {
             Account Account = _context.Accounts.Find(id);
