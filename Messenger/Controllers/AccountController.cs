@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
 using AutoMapper;
 using Messenger.Filters;
-using Messenger.Models;
-using Microsoft.AspNetCore.Http.Extensions;
+using Messenger.Models.Account;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AuthRepositories;

@@ -1203,9 +1203,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Local Time</p>
-                                                              
-                                                                    <p class="mb-0 localtime">@Model.AccountDetailViewModel.LastLogin</p>
-                                                                
+
+                                                                <p class="mb-0 localtime">@Model.AccountDetailViewModel.LastLogin</p>
+
 
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
@@ -1223,9 +1223,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Birthdate</p>
-                                                               
-                                                                    <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday</p>
-                                                                
+
+                                                                <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday</p>
+
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1278,8 +1278,8 @@
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Website</p>
 
-                                                                    <p class="mb-0 website">@Model.AccountDetailViewModel.Website</p>
-                                                                
+                                                                <p class="mb-0 website">@Model.AccountDetailViewModel.Website</p>
+
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1296,9 +1296,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Address</p>
-                                                               
-                                                                 <p class="mb-0 address">@Model.AccountDetailViewModel.Address</p>
-                                                                
+
+                                                                <p class="mb-0 address">@Model.AccountDetailViewModel.Address</p>
+
 
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
@@ -1328,9 +1328,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Facebook</p>
-                                                                @if (Model.AccountSocialLink!=null)
+                                                                @if (Model.AccountSocialLinkViewModel != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Facebook</a>
+                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLinkViewModel.Facebook</a>
                                                                 }
 
                                                             </div>
@@ -1349,11 +1349,11 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Twitter</p>
-                                                                @if (Model.AccountSocialLink != null)
+                                                                @if (Model.AccountSocialLinkViewModel != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Twitter</a>
+                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLinkViewModel.Twitter</a>
                                                                 }
-                                                             
+
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="text-muted hw-20 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1370,9 +1370,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Instagram</p>
-                                                                @if (Model.AccountSocialLink != null)
+                                                                @if (Model.AccountSocialLinkViewModel != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Instagram</a>
+                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLinkViewModel.Instagram</a>
                                                                 }
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
@@ -1392,11 +1392,11 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Linkedin</p>
-                                                                @if (Model.AccountSocialLink != null)
+                                                                @if (Model.AccountSocialLinkViewModel != null)
                                                                 {
-                                                                <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Linkedin</a>
+                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLinkViewModel.Linkedin</a>
                                                                 }
-                                                                
+
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="text-muted hw-20 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3775,7 +3775,7 @@
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Name">First Name</label>
-                                                        <input asp-for="@Model.AccountDetailViewModel.Name" class="form-control form-control-md"  placeholder="Type your first name">
+                                                        <input asp-for="@Model.AccountDetailViewModel.Name" class="form-control form-control-md" placeholder="Type your first name">
                                                         <span asp-validation-for="@Model.AccountDetailViewModel.Name" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -3827,7 +3827,7 @@
                                             <button type="submit" class="btn btn-primary ">Save Changes</button>
                                         </div>
                                     </form>
-                                   
+
                                 </div>
 
                                 <div class="card mb-3">
@@ -4637,11 +4637,10 @@
             });
         </script>
 
-
+        <!--Account Add Database-->
         <script>
-          
             $(document).on("submit", ".accountchange", function (e) {
-            
+
                 let Name = $("#AccountDetailViewModel_Name").val();
                 let Surname = $("#AccountDetailViewModel_Surname").val();
                 let Phone = $("#AccountDetailViewModel_Phone").val();
@@ -4650,7 +4649,7 @@
                 let Website = $("#AccountDetailViewModel_Website").val();
                 let Address = $("#AccountDetailViewModel_Address").val();
                 $.ajax({
-                    url:'/accountdetail/update',
+                    url: '/accountdetail/update',
                     type: "POST",
                     dataType: "json",
                     data:
@@ -4661,7 +4660,7 @@
                         birthday: Birthday,
                         email: Email,
                         website: Website,
-                        address:Address
+                        address: Address
                     },
                     success: function (res) {
                         $(".email").text(Email);
@@ -4685,8 +4684,8 @@
 
                 e.preventDefault();
             });
-        
         </script>
+
 
     </body>
 

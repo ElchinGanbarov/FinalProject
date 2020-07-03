@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using Messenger.Models;
+using Messenger.Models.Account;
+using Messenger.Models.AccountDetail;
 using Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Messenger.Mapping
 {
@@ -18,7 +15,8 @@ namespace Messenger.Mapping
             CreateMap<Account, AccountDetailViewModel>();
             CreateMap<AccountDetailViewModel, Account>();
 
-
+            CreateMap<AccountSocialLink, AccountSocialLinkViewModel>();
+            CreateMap<AccountSocialLinkViewModel, AccountSocialLink>();
 
         }
     }

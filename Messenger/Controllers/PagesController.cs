@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Messenger.Filters;
-using Messenger.Models;
+using Messenger.Models.AccountDetail;
+using Messenger.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AccountRepository;
@@ -30,11 +27,11 @@ namespace Messenger.Controllers
         [TypeFilter(typeof(Access))]
         public IActionResult Chat1()
         {
-            var user = _mapper.Map<Account, AccountDetailViewModel>(_authRepository.CheckByToken(_user.Token));
+            
             GeneralViewModel model = new GeneralViewModel
             {
-                AccountDetailViewModel = user,
-                AccountSocialLink = _accountDetailRepository.GetAccountSocialLink(_user.Id)
+                AccountDetailViewModel = _mapper.Map<Account, AccountDetailViewModel>(_authRepository.CheckByToken(_user.Token)),
+                AccountSocialLinkViewModel =_mapper.Map<AccountSocialLink,AccountSocialLinkViewModel>(_accountDetailRepository.GetAccountSocialLink(_user.Id))
             };
             return View(model);
         }

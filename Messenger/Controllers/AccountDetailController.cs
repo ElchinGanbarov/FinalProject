@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Messenger.Filters;
 using Messenger.Models;
+using Messenger.Models.Account;
+using Messenger.Models.AccountDetail;
+using Messenger.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AuthRepositories;
@@ -37,6 +36,10 @@ namespace Messenger.Controllers
             {
                AccountDetailViewModel = model
             });
+        }
+        public IActionResult UpdateSocialLink(AccountSocialLinkViewModel model)
+        {
+            return View();
         }
     }
 }
