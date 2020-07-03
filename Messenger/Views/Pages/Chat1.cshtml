@@ -1224,7 +1224,7 @@
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Birthdate</p>
 
-                                                                <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday</p>
+                                                                <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0,11)</p>
 
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
@@ -1328,9 +1328,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Facebook</p>
-                                                                @if (Model.AccountSocialLinkViewModel != null)
+                                                                @if (Model.AccountSocialLink != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLinkViewModel.Facebook</a>
+                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Facebook</a>
                                                                 }
 
                                                             </div>
@@ -1349,9 +1349,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Twitter</p>
-                                                                @if (Model.AccountSocialLinkViewModel != null)
+                                                                @if (Model.AccountSocialLink != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLinkViewModel.Twitter</a>
+                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Twitter</a>
                                                                 }
 
                                                             </div>
@@ -1370,9 +1370,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Instagram</p>
-                                                                @if (Model.AccountSocialLinkViewModel != null)
+                                                                @if (Model.AccountSocialLink != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLinkViewModel.Instagram</a>
+                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Instagram</a>
                                                                 }
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
@@ -1392,9 +1392,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Linkedin</p>
-                                                                @if (Model.AccountSocialLinkViewModel != null)
+                                                                @if (Model.AccountSocialLink != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLinkViewModel.Linkedin</a>
+                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Linkedin</a>
                                                                 }
 
                                                             </div>
@@ -3775,47 +3775,47 @@
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Name">First Name</label>
-                                                        <input asp-for="@Model.AccountDetailViewModel.Name" class="form-control form-control-md" placeholder="Type your first name">
+                                                        <input asp-for="@Model.AccountDetailViewModel.Name" class="form-control form-control-md onchange" placeholder="Type your first name">
                                                         <span asp-validation-for="@Model.AccountDetailViewModel.Name" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Surname">Last Name</label>
-                                                        <input asp-for="@Model.AccountDetailViewModel.Surname" class="form-control form-control-md" placeholder="Type your last name">
+                                                        <input asp-for="@Model.AccountDetailViewModel.Surname" class="form-control form-control-md onchange" placeholder="Type your last name">
                                                         <span asp-validation-for="@Model.AccountDetailViewModel.Surname" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Phone">Mobile number</label>
-                                                        <input asp-for="@Model.AccountDetailViewModel.Phone" class="form-control form-control-md" placeholder="Type your mobile number">
+                                                        <input asp-for="@Model.AccountDetailViewModel.Phone" class="form-control form-control-md onchange" placeholder="Type your mobile number">
                                                         <span asp-validation-for="@Model.AccountDetailViewModel.Phone" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Birthday">Birth date</label>
-                                                        <input asp-for="@Model.AccountDetailViewModel.Birthday" class="form-control form-control-md" placeholder="dd/mm/yyyy">
+                                                        <input asp-for="@Model.AccountDetailViewModel.Birthday" type="date" min="1930-01-01" max="2010-01-01" class="form-control form-control-md onchange" placeholder="dd/mm/yyyy">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Email">Email address</label>
-                                                        <input asp-for="@Model.AccountDetailViewModel.Email" class="form-control form-control-md" placeholder="Type your email address">
-                                                        <span asp-validation-for="@Model.AccountDetailViewModel.Email" class="text-danger"></span>
+                                                        <input asp-for="@Model.AccountDetailViewModel.Email" class="form-control form-control-md onchange" placeholder="Type your email address">
+                                                        <span asp-validation-for="@Model.AccountDetailViewModel.Email" class="text-danger "></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Website">Website</label>
-                                                        <input asp-for="@Model.AccountDetailViewModel.Website" class="form-control form-control-md" placeholder="Type your website">
+                                                        <input asp-for="@Model.AccountDetailViewModel.Website" class="form-control form-control-md onchange" placeholder="Type your website">
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Address">Address</label>
-                                                        <input asp-for="@Model.AccountDetailViewModel.Address" class="form-control form-control-md" placeholder="Type your address">
+                                                        <input asp-for="@Model.AccountDetailViewModel.Address" class="form-control form-control-md onchange" placeholder="Type your address">
                                                     </div>
                                                 </div>
 
@@ -3824,7 +3824,7 @@
 
                                         <div class="card-footer d-flex justify-content-end">
                                             <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                            <button type="submit" class="btn btn-primary ">Save Changes</button>
+                                            <button type="submit" class="btn btn-primary onchangesubmit " disabled >Save Changes</button>
                                         </div>
                                     </form>
 
@@ -3840,8 +3840,9 @@
                                         <div class="row">
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="facebookId">Facebook</label>
-                                                    <input type="text" class="form-control form-control-md" id="facebookId" placeholder="Username">
+                                                    <label asp-for="@Model.AccountSocialLinkViewModel.Facebook">Facebook</label>
+                                                    <input asp-for="@Model.AccountSocialLinkViewModel.Facebook" class="form-control form-control-md" placeholder="Username">
+                                                    <span asp-validation-for="@Model.AccountSocialLinkViewModel.Facebook" class="text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
@@ -4669,7 +4670,7 @@
                         $(".phone").text(Phone);
                         $(".website").text(Website);
                         $(".address").text(Address);
-                        console.log(res);
+                      
                         $.toast({
                             heading: 'Məlumat',
                             text: "Hesabiniz deisdirildi",
@@ -4677,7 +4678,8 @@
                             loader: true,
                             bgColor: '#3988ff',
                             loaderBg: '#f7d40d',
-                            position: 'bottom-right'
+                            position: 'top-right',
+                            hideAfter:4000
                         });
                     }
                 });
@@ -4685,7 +4687,12 @@
                 e.preventDefault();
             });
         </script>
+        <!--Disabled Removed Account-->
+        <script>
+            $(document).on("keydown", ".onchange", function (e) {
+                $(".onchangesubmit").prop("disabled",false)
 
-
+            });
+        </script>
     </body>
 

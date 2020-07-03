@@ -29,14 +29,23 @@ namespace Messenger.Controllers
             {
                 var user = _mapper.Map<AccountDetailViewModel, Account>(model);
                 var updateuser = _authRepository.CheckByToken(_user.Token);
-                _authRepository.UpdateAccount(updateuser, user);
-                return Ok(user);
+                if (updateuser.Name != user.Name.Trim() || updateuser.Surname !=user.Surname.Trim() ||
+                    updateuser.Address != user.Address.Trim() || updateuser.Birthday!= user.Birthday ||
+                    updateuser.Email != user.Email.Trim() || updateuser.Website != user.Website.Trim())
+                {
+                    _authRepository.UpdateAccount(updateuser, user);
+                    return Ok(user);
+                }
+             
+                
             }
             return View("Views/Pages/Chat1.cshtml", new GeneralViewModel
             {
                AccountDetailViewModel = model
             });
         }
+
+
         public IActionResult UpdateSocialLink(AccountSocialLinkViewModel model)
         {
             return View();
