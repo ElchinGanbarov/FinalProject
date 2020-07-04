@@ -1224,7 +1224,7 @@
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Birthdate</p>
 
-                                                                <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0,11)</p>
+                                                                <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11)</p>
 
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
@@ -1330,7 +1330,7 @@
                                                                 <p class="small text-muted mb-0">Facebook</p>
                                                                 @if (Model.AccountSocialLink != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Facebook</a>
+                                                                    <a class="font-size-sm font-weight-medium facebook" href="#">@Model.AccountSocialLink.Facebook</a>
                                                                 }
 
                                                             </div>
@@ -1351,7 +1351,7 @@
                                                                 <p class="small text-muted mb-0">Twitter</p>
                                                                 @if (Model.AccountSocialLink != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Twitter</a>
+                                                                    <a class="font-size-sm font-weight-medium twitter" href="#">@Model.AccountSocialLink.Twitter</a>
                                                                 }
 
                                                             </div>
@@ -1372,7 +1372,7 @@
                                                                 <p class="small text-muted mb-0">Instagram</p>
                                                                 @if (Model.AccountSocialLink != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Instagram</a>
+                                                                    <a class="font-size-sm font-weight-medium instagram" href="#">@Model.AccountSocialLink.Instagram</a>
                                                                 }
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
@@ -1394,7 +1394,7 @@
                                                                 <p class="small text-muted mb-0">Linkedin</p>
                                                                 @if (Model.AccountSocialLink != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium" href="#">@Model.AccountSocialLink.Linkedin</a>
+                                                                    <a class="font-size-sm font-weight-medium linkedin" href="#">@Model.AccountSocialLink.Linkedin</a>
                                                                 }
 
                                                             </div>
@@ -3810,12 +3810,14 @@
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Website">Website</label>
                                                         <input asp-for="@Model.AccountDetailViewModel.Website" class="form-control form-control-md onchange" placeholder="Type your website">
+                                                       <span asp-validation-for="@Model.AccountDetailViewModel.Website" class="text-danger "></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Address">Address</label>
                                                         <input asp-for="@Model.AccountDetailViewModel.Address" class="form-control form-control-md onchange" placeholder="Type your address">
+                                                        <span asp-validation-for="@Model.AccountDetailViewModel.Address" class="text-danger "></span>
                                                     </div>
                                                 </div>
 
@@ -3824,52 +3826,58 @@
 
                                         <div class="card-footer d-flex justify-content-end">
                                             <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                            <button type="submit" class="btn btn-primary onchangesubmit " disabled >Save Changes</button>
+                                            <button type="submit" class="btn btn-primary onchangesubmit " disabled>Save Changes</button>
                                         </div>
                                     </form>
 
                                 </div>
 
                                 <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h6 class="mb-1">Social network profiles</h6>
-                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                    </div>
+                                    <form method="post" class="sociallink" asp-controller="accountdetail" asp-action="updatesocialLink">
+                                        <div class="card-header">
+                                            <h6 class="mb-1">Social network profiles</h6>
+                                            <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
+                                        </div>
 
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label asp-for="@Model.AccountSocialLinkViewModel.Facebook">Facebook</label>
-                                                    <input asp-for="@Model.AccountSocialLinkViewModel.Facebook" class="form-control form-control-md" placeholder="Username">
-                                                    <span asp-validation-for="@Model.AccountSocialLinkViewModel.Facebook" class="text-danger"></span>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="@Model.AccountSocialLinkViewModel.Facebook">Facebook</label>
+                                                        <input asp-for="@Model.AccountSocialLinkViewModel.Facebook" class="form-control form-control-md onchanges" placeholder="Username">
+                                                        <span asp-validation-for="@Model.AccountSocialLinkViewModel.Facebook" class="text-danger "></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="twitterId">Twitter</label>
-                                                    <input type="text" class="form-control form-control-md" id="twitterId" placeholder="Username">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="@Model.AccountSocialLinkViewModel.Twitter">Twitter</label>
+                                                        <input asp-for="@Model.AccountSocialLinkViewModel.Twitter" class="form-control form-control-md onchanges" placeholder="Username">
+                                                        <span asp-validation-for="@Model.AccountSocialLinkViewModel.Twitter" class="text-danger"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="instagramId">Instagram</label>
-                                                    <input type="text" class="form-control form-control-md" id="instagramId" placeholder="Username">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="@Model.AccountSocialLinkViewModel.Instagram">Instagram</label>
+                                                        <input asp-for="@Model.AccountSocialLinkViewModel.Instagram" class="form-control form-control-md onchanges" placeholder="Username">
+                                                        <span asp-validation-for="@Model.AccountSocialLinkViewModel.Instagram" class="text-danger"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="linkedinId">Linkedin</label>
-                                                    <input type="text" class="form-control form-control-md" id="linkedinId" placeholder="Username">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="@Model.AccountSocialLinkViewModel.Linkedin">Linkedin</label>
+                                                        <input asp-for="@Model.AccountSocialLinkViewModel.Linkedin" class="form-control form-control-md onchanges" placeholder="Username">
+                                                        <span asp-validation-for="@Model.AccountSocialLinkViewModel.Linkedin" class="text-danger"></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="card-footer d-flex justify-content-end">
-                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                        <button type="button" class="btn btn-primary">Save Changes</button>
-                                    </div>
+                                        <div class="card-footer d-flex justify-content-end">
+                                            <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
+                                            <button type="submit" class="btn btn-primary onchangesocial" disabled >Save Changes</button>
+                                        </div>
+                                    </form>
+
                                 </div>
 
                                 <div class="card mb-3">
@@ -4648,7 +4656,10 @@
                 let Birthday = $("#AccountDetailViewModel_Birthday").val();
                 let Email = $("#AccountDetailViewModel_Email").val();
                 let Website = $("#AccountDetailViewModel_Website").val();
+                
                 let Address = $("#AccountDetailViewModel_Address").val();
+
+                
                 $.ajax({
                     url: '/accountdetail/update',
                     type: "POST",
@@ -4670,7 +4681,7 @@
                         $(".phone").text(Phone);
                         $(".website").text(Website);
                         $(".address").text(Address);
-                      
+
                         $.toast({
                             heading: 'Məlumat',
                             text: "Hesabiniz deisdirildi",
@@ -4679,7 +4690,7 @@
                             bgColor: '#3988ff',
                             loaderBg: '#f7d40d',
                             position: 'top-right',
-                            hideAfter:4000
+                            hideAfter: 4000
                         });
                     }
                 });
@@ -4687,12 +4698,66 @@
                 e.preventDefault();
             });
         </script>
+        <!--Account Add Database-->
+        <script>
+            $(document).on("submit", ".sociallink", function (e) {
+           
+                let Facebook = $("#AccountSocialLinkViewModel_Facebook").val();
+                let Twitter = $("#AccountSocialLinkViewModel_Twitter").val();
+                let Instagram = $("#AccountSocialLinkViewModel_Instagram").val();
+                let Linkedin = $("#AccountSocialLinkViewModel_Linkedin").val();
+             
+                $.ajax({
+                    url: '/accountdetail/updatesociallink',
+                    type: "POST",
+                    dataType: "json",
+                    data:
+                    {
+                        facebook: Facebook,
+                        twitter: Twitter,
+                        instagram: Instagram,
+                        linkedin: Linkedin
+                      
+                    },
+                    success: function (res) {
+                        console.log(res);
+                        $(".facebook").text(Facebook);
+                        $(".twitter").text(Twitter);
+                        $(".instagram").text(Instagram);
+                        $(".linkedin").text(Linkedin);
+
+                        $("#AccountSocialLinkViewModel_Facebook").val("");
+                        $("#AccountSocialLinkViewModel_Twitter").val("");
+                        $("#AccountSocialLinkViewModel_Instagram").val("");
+                        $("#AccountSocialLinkViewModel_Linkedin").val("");
+
+                        $.toast({
+                            heading: 'Məlumat',
+                            text: "Hesabiniz deisdirildi",
+                            icon: 'info',
+                            loader: true,
+                            bgColor: '#3988ff',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 4000
+                        });
+                    }
+                });
+             
+                e.preventDefault();
+            });
+        </script>
         <!--Disabled Removed Account-->
         <script>
             $(document).on("keydown", ".onchange", function (e) {
-                $(".onchangesubmit").prop("disabled",false)
+                $(".onchangesubmit").prop("disabled", false)
 
             });
+            $(document).on("keydown", ".onchanges", function (e) {
+                $(".onchangesocial").prop("disabled", false)
+
+            });
+        
         </script>
     </body>
 

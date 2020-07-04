@@ -11,6 +11,8 @@ namespace Repository.Repositories.AccountRepository
     public interface IAccountDetailRepository
     {
         AccountSocialLink GetAccountSocialLink(int id);
+        AccountSocialLink GetByAccountId(int id);
+        void UpdateSocialLink(AccountSocialLink updatesociallink, AccountSocialLink socialLink);
     }
     public class AccountDetailRepository : IAccountDetailRepository
     {
@@ -22,6 +24,21 @@ namespace Repository.Repositories.AccountRepository
         public AccountSocialLink GetAccountSocialLink(int id)
         {
             return _context.AccountSocialLinks.Include(a => a.Account).FirstOrDefault(a => a.AccountId == id);
+        }
+
+        public AccountSocialLink GetByAccountId(int id)
+        {
+            return _context.AccountSocialLinks.Include(a => a.Account).FirstOrDefault(a => a.AccountId == id);
+        }
+
+        public void UpdateSocialLink(AccountSocialLink updatesociallink, AccountSocialLink socialLink)
+        {
+            updatesociallink.Facebook = socialLink.Facebook;
+            updatesociallink.Instagram = socialLink.Instagram;
+            updatesociallink.Linkedin = socialLink.Linkedin;
+            updatesociallink.Twitter = socialLink.Twitter;
+            _context.SaveChanges();
+
         }
     }
 }

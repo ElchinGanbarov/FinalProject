@@ -27,8 +27,10 @@ namespace Messenger.Models.AccountDetail
         public string Phone { get; set; }
         public DateTime? Birthday { get; set; }
         [MaxLength(50)]
+        [Required]
         public string Address { get; set; }
         [MaxLength(50)]
+        [Required]
         public string Website { get; set; }
         public DateTime? LastLogin { get; set; }
 
