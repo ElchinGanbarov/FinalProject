@@ -3,16 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Repository.Models
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public int Id { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set; }
-
-        [MaxLength(100)]
-        public string CreatedBy { get; set; }
-
-        [MaxLength(100)]
+        public bool Status { get; set; }
+        public DateTime AddedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        [MaxLength(50)]
+        public string AddedBy { get; set; }
+        [MaxLength(50)]
         public string ModifiedBy { get; set; }
     }
 }

@@ -26,32 +26,51 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("ForgetToken")
-                        .IsRequired()
+                    b.Property<string>("EmailActivationCode")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
+
+                    b.Property<string>("ForgetToken")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<bool>("IsEmailVerified")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsOnline")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime?>("LastLogin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastSeen")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -68,79 +87,23 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
 
+                    b.Property<string>("ProfileImg")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StatusText")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
                     b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Accounts");
-                });
-
-            modelBuilder.Entity("Repository.Models.AccountDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Facebook")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Instagram")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime>("LastLogin")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastSeen")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Linkedin")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("ProfileImg")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("StatusText")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Twitter")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
@@ -150,9 +113,7 @@ namespace Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("AccountDetails");
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("Repository.Models.AccountFavMessages", b =>
@@ -165,22 +126,25 @@ namespace Repository.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("MessageId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -189,6 +153,40 @@ namespace Repository.Migrations
                     b.HasIndex("MessageId");
 
                     b.ToTable("AccountFavMessages");
+                });
+
+            modelBuilder.Entity("Repository.Models.AccountFriend", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("AccountFriend");
                 });
 
             modelBuilder.Entity("Repository.Models.AccountHubs", b =>
@@ -201,22 +199,25 @@ namespace Repository.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("HubId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -237,26 +238,20 @@ namespace Repository.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Address")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Birthday")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
                     b.Property<bool>("Email")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Facebook")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Instagram")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LastLogin")
@@ -265,15 +260,12 @@ namespace Repository.Migrations
                     b.Property<bool>("LastSeen")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Linkedin")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("Phone")
                         .HasColumnType("bit");
@@ -281,10 +273,13 @@ namespace Repository.Migrations
                     b.Property<bool>("ProfileImg")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("StatusText")
+                    b.Property<bool>("SocialLink")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Twitter")
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("StatusText")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Website")
@@ -307,22 +302,25 @@ namespace Repository.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("LoginAlerts")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("TwoFactoryAuth")
                         .HasColumnType("bit");
@@ -334,6 +332,95 @@ namespace Repository.Migrations
                     b.ToTable("AccountSecurities");
                 });
 
+            modelBuilder.Entity("Repository.Models.AccountSocialLink", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Facebook")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Instagram")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Linkedin")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Twitter")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("AccountSocialLinks");
+                });
+
+            modelBuilder.Entity("Repository.Models.Friendship", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountFriendId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountFriendId");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Friendship");
+                });
+
             modelBuilder.Entity("Repository.Models.Group", b =>
                 {
                     b.Property<int>("Id")
@@ -341,22 +428,22 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("HubId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -367,6 +454,9 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -382,22 +472,25 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -416,22 +509,25 @@ namespace Repository.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("GroupAccountId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -449,19 +545,22 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -478,12 +577,12 @@ namespace Repository.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("File")
                         .IsRequired()
@@ -498,12 +597,15 @@ namespace Repository.Migrations
                     b.Property<int>("HubId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -524,22 +626,25 @@ namespace Repository.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("HubId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -555,15 +660,6 @@ namespace Repository.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("Repository.Models.AccountDetail", b =>
-                {
-                    b.HasOne("Repository.Models.Account", "Account")
-                        .WithMany("Detail")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Repository.Models.AccountFavMessages", b =>
                 {
                     b.HasOne("Repository.Models.Account", "Account")
@@ -575,6 +671,15 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Models.Message", "Message")
                         .WithMany("AccountFavMessages")
                         .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Repository.Models.AccountFriend", b =>
+                {
+                    b.HasOne("Repository.Models.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -607,6 +712,30 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Repository.Models.Account", "Account")
                         .WithMany("Security")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Repository.Models.AccountSocialLink", b =>
+                {
+                    b.HasOne("Repository.Models.Account", "Account")
+                        .WithMany("AccountSocialLinks")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Repository.Models.Friendship", b =>
+                {
+                    b.HasOne("Repository.Models.AccountFriend", "AccountFriend")
+                        .WithMany("Friendships")
+                        .HasForeignKey("AccountFriendId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Repository.Models.Account", "Account")
+                        .WithMany("Friendships")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
