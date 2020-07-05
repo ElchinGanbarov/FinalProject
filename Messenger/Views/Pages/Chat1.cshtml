@@ -1328,9 +1328,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Facebook</p>
-                                                                @if (Model.AccountSocialLink != null)
+                                                                @if (Model.AccountSocialLinkViewModel != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium facebook" href="#">@Model.AccountSocialLink.Facebook</a>
+                                                                    <a class="font-size-sm font-weight-medium facebook" href="#">@Model.AccountSocialLinkViewModel.Facebook</a>
                                                                 }
 
                                                             </div>
@@ -1349,9 +1349,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Twitter</p>
-                                                                @if (Model.AccountSocialLink != null)
+                                                                @if (Model.AccountSocialLinkViewModel != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium twitter" href="#">@Model.AccountSocialLink.Twitter</a>
+                                                                    <a class="font-size-sm font-weight-medium twitter" href="#">@Model.AccountSocialLinkViewModel.Twitter</a>
                                                                 }
 
                                                             </div>
@@ -1370,9 +1370,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Instagram</p>
-                                                                @if (Model.AccountSocialLink != null)
+                                                                @if (Model.AccountSocialLinkViewModel != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium instagram" href="#">@Model.AccountSocialLink.Instagram</a>
+                                                                    <a class="font-size-sm font-weight-medium instagram" href="#">@Model.AccountSocialLinkViewModel.Instagram</a>
                                                                 }
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
@@ -1392,9 +1392,9 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Linkedin</p>
-                                                                @if (Model.AccountSocialLink != null)
+                                                                @if (Model.AccountSocialLinkViewModel != null)
                                                                 {
-                                                                    <a class="font-size-sm font-weight-medium linkedin" href="#">@Model.AccountSocialLink.Linkedin</a>
+                                                                    <a class="font-size-sm font-weight-medium linkedin" href="#">@Model.AccountSocialLinkViewModel.Linkedin</a>
                                                                 }
 
                                                             </div>
@@ -3776,7 +3776,6 @@
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Name">First Name</label>
                                                         <input asp-for="@Model.AccountDetailViewModel.Name" class="form-control form-control-md onchange" placeholder="Type your first name">
-                                                        <span asp-validation-for="@Model.AccountDetailViewModel.Name" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
@@ -3803,21 +3802,18 @@
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Email">Email address</label>
                                                         <input asp-for="@Model.AccountDetailViewModel.Email" class="form-control form-control-md onchange" placeholder="Type your email address">
-                                                        <span asp-validation-for="@Model.AccountDetailViewModel.Email" class="text-danger "></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Website">Website</label>
                                                         <input asp-for="@Model.AccountDetailViewModel.Website" class="form-control form-control-md onchange" placeholder="Type your website">
-                                                       <span asp-validation-for="@Model.AccountDetailViewModel.Website" class="text-danger "></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Address">Address</label>
                                                         <input asp-for="@Model.AccountDetailViewModel.Address" class="form-control form-control-md onchange" placeholder="Type your address">
-                                                        <span asp-validation-for="@Model.AccountDetailViewModel.Address" class="text-danger "></span>
                                                     </div>
                                                 </div>
 
@@ -4650,14 +4646,14 @@
         <script>
             $(document).on("submit", ".accountchange", function (e) {
 
-                let Name = $("#AccountDetailViewModel_Name").val();
-                let Surname = $("#AccountDetailViewModel_Surname").val();
-                let Phone = $("#AccountDetailViewModel_Phone").val();
-                let Birthday = $("#AccountDetailViewModel_Birthday").val();
-                let Email = $("#AccountDetailViewModel_Email").val();
-                let Website = $("#AccountDetailViewModel_Website").val();
+                let Name = $("#AccountDetailViewModel_Name").val().trim();
+                let Surname = $("#AccountDetailViewModel_Surname").val().trim();
+                let Phone = $("#AccountDetailViewModel_Phone").val().trim();
+                let Birthday = $("#AccountDetailViewModel_Birthday").val().trim();
+                let Email = $("#AccountDetailViewModel_Email").val().trim();
+                let Website = $("#AccountDetailViewModel_Website").val().trim();
                 
-                let Address = $("#AccountDetailViewModel_Address").val();
+                let Address = $("#AccountDetailViewModel_Address").val().trim();
 
                 
                 $.ajax({
@@ -4702,10 +4698,10 @@
         <script>
             $(document).on("submit", ".sociallink", function (e) {
            
-                let Facebook = $("#AccountSocialLinkViewModel_Facebook").val();
-                let Twitter = $("#AccountSocialLinkViewModel_Twitter").val();
-                let Instagram = $("#AccountSocialLinkViewModel_Instagram").val();
-                let Linkedin = $("#AccountSocialLinkViewModel_Linkedin").val();
+                let Facebook = $("#AccountSocialLinkViewModel_Facebook").val().trim();
+                let Twitter = $("#AccountSocialLinkViewModel_Twitter").val().trim();
+                let Instagram = $("#AccountSocialLinkViewModel_Instagram").val().trim();
+                let Linkedin = $("#AccountSocialLinkViewModel_Linkedin").val().trim();
              
                 $.ajax({
                     url: '/accountdetail/updatesociallink',
@@ -4726,10 +4722,7 @@
                         $(".instagram").text(Instagram);
                         $(".linkedin").text(Linkedin);
 
-                        $("#AccountSocialLinkViewModel_Facebook").val("");
-                        $("#AccountSocialLinkViewModel_Twitter").val("");
-                        $("#AccountSocialLinkViewModel_Instagram").val("");
-                        $("#AccountSocialLinkViewModel_Linkedin").val("");
+        
 
                         $.toast({
                             heading: 'Məlumat',

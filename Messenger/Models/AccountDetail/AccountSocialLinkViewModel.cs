@@ -9,19 +9,15 @@ namespace Messenger.Models.AccountDetail
     public class AccountSocialLinkViewModel
     {
         [MaxLength(100)]
-        [Required]
         public string Facebook { get; set; }
 
         [MaxLength(100)]
-        [Required]
         public string Twitter { get; set; }
 
         [MaxLength(100)]
-        [Required]
         public string Instagram { get; set; }
 
         [MaxLength(100)]
-        [Required]
         public string Linkedin { get; set; }
     }
 }
