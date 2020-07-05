@@ -30,7 +30,7 @@ namespace Messenger.Controllers
         {
             bool checkUser = _authRepository.CheckEmail(model.Email);
             bool number = _authRepository.CheckPhone(model.Phone);
-
+            
             if (checkUser)
             {
                 ModelState.AddModelError("Email", "Bu E-mail artiq movcuddur");
