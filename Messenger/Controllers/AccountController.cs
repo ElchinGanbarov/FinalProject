@@ -7,6 +7,7 @@ using Messenger.Models.Account;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AuthRepositories;
+using Repository.Services;
 
 namespace Messenger.Controllers
 {
@@ -15,10 +16,15 @@ namespace Messenger.Controllers
         private Repository.Models.Account  _user => RouteData.Values["User"] as Repository.Models.Account;
         private readonly IMapper _mapper;
         private readonly IAuthRepository _authRepository;
-        public AccountController(IMapper mapper,IAuthRepository authRepository)
+        private readonly ISendEmail _emailService;
+
+        public AccountController(IMapper mapper,
+                                 IAuthRepository authRepository,
+                                 ISendEmail sendEmail)
         {
             _mapper = mapper;
             _authRepository = authRepository;
+            _emailService = sendEmail;
         }
         public IActionResult SignUp()
         {
@@ -54,7 +60,9 @@ namespace Messenger.Controllers
                 //send verification link email
                 string userFullname = user.Name + " " + user.Surname;
 
-                SendVerificationLinkEmail(user.Email, user.EmailActivationCode, userFullname);
+                string link = HttpContext.Request.Scheme + "://" + Request.Host + "/account/verifyemail/" + user.EmailActivationCode;
+
+                _emailService.VerificationEmail(user.Email, link, user.EmailActivationCode, userFullname);
 
                 Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions
                 {
@@ -104,10 +112,12 @@ namespace Messenger.Controllers
             }
             return View(model);
         }
+
         public IActionResult ResetPassword()
         {
             return View();
         }
+
         public IActionResult Logout()
         {
             Request.Cookies.TryGetValue("token", out string token);
@@ -118,68 +128,13 @@ namespace Messenger.Controllers
             }
             Response.Cookies.Delete("token");
             //return PartialView("chat1", "pages");
-            return RedirectToAction("SignIn","Account");
-        }
-
-        //Send Verification Link Email
-        [NonAction]
-        public void SendVerificationLinkEmail(string email, string activationCode, string userFullname)
-        {
-            bool isRetry = false;
-            if (string.IsNullOrEmpty(activationCode) || activationCode == "verified")
-            {
-                activationCode = Guid.NewGuid().ToString();
-                isRetry = true;
-            }
-
-            string link = HttpContext.Request.Scheme + "://" + Request.Host + "/account/verifyemail/" + activationCode;
-
-            var fromEmail = new MailAddress("parvinkhp@code.edu.az", "Messenger App");
-            var fromEmailPassword = "Pervin_1997";
-            var toEmail = new MailAddress(email);
-            var appeal = "Dear, " + userFullname +"! ";
-            var subject = ""; //in testing proccess!
-            if (isRetry)
-            {
-                subject = "Messenger Account Verify Link";
-            }
-            else
-            {
-                subject = "Messenger Account Successfully Created";
-            }
-
-            var messageBody = " <center><img style='width: 80; padding: 10px 0px' src='http://frontendmatters.org/quicky/assets/media/logo.svg' /></center> </br> " +
-                "<div style=' background-color: #665dfe; padding: 20px 0px;'> " +
-                "<h2 style='padding: 10px 30px; font-size: 29px; color: #fff;'>" + appeal +
-                "Thank you for creating your new Messanger App account! Please, Click the below button to Verify Your Account </h2>" +
-                "<center><a style='display: inline-block; background-color: #28a745; font-weight: bold; color: #fff; padding: 10px; " +
-                "text-align: center; text-decoration: none; border: 1px solid transparent; font-size: 22px; border-radius: 5px; line-height: 1.5;' " +
-                "href=" + link + ">Verify Account</a></center>";
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
-            };
-
-            using var message = new MailMessage(fromEmail, toEmail)
-            {
-                Subject = subject,
-                Body = messageBody,
-                IsBodyHtml = true
-            };
-            smtp.Send(message);
-
+            return RedirectToAction("signin","account");
         }
 
         //Email Verification Link Click View
         [TypeFilter(typeof(Auth))]
         [HttpGet]
-        public IActionResult VerifyEmail(int? id)
+        public IActionResult VerifyEmail()
         {
             string Url = Request.Path.Value;
             if (Url.Length < 22)
@@ -213,6 +168,8 @@ namespace Messenger.Controllers
                 ViewBag.IsVerified = true;
 
                 _authRepository.VerifyUserEmail(_user.Id);
+
+                return View();
             }
 
             ViewBag.Message = "Account Verification Link Has Expired !";
