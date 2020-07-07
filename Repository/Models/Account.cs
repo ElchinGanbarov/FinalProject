@@ -28,6 +28,8 @@ namespace Repository.Models
         public string Token { get; set; }
         [MaxLength(100)]
         public string ForgetToken { get; set; }
+        [MaxLength(6)]
+        public string ResetPasswordCode { get; set; }
         public bool IsEmailVerified { get; set; }
         [MaxLength(100)]
         public string EmailActivationCode { get; set; }
