@@ -270,8 +270,8 @@ namespace Messenger.Controllers
                 return Ok(new { status = true, forgetToken = account.ForgetToken });
             }
 
-            return NotFound();
-            //return Ok(new { status = false});
+            //return NotFound();
+            return Ok(new { status = false});
         }
 
     }
