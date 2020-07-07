@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Net;
-using System.Net.Mail;
 using AutoMapper;
 using Messenger.Filters;
 using Messenger.Models.Account;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AuthRepositories;
+using Repository.Services;
 
 namespace Messenger.Controllers
 {
@@ -15,10 +14,15 @@ namespace Messenger.Controllers
         private Repository.Models.Account  _user => RouteData.Values["User"] as Repository.Models.Account;
         private readonly IMapper _mapper;
         private readonly IAuthRepository _authRepository;
-        public AccountController(IMapper mapper,IAuthRepository authRepository)
+        private readonly ISendEmail _emailService;
+
+        public AccountController(IMapper mapper,
+                                 IAuthRepository authRepository,
+                                 ISendEmail sendEmail)
         {
             _mapper = mapper;
             _authRepository = authRepository;
+            _emailService = sendEmail;
         }
         public IActionResult SignUp()
         {
@@ -54,7 +58,9 @@ namespace Messenger.Controllers
                 //send verification link email
                 string userFullname = user.Name + " " + user.Surname;
 
-                SendVerificationLinkEmail(user.Email, user.EmailActivationCode, userFullname);
+                string link = HttpContext.Request.Scheme + "://" + Request.Host + "/account/verifyemail/" + user.EmailActivationCode;
+
+                _emailService.VerificationEmail(user.Email, link, user.EmailActivationCode, userFullname);
 
                 Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions
                 {
@@ -104,10 +110,7 @@ namespace Messenger.Controllers
             }
             return View(model);
         }
-        public IActionResult ResetPassword()
-        {
-            return View();
-        }
+
         public IActionResult Logout()
         {
             Request.Cookies.TryGetValue("token", out string token);
@@ -118,68 +121,70 @@ namespace Messenger.Controllers
             }
             Response.Cookies.Delete("token");
             //return PartialView("chat1", "pages");
-            return RedirectToAction("SignIn","Account");
+            return RedirectToAction("signin","account");
         }
 
-        //Send Verification Link Email
-        [NonAction]
-        public void SendVerificationLinkEmail(string email, string activationCode, string userFullname)
+        public IActionResult ResetPassword()
         {
-            bool isRetry = false;
-            if (string.IsNullOrEmpty(activationCode) || activationCode == "verified")
+            return View();
+        }
+
+        //dont using
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
             {
-                activationCode = Guid.NewGuid().ToString();
-                isRetry = true;
+                Account account = _authRepository.GetByEmail(model.Email);
+                if (account == null)
+                {
+                    ModelState.AddModelError("Email", "There's no Messenger App Account with the info you provided");
+                    return View();
+                }
+
+                _emailService.ResetPassword(account);
+                Response.Cookies.Delete("resetpassword");
+                Response.Cookies.Append("resetpassword", account.ForgetToken, new Microsoft.AspNetCore.Http.CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(1),
+                    HttpOnly = true
+                });
+                return RedirectToAction("resetpassconfirm", "account");
             }
 
-            string link = HttpContext.Request.Scheme + "://" + Request.Host + "/account/verifyemail/" + activationCode;
+            return Content("error");
+        }
 
-            var fromEmail = new MailAddress("parvinkhp@code.edu.az", "Messenger App");
-            var fromEmailPassword = "Pervin_1997";
-            var toEmail = new MailAddress(email);
-            var appeal = "Dear, " + userFullname +"! ";
-            var subject = ""; //in testing proccess!
-            if (isRetry)
+        [TypeFilter(typeof(ResetPassFilter))]
+        public IActionResult ResetPassConfirm()
+        {
+            return View();
+        }
+
+        [TypeFilter(typeof(ResetPassFilter))]
+        [HttpPost]
+        public IActionResult ResetPassConfirm(ResetPasswordConfirmViewModel model)
+        {
+            if (ModelState.IsValid)
             {
-                subject = "Messenger Account Verify Link";
+                string forgettoken = Request.Cookies["forgettoken"];
+                if (string.IsNullOrEmpty(forgettoken)) return BadRequest();
+                Account account = _authRepository.GetByForgetToken(forgettoken);
+                if (account != null)
+                {
+                    _authRepository.UpdatePassword(account.Id, model.Password);
+                }
+                Response.Cookies.Delete("forgettoken");
+                return RedirectToAction("signin", "account");
             }
-            else
-            {
-                subject = "Messenger Account Successfully Created";
-            }
 
-            var messageBody = " <center><img style='width: 80; padding: 10px 0px' src='http://frontendmatters.org/quicky/assets/media/logo.svg' /></center> </br> " +
-                "<div style=' background-color: #665dfe; padding: 20px 0px;'> " +
-                "<h2 style='padding: 10px 30px; font-size: 29px; color: #fff;'>" + appeal +
-                "Thank you for creating your new Messanger App account! Please, Click the below button to Verify Your Account </h2>" +
-                "<center><a style='display: inline-block; background-color: #28a745; font-weight: bold; color: #fff; padding: 10px; " +
-                "text-align: center; text-decoration: none; border: 1px solid transparent; font-size: 22px; border-radius: 5px; line-height: 1.5;' " +
-                "href=" + link + ">Verify Account</a></center>";
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
-            };
-
-            using var message = new MailMessage(fromEmail, toEmail)
-            {
-                Subject = subject,
-                Body = messageBody,
-                IsBodyHtml = true
-            };
-            smtp.Send(message);
-
+            return View();
         }
 
         //Email Verification Link Click View
         [TypeFilter(typeof(Auth))]
         [HttpGet]
-        public IActionResult VerifyEmail(int? id)
+        public IActionResult VerifyEmail()
         {
             string Url = Request.Path.Value;
             if (Url.Length < 22)
@@ -213,6 +218,8 @@ namespace Messenger.Controllers
                 ViewBag.IsVerified = true;
 
                 _authRepository.VerifyUserEmail(_user.Id);
+
+                return View();
             }
 
             ViewBag.Message = "Account Verification Link Has Expired !";
@@ -231,5 +238,41 @@ namespace Messenger.Controllers
 
             return View();
         }
+
+        public bool CheckEmailAddress(string userEmail) //checkemailaddress
+        {
+
+            if (string.IsNullOrEmpty(userEmail)) return false;
+
+            if (_authRepository.CheckEmail(userEmail))
+            {
+                Account account = _authRepository.GetByEmail(userEmail);
+                if (account == null) return false;
+                _emailService.ResetPassword(account);
+                return true;
+            };
+
+            return false;
+           
+        }
+        public IActionResult CheckForgetCode(string userEmail, string inputResetPass)
+        {
+            if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(inputResetPass))
+            {
+                return Ok(new { status = false });
+            }
+
+            Account account = _authRepository.GetByEmail(userEmail);
+            if (account == null || string.IsNullOrEmpty(account.ForgetToken)) return Ok(new { status = false });
+
+            if (_authRepository.CheckPasswordResetCode(account.Id, inputResetPass))
+            {
+                return Ok(new { status = true, forgetToken = account.ForgetToken });
+            }
+
+            return NotFound();
+            //return Ok(new { status = false});
+        }
+
     }
 }

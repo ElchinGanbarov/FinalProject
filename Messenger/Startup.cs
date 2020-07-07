@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Repository.Data;
 using Repository.Repositories.AccountRepository;
 using Repository.Repositories.AuthRepositories;
+using Repository.Services;
 
 namespace Messenger
 {
@@ -36,6 +37,8 @@ namespace Messenger
                                                            x => x.MigrationsAssembly("Repository")));
             services.AddTransient<IAuthRepository, AuthRepository>();  //AuthRepository Service Added
             services.AddTransient<IAccountDetailRepository, AccountDetailRepository>();  //AccountDetailRepository Service Added
+
+            services.AddTransient<ISendEmail, SendEmail>();  //For send email service
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

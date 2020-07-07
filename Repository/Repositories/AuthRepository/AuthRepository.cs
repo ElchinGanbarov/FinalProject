@@ -11,12 +11,16 @@ namespace Repository.Repositories.AuthRepositories
         Account Register(Account Account);
         Account Login(string email, string password);
         Account CheckByToken(string token);
+        Account GetByEmail(string email);
+        Account GetByForgetToken(string forgetToken);
         void UpdateToken(int id, string token);
         bool CheckEmail(string email);
+        bool CheckPasswordResetCode(int accountId, string passwordResetCode);
         bool CheckPhone(string phone);
         //remove AccountEmailVerficationCode
         void VerifyUserEmail(int accountId);
         void UpdateAccount(Account _user, Account user);
+        bool UpdatePassword(int accountId, string password);
     }
     public class AuthRepository : IAuthRepository
     {
@@ -30,9 +34,34 @@ namespace Repository.Repositories.AuthRepositories
             return _context.Accounts.FirstOrDefault(u => u.Token == token);
         }
 
+        //get user by email addres
+        public Account GetByEmail(string email)
+        {
+            return _context.Accounts.FirstOrDefault(a => a.Email == email);
+        }
+
+        //get user by forget token
+        public Account GetByForgetToken(string forgetToken)
+        {
+            return _context.Accounts.FirstOrDefault(a => a.ForgetToken == forgetToken);
+        }
+
         public bool CheckEmail(string email)
         {
             return _context.Accounts.Any(u => u.Email == email);
+        }
+
+        //check account forget token
+        public bool CheckPasswordResetCode(int accountId, string passwordResetCode)
+        {
+            if (string.IsNullOrEmpty(passwordResetCode)) return false;
+            Account account = _context.Accounts.Find(accountId);
+            if (account == null) return false;
+            if (account.ResetPasswordCode == passwordResetCode)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool CheckPhone(string phone)
@@ -88,5 +117,22 @@ namespace Repository.Repositories.AuthRepositories
             account.IsEmailVerified = true;
             _context.SaveChanges();
         }
+
+        //update account password
+        public bool UpdatePassword(int accountId, string password)
+        {
+            if (string.IsNullOrEmpty(password)) return false;
+            Account account = _context.Accounts.Find(accountId);
+            if (account != null)
+            {
+                account.Password = Crypto.HashPassword(password);
+                account.ModifiedDate = DateTime.Now;
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }

@@ -274,8 +274,6 @@ C:\Users\User\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\runtimes\wi
 C:\Users\User\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\Repository.dll
 C:\Users\User\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\Repository.pdb
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.csprojAssemblyReference.cache
-C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.RazorAssemblyInfo.cache
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.RazorAssemblyInfo.cs
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.AssemblyInfoInputs.cache
@@ -308,3 +306,6 @@ C:\Users\Admin\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\Admin\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Account\VerifyEmail.cshtml.g.cs
 C:\Users\Admin\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\libman.json
 C:\Users\User\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\libman.json
+C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassConfirm.cshtml.g.cs
