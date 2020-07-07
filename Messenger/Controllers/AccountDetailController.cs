@@ -35,14 +35,19 @@ namespace Messenger.Controllers
                 var user = _mapper.Map<AccountDetailViewModel, Account>(model);
                 
                 var updateuser = _authRepository.CheckByToken(_user.Token);
-                if (updateuser.Name.Trim() != user.Name.Trim() || updateuser.Surname.Trim() != user.Surname.Trim() ||
-                    updateuser.Address.Trim() != user.Address.Trim() || updateuser.Birthday != user.Birthday ||
-                    updateuser.Email.Trim() != user.Email.Trim() || updateuser.Website.Trim() != user.Website.Trim())
-                {
-                   
-                    _authRepository.UpdateAccount(updateuser, user);
-                    return Ok(user);
-                }
+              
+                    if (updateuser.Name != user.Name ||
+                        updateuser.Surname != user.Surname ||
+                        updateuser.Address != user.Address ||
+                        updateuser.Birthday != user.Birthday ||
+                        updateuser.Email != user.Email ||
+                        updateuser.Website != user.Website)
+                    {
+
+                        _authRepository.UpdateAccount(updateuser, user);
+                        return Ok(user);
+                    }
+             
             
 
 
@@ -64,14 +69,17 @@ namespace Messenger.Controllers
                 socialLink.AccountId = _user.Id;
                     var updatesociallink = _accountDetailRepository.GetByAccountId(_user.Id);
 
-                    if (updatesociallink.Facebook != socialLink.Facebook.Trim() ||
-                        updatesociallink.Twitter != socialLink.Twitter.Trim() ||
-                        updatesociallink.Instagram != socialLink.Instagram.Trim() ||
-                        updatesociallink.Linkedin != socialLink.Linkedin.Trim())
+                
+                    if (updatesociallink.Facebook != socialLink.Facebook ||
+                     updatesociallink.Twitter != socialLink.Twitter||
+                     updatesociallink.Instagram != socialLink.Instagram ||
+                     updatesociallink.Linkedin != socialLink.Linkedin)
                     {
                         _accountDetailRepository.UpdateSocialLink(updatesociallink, socialLink);
                         return Ok(socialLink);
                     }
+                
+             
 
 
 

@@ -31,7 +31,7 @@ namespace Messenger.Controllers
             GeneralViewModel model = new GeneralViewModel
             {
                 AccountDetailViewModel = _mapper.Map<Account, AccountDetailViewModel>(_authRepository.CheckByToken(_user.Token)),
-                AccountSocialLink =_accountDetailRepository.GetAccountSocialLink(_user.Id)
+                AccountSocialLinkViewModel =_mapper.Map<AccountSocialLink,AccountSocialLinkViewModel>(_accountDetailRepository.GetAccountSocialLink(_user.Id))
             };
             return View(model);
         }
