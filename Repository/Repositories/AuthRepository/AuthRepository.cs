@@ -21,6 +21,7 @@ namespace Repository.Repositories.AuthRepositories
         void VerifyUserEmail(int accountId);
         void UpdateAccount(Account _user, Account user);
         bool UpdatePassword(int accountId, string password);
+        void AddedSocial(AccountSocialLink accountSocialLink);
     }
     public class AuthRepository : IAuthRepository
     {
@@ -133,6 +134,11 @@ namespace Repository.Repositories.AuthRepositories
             return false;
         }
 
+        public void AddedSocial(AccountSocialLink accountSocialLink)
+        {
+             _context.AccountSocialLinks.Add(accountSocialLink);
+            _context.SaveChanges();
 
+        }
     }
 }

@@ -34,7 +34,7 @@ using Messenger.Models.Account;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e8300cdcf8c9ec9becc71916957286f22a2d7108", @"/Views/Account/ResetPassConfirm.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d68527687fda5f1d514363738cdcddef7277d862", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a0e1397ec42d7ed27f6a1d0a1c76ca89f5dbcf93", @"/Views/_ViewImports.cshtml")]
     public class Views_Account_ResetPassConfirm : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ResetPasswordConfirmViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("sr-only"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
