@@ -1225,16 +1225,15 @@
                                                                 <p class="small text-muted mb-0">Birthdate</p>
                                                                 @if (Model.AccountDetailViewModel.Birthday != null)
                                                                 {
-<<<<<<< HEAD
+
                                                                     <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11)</p>
 
                                                                 }
-=======
-                                                                 <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11)</p>
-                                                                }
+
+                                                                
                                                                 
 
->>>>>>> ae3f9b3d8fd83fffb6fbd469dc6cec63eeb1a81f
+
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -3888,19 +3887,20 @@
                                 </div>
                                 <!--Update Password-->
                                 <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h6 class="mb-1">Password</h6>
-                                        <p class="mb-0 text-muted small">Update personal account password</p>
-                                    </div>
+                                    <form method="post" class="bir" asp-controller="account" asp-action="updatepassword">
+                                        <div class="card-header">
+                                            <h6 class="mb-1">Password</h6>
+                                            <p class="mb-0 text-muted small">Update personal account password</p>
+                                        </div>
 
-                                    <div class="card-body">
-                                        <form method="post" class="bir" asp-controller="account" asp-action="updatepassword">
+                                        <div class="card-body">
+
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.UpdatePasswordViewModel.CurrentPassword">Current Password</label>
-                                                        <input asp-for="@Model.UpdatePasswordViewModel.CurrentPassword" class="form-control form-control-md onchanges" placeholder="Current password">
-                                                        <span asp-validation-for="@Model.UpdatePasswordViewModel.CurrentPassword" class="text-danger "></span>
+                                                        <input asp-for="@Model.UpdatePasswordViewModel.CurrentPassword" class="form-control form-control-md chpassword" placeholder="Current password">
+                                                        <span asp-validation-for="@Model.UpdatePasswordViewModel.CurrentPassword" class="text-danger currentpassworderror "></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3908,25 +3908,27 @@
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.UpdatePasswordViewModel.Password">New Password</label>
-                                                        <input asp-for="@Model.UpdatePasswordViewModel.Password" class="form-control form-control-md onchanges" placeholder="New password">
+                                                        <input asp-for="@Model.UpdatePasswordViewModel.Password" class="form-control form-control-md " placeholder="New password">
                                                         <span asp-validation-for="@Model.UpdatePasswordViewModel.Password" class="text-danger "></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.UpdatePasswordViewModel.PasswordConfirm">Repeat Password</label>
-                                                        <input asp-for="@Model.UpdatePasswordViewModel.PasswordConfirm" class="form-control form-control-md onchanges" placeholder="Repeat password">
+                                                        <input asp-for="@Model.UpdatePasswordViewModel.PasswordConfirm" class="form-control form-control-md " placeholder="Repeat password">
                                                         <span asp-validation-for="@Model.UpdatePasswordViewModel.PasswordConfirm" class="text-danger "></span>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
 
-                                    <div class="card-footer d-flex justify-content-end">
-                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                        <button type="submit" class="btn btn-primary" >Save Changes</button>
-                                    </div>
+                                        </div>
+
+                                        <div class="card-footer d-flex justify-content-end">
+                                            <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
+                                            <button type="submit" class="btn btn-primary changepassword" disabled>Save Changes</button>
+                                        </div>
+                                    </form>
+                                  
                                 </div>
                                 <!--Account Privacy-->
                                 <div class="card mb-3">
@@ -4709,6 +4711,7 @@
             });
         </script>
         <!--Account Add Database-->
+
         <script>
             $(document).on("submit", ".sociallink", function (e) {
 
@@ -4755,56 +4758,75 @@
             });
         </script>
         <!--Account Update Password-->
+
         <script>
             $(document).on("submit", ".bir", function (e) {
 
-                alert("1")
+                
 
-                //let CurrentPassword = $("#UpdatePasswordViewModel_CurrentPassword").val().trim();
-                //let NewPassword = $("#UpdatePasswordViewModel_Password").val().trim();
-                //let RepeatPassword = $("#UpdatePasswordViewModel_PasswordConfirm").val().trim();
+                let CurrentPassword = $("#UpdatePasswordViewModel_CurrentPassword").val().trim();
+                let NewPassword = $("#UpdatePasswordViewModel_Password").val().trim();
+                let RepeatPassword = $("#UpdatePasswordViewModel_PasswordConfirm").val().trim();
 
                 
 
-                //$.ajax({
-                //    url: '/account/updatepassword',
-                //    type: "POST",
-                //    dataType: "json",
-                //    data:
-                //    {
-                //        currentpassword: CurrentPassword,
-                //        password: NewPassword,
-                //        passwordconfirm: RepeatPassword
+                $.ajax({
+                    url: '/account/updatepassword',
+                    type: "POST",
+                    dataType: "json",
+                    data:
+                    {
+                        currentpassword: CurrentPassword,
+                        password: NewPassword,
+                        passwordconfirm: RepeatPassword
 
-                //    },
-                //    success: function (res) {
+                    },
+                  
+                    success: function (res) {
+                        if (res.status == false) {
+                            $(".currentpassworderror").text(res.message);
+                            $.toast({
+                                heading: 'Error',
+                                text: res.message,
+                                icon: 'error',
+                                loader: true,
+                                bgColor: '#dc3545',
+                                loaderBg: '#f7d40d',
+                                position: 'top-right',
+                                hideAfter: 4000
+                            });
+                            $("#UpdatePasswordViewModel_Password").val("");
+                            $("#UpdatePasswordViewModel_PasswordConfirm").val("");
+                        }
+                       
+                        if (res.status == true) {
+                            $.toast({
+                                heading: 'Correct',
+                                text: res.message,
+                                icon: 'info',
+                                loader: true,
+                                bgColor: '#3988ff',
+                                loaderBg: '#f7d40d',
+                                position: 'top-right',
+                                hideAfter: 4000
+                            });
+                            $("#UpdatePasswordViewModel_Password").val("");
+                            $("#UpdatePasswordViewModel_PasswordConfirm").val("");
+                            $("#UpdatePasswordViewModel_CurrentPassword").val("");
+                        }
+                       
+                       
+                       
 
-                //        alert("ok")
-                //        //console.log(res);
-                //        //$(".facebook").text(Facebook);
-                //        //$(".twitter").text(Twitter);
-                //        //$(".instagram").text(Instagram);
-                //        //$(".linkedin").text(Linkedin);
-
-
-
-                //        //$.toast({
-                //        //    heading: 'Məlumat',
-                //        //    text: "Hesabiniz deisdirildi",
-                //        //    icon: 'info',
-                //        //    loader: true,
-                //        //    bgColor: '#3988ff',
-                //        //    loaderBg: '#f7d40d',
-                //        //    position: 'top-right',
-                //        //    hideAfter: 4000
-                //        //});
-
-                //    }
-                //});
+                    }
+                });
+              
+               
                 e.preventDefault();
             });
         </script>
         <!--/Account Password Update-->
+
         <!--Disabled Removed Account-->
         <script>
             $(document).on("keydown", ".onchange", function (e) {
@@ -4813,6 +4835,10 @@
             });
             $(document).on("keydown", ".onchanges", function (e) {
                 $(".onchangesocial").prop("disabled", false)
+
+            });
+            $(document).on("keydown", ".chpassword", function (e) {
+                    $(".changepassword").prop("disabled", false)
 
             });
 

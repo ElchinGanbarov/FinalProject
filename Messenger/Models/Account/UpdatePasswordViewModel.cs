@@ -26,5 +26,6 @@ namespace Messenger.Models.Account
         [Compare("Password", ErrorMessage = "Password and password confirmation must be the same")]
         [DataType(DataType.Password)]
         public string PasswordConfirm { get; set; }
+           
     }
 }
