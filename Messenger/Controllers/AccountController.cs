@@ -181,6 +181,13 @@ namespace Messenger.Controllers
             return View();
         }
 
+        //[TypeFilter(typeof(Auth))]
+        [HttpPost]
+        public IActionResult UpdatePassword(UpdatePasswordViewModel model)
+        {
+            return Ok(model);
+        }
+
         //Email Verification Link Click View
         [TypeFilter(typeof(Auth))]
         [HttpGet]
@@ -233,7 +240,7 @@ namespace Messenger.Controllers
         {
             if (_user.IsEmailVerified)
             {
-                return NotFound();
+                return RedirectToAction("chat1", "pages");
             }
 
             return View();

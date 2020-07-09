@@ -31,7 +31,7 @@ namespace Repository.Services
             var fromEmailPassword = "Pervin_1997";
             var toEmail = new MailAddress(email);
             var appeal = "Dear, " + userFullname + "! ";
-            var subject = "Messenger Account Successfully Created";
+            var subject = "Messenger Account Successfully Created! ";
 
             var messageBody = "</br> " +
                 "<div style=' background-color: #665dfe; padding: 20px 0px;'> " +
@@ -39,7 +39,9 @@ namespace Repository.Services
                 "Thank you for creating your new Messanger App account! Please, Click the below button to Verify Your Account </h2>" +
                 "<center><a style='display: inline-block; background-color: #28a745; font-weight: bold; color: #fff; padding: 10px; " +
                 "text-align: center; text-decoration: none; border: 1px solid transparent; font-size: 22px; border-radius: 5px; line-height: 1.5;' " +
-                "href=" + link + ">Verify Account</a></center>";
+                "href=" + link + ">Verify Account</a></center>" +
+                "</br><h3 style='margin: 0px; padding: 10px 30px; font-size: 15px; color: #fff;'>" + DateTime.Now.Year +
+                " Messenger Application © by Elchin Ganbarov & Pervin Pashazade </h3>";
 
             var smtp = new SmtpClient
             {
@@ -72,7 +74,7 @@ namespace Repository.Services
             var fromEmailPassword = "Pervin_1997";
             var toEmail = new MailAddress(account.Email);
             var appeal = "Dear, " + userFullname + "! ";
-            var subject = "Messenger Account Reset Password";
+            var subject = "Messenger Account Reset Password! ";
 
             var messageBody = "</br> " +
                 "<div style=' background-color: #665dfe; padding: 20px 0px;'> " +
@@ -85,7 +87,9 @@ namespace Repository.Services
                 ". </p>" +
                 "<center><p style='display: inline-block; background-color: #28a745; font-weight: bold; color: #fff; padding: 10px; " +
                 "text-align: center; text-decoration: none; border: 1px solid transparent; font-size: 22px; border-radius: 5px; " +
-                "line-height: 1.5;' >Code: " + account.ResetPasswordCode + "</p></center>";
+                "line-height: 1.5;' >Code: " + account.ResetPasswordCode + "</p></center>" +
+                "</br><h3 style='margin: 0px; padding: 10px 30px; font-size: 15px; color: #fff;'>" + DateTime.Now.Year +
+                " Messenger Application © by Elchin Ganbarov & Pervin Pashazade </h3>";
 
             var smtp = new SmtpClient
             {

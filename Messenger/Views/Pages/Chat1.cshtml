@@ -1223,9 +1223,11 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Birthdate</p>
+                                                                @if (Model.AccountDetailViewModel.Birthday != null)
+                                                                {
+                                                                    <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11)</p>
 
-                                                                <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11)</p>
-
+                                                                }
                                                             </div>
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -3761,6 +3763,7 @@
                     <div class="container-xl px-2 px-sm-3">
                         <div class="row">
                             <div class="col">
+                                <!--Account Information-->
                                 <div class="card mb-3">
                                     <form method="post" class="accountchange" asp-controller="accountdetail" asp-action="update">
                                         <div class="card-header">
@@ -3776,6 +3779,7 @@
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Name">First Name</label>
                                                         <input asp-for="@Model.AccountDetailViewModel.Name" class="form-control form-control-md onchange" placeholder="Type your first name">
+                                                        <span asp-validation-for="@Model.AccountDetailViewModel.Name" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
@@ -3827,7 +3831,7 @@
                                     </form>
 
                                 </div>
-
+                                <!--Account Social Links-->
                                 <div class="card mb-3">
                                     <form method="post" class="sociallink" asp-controller="accountdetail" asp-action="updatesocialLink">
                                         <div class="card-header">
@@ -3870,39 +3874,42 @@
 
                                         <div class="card-footer d-flex justify-content-end">
                                             <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                            <button type="submit" class="btn btn-primary onchangesocial" disabled >Save Changes</button>
+                                            <button type="submit" class="btn btn-primary onchangesocial" disabled>Save Changes</button>
                                         </div>
                                     </form>
 
                                 </div>
-
+                                <!--Update Password-->
                                 <div class="card mb-3">
                                     <div class="card-header">
                                         <h6 class="mb-1">Password</h6>
-                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
+                                        <p class="mb-0 text-muted small">Update personal account password</p>
                                     </div>
 
                                     <div class="card-body">
-                                        <form>
+                                        <form method="post" class="bir" asp-controller="account" asp-action="updatepassword">
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="current-password">Current Password</label>
-                                                        <input type="password" class="form-control form-control-md" id="current-password" placeholder="Current password" autocomplete="on">
+                                                        <label asp-for="@Model.UpdatePasswordViewModel.CurrentPassword">Current Password</label>
+                                                        <input asp-for="@Model.UpdatePasswordViewModel.CurrentPassword" class="form-control form-control-md onchanges" placeholder="Current password">
+                                                        <span asp-validation-for="@Model.UpdatePasswordViewModel.CurrentPassword" class="text-danger "></span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="new-password">New Password</label>
-                                                        <input type="password" class="form-control form-control-md" id="new-password" placeholder="New password" autocomplete="off">
+                                                        <label asp-for="@Model.UpdatePasswordViewModel.Password">New Password</label>
+                                                        <input asp-for="@Model.UpdatePasswordViewModel.Password" class="form-control form-control-md onchanges" placeholder="New password">
+                                                        <span asp-validation-for="@Model.UpdatePasswordViewModel.Password" class="text-danger "></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="repeat-password">Repeat Password</label>
-                                                        <input type="password" class="form-control form-control-md" id="repeat-password" placeholder="Repeat password" autocomplete="off">
+                                                        <label asp-for="@Model.UpdatePasswordViewModel.PasswordConfirm">Repeat Password</label>
+                                                        <input asp-for="@Model.UpdatePasswordViewModel.PasswordConfirm" class="form-control form-control-md onchanges" placeholder="Repeat password">
+                                                        <span asp-validation-for="@Model.UpdatePasswordViewModel.PasswordConfirm" class="text-danger "></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3911,10 +3918,10 @@
 
                                     <div class="card-footer d-flex justify-content-end">
                                         <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                        <button type="button" class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" class="btn btn-primary" >Save Changes</button>
                                     </div>
                                 </div>
-
+                                <!--Account Privacy-->
                                 <div class="card mb-3">
                                     <div class="card-header">
                                         <h6 class="mb-1">Privacy</h6>
@@ -4021,7 +4028,7 @@
                                         <button type="button" class="btn btn-primary">Save Changes</button>
                                     </div>
                                 </div>
-
+                                <!--Account Security-->
                                 <div class="card mb-3">
                                     <div class="card-header">
                                         <h6 class="mb-1">Security</h6>
@@ -4652,10 +4659,10 @@
                 let Birthday = $("#AccountDetailViewModel_Birthday").val().trim();
                 let Email = $("#AccountDetailViewModel_Email").val().trim();
                 let Website = $("#AccountDetailViewModel_Website").val().trim();
-                
+
                 let Address = $("#AccountDetailViewModel_Address").val().trim();
 
-                
+
                 $.ajax({
                     url: '/accountdetail/update',
                     type: "POST",
@@ -4697,12 +4704,12 @@
         <!--Account Add Database-->
         <script>
             $(document).on("submit", ".sociallink", function (e) {
-           
+
                 let Facebook = $("#AccountSocialLinkViewModel_Facebook").val().trim();
                 let Twitter = $("#AccountSocialLinkViewModel_Twitter").val().trim();
                 let Instagram = $("#AccountSocialLinkViewModel_Instagram").val().trim();
                 let Linkedin = $("#AccountSocialLinkViewModel_Linkedin").val().trim();
-             
+
                 $.ajax({
                     url: '/accountdetail/updatesociallink',
                     type: "POST",
@@ -4713,7 +4720,7 @@
                         twitter: Twitter,
                         instagram: Instagram,
                         linkedin: Linkedin
-                      
+
                     },
                     success: function (res) {
                         console.log(res);
@@ -4722,7 +4729,7 @@
                         $(".instagram").text(Instagram);
                         $(".linkedin").text(Linkedin);
 
-        
+
 
                         $.toast({
                             heading: 'Məlumat',
@@ -4736,10 +4743,61 @@
                         });
                     }
                 });
-             
+
                 e.preventDefault();
             });
         </script>
+        <!--Account Update Password-->
+        <script>
+            $(document).on("submit", ".bir", function (e) {
+
+                alert("1")
+
+                //let CurrentPassword = $("#UpdatePasswordViewModel_CurrentPassword").val().trim();
+                //let NewPassword = $("#UpdatePasswordViewModel_Password").val().trim();
+                //let RepeatPassword = $("#UpdatePasswordViewModel_PasswordConfirm").val().trim();
+
+                
+
+                //$.ajax({
+                //    url: '/account/updatepassword',
+                //    type: "POST",
+                //    dataType: "json",
+                //    data:
+                //    {
+                //        currentpassword: CurrentPassword,
+                //        password: NewPassword,
+                //        passwordconfirm: RepeatPassword
+
+                //    },
+                //    success: function (res) {
+
+                //        alert("ok")
+                //        //console.log(res);
+                //        //$(".facebook").text(Facebook);
+                //        //$(".twitter").text(Twitter);
+                //        //$(".instagram").text(Instagram);
+                //        //$(".linkedin").text(Linkedin);
+
+
+
+                //        //$.toast({
+                //        //    heading: 'Məlumat',
+                //        //    text: "Hesabiniz deisdirildi",
+                //        //    icon: 'info',
+                //        //    loader: true,
+                //        //    bgColor: '#3988ff',
+                //        //    loaderBg: '#f7d40d',
+                //        //    position: 'top-right',
+                //        //    hideAfter: 4000
+                //        //});
+
+                //    }
+                //});
+                e.preventDefault();
+            });
+        </script>
+        <!--/Account Password Update-->
         <!--Disabled Removed Account-->
         <script>
             $(document).on("keydown", ".onchange", function (e) {
@@ -4750,7 +4808,7 @@
                 $(".onchangesocial").prop("disabled", false)
 
             });
-        
+
         </script>
     </body>
 
