@@ -1,9 +1,13 @@
 ﻿using System;
 using AutoMapper;
+using CryptoHelper;
 using Messenger.Filters;
 using Messenger.Models.Account;
+using Messenger.Models.AccountDetail;
+using Messenger.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
+using Repository.Repositories.AccountRepository;
 using Repository.Repositories.AuthRepositories;
 using Repository.Services;
 
@@ -15,14 +19,18 @@ namespace Messenger.Controllers
         private readonly IMapper _mapper;
         private readonly IAuthRepository _authRepository;
         private readonly ISendEmail _emailService;
+        private readonly IAccountDetailRepository _accountDetailRepository;
+
 
         public AccountController(IMapper mapper,
                                  IAuthRepository authRepository,
-                                 ISendEmail sendEmail)
+                                 ISendEmail sendEmail,
+                                 IAccountDetailRepository accountDetailRepository)
         {
             _mapper = mapper;
             _authRepository = authRepository;
             _emailService = sendEmail;
+            _accountDetailRepository = accountDetailRepository;
         }
         public IActionResult SignUp()
         {
@@ -191,11 +199,43 @@ namespace Messenger.Controllers
             return View();
         }
 
-        //[TypeFilter(typeof(Auth))]
+        [TypeFilter(typeof(Auth))]
         [HttpPost]
-        public IActionResult UpdatePassword(UpdatePasswordViewModel model)
+        public IActionResult UpdatePassword(UpdatePasswordViewModel UpdatePasswordViewModel)
         {
-            return Ok(model);
+            var account = _authRepository.CheckByToken(_user.Token);
+         
+            if (ModelState.IsValid)
+            {
+                if (!Crypto.VerifyHashedPassword(account.Password, UpdatePasswordViewModel.CurrentPassword))
+                {
+                    return Ok(new
+                    {
+                        message = "Sifre Yanlisdir",
+                        status=false
+                    });
+                }
+
+                
+                if(_authRepository.UpdatePassword(_user.Id, UpdatePasswordViewModel.Password))
+                {
+                    return Ok(new
+                    {
+                        message = "Sifreniz deisdirildi.",
+                        status = true
+                    });
+                }
+                
+            }
+
+
+            return View("Views/Pages/Chat1.cshtml", new GeneralViewModel
+            {
+                UpdatePasswordViewModel = UpdatePasswordViewModel,
+                AccountDetailViewModel = _mapper.Map<Account, AccountDetailViewModel>(_authRepository.CheckByToken(_user.Token))
+
+            });
+
         }
 
         //Email Verification Link Click View
