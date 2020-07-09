@@ -35,6 +35,8 @@ namespace Messenger
                                                            UseSqlServer(Configuration.
                                                            GetConnectionString("Default"),
                                                            x => x.MigrationsAssembly("Repository")));
+
+
             services.AddTransient<IAuthRepository, AuthRepository>();  //AuthRepository Service Added
             services.AddTransient<IAccountDetailRepository, AccountDetailRepository>();  //AccountDetailRepository Service Added
 

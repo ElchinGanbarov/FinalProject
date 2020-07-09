@@ -1223,8 +1223,11 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Birthdate</p>
-
-                                                                <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11)</p>
+                                                                @if (Model.AccountDetailViewModel.Birthday != null)
+                                                                {
+                                                                 <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11)</p>
+                                                                }
+                                                                
 
                                                             </div>
                                                             <!-- Default :: Inline SVG -->

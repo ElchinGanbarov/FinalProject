@@ -52,8 +52,18 @@ namespace Messenger.Controllers
 
                 //email verification code
                 user.EmailActivationCode = Guid.NewGuid().ToString();
-
+           
                 _authRepository.Register(user);
+
+                AccountSocialLink accountSocialLink = new AccountSocialLink
+                {
+                    AccountId = user.Id,
+                    Status = true,
+                    AddedBy = "System",
+                    AddedDate = DateTime.Now
+                };
+                _authRepository.AddedSocial(accountSocialLink);
+
 
                 //send verification link email
                 string userFullname = user.Name + " " + user.Surname;
