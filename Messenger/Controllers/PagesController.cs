@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Messenger.Filters;
 using Messenger.Models.AccountDetail;
+using Messenger.Models.AccountPrivacySecurity;
 using Messenger.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
@@ -31,7 +32,9 @@ namespace Messenger.Controllers
             GeneralViewModel model = new GeneralViewModel
             {
                 AccountDetailViewModel = _mapper.Map<Account, AccountDetailViewModel>(_authRepository.CheckByToken(_user.Token)),
-                AccountSocialLinkViewModel =_mapper.Map<AccountSocialLink,AccountSocialLinkViewModel>(_accountDetailRepository.GetAccountSocialLink(_user.Id))
+                AccountSocialLinkViewModel =_mapper.Map<AccountSocialLink,AccountSocialLinkViewModel>(_accountDetailRepository.GetAccountSocialLink(_user.Id)),
+                AccountPrivacyViewModel =_mapper.Map<AccountPrivacy, AccountPrivacyViewModel>(_accountDetailRepository.GetAccountPrivacy(_user.Id)),
+                AccountSecurityViewModel =_mapper.Map<AccountSecurity, AccountSecurityViewModel>(_accountDetailRepository.GetAccountSecurity(_user.Id))
             };
             return View(model);
         }

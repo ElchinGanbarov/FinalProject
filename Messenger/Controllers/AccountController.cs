@@ -32,6 +32,10 @@ namespace Messenger.Controllers
             _emailService = sendEmail;
             _accountDetailRepository = accountDetailRepository;
         }
+
+        //SignUp; SignIn; Logout Start
+        #region signUp,singIn,Logout
+
         public IActionResult SignUp()
         {
             return View();
@@ -72,6 +76,32 @@ namespace Messenger.Controllers
                 };
                 _authRepository.AddedSocial(accountSocialLink);
 
+                //creating account's privacy Database
+                AccountPrivacy accountPrivacy = new AccountPrivacy
+                {
+                    AccountId = user.Id,
+                    Status = true,
+                    AddedDate = DateTime.Now,
+                    AddedBy = "System",
+                    Phone = true,
+                    Email = true,
+                    LastLogin = true,
+                    LastSeen = true,
+                    Address = true,
+                    Birthday = true,
+                    ProfileImg = true,
+                    SocialLink = true,
+                    StatusText = true,
+                    Website = true
+                };
+                _authRepository.CreatePrivacy(accountPrivacy);
+
+                AccountSecurity accountSecurity = new AccountSecurity
+                {
+                    TwoFactoryAuth = false,
+                    LoginAlerts = false
+                };
+                _authRepository.CreateSecurity(accountSecurity);
 
                 //send verification link email
                 string userFullname = user.Name + " " + user.Surname;
@@ -141,36 +171,15 @@ namespace Messenger.Controllers
             //return PartialView("chat1", "pages");
             return RedirectToAction("signin","account");
         }
+        #endregion
+        //SignUp; SignIn; Logout End
 
+
+        //Reset and Update Password Start
+        #region Reset & Update Password
         public IActionResult ResetPassword()
         {
             return View();
-        }
-
-        //dont using
-        [HttpPost]
-        public IActionResult ResetPassword(ResetPasswordViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                Account account = _authRepository.GetByEmail(model.Email);
-                if (account == null)
-                {
-                    ModelState.AddModelError("Email", "There's no Messenger App Account with the info you provided");
-                    return View();
-                }
-
-                _emailService.ResetPassword(account);
-                Response.Cookies.Delete("resetpassword");
-                Response.Cookies.Append("resetpassword", account.ForgetToken, new Microsoft.AspNetCore.Http.CookieOptions
-                {
-                    Expires = DateTime.Now.AddDays(1),
-                    HttpOnly = true
-                });
-                return RedirectToAction("resetpassconfirm", "account");
-            }
-
-            return Content("error");
         }
 
         [TypeFilter(typeof(ResetPassFilter))]
@@ -237,7 +246,11 @@ namespace Messenger.Controllers
             });
 
         }
+        #endregion
+        //Reset and Update Password End
 
+        //VerifyEmail, UnVerified, CheckEmailAddress, CheckForgetCode Start
+        #region Email 
         //Email Verification Link Click View
         [TypeFilter(typeof(Auth))]
         [HttpGet]
@@ -330,6 +343,9 @@ namespace Messenger.Controllers
             //return NotFound();
             return Ok(new { status = false});
         }
+        #endregion
+        //VerifyEmail, UnVerified, CheckEmailAddress, CheckForgetCode Start
 
+        
     }
 }
