@@ -1221,18 +1221,22 @@
                                                         <div class="media align-items-center">
                                                             <div class="media-body">
                                                                 <p class="small text-muted mb-0">Birthdate</p>
-                                                                @if (Model.AccountDetailViewModel.Birthday != null)
-                                                                {
+                                                                <p class="mb-0 birthday">
+                                                                    @if (Model.AccountDetailViewModel.Birthday != null)
+                                                                    {
 
-                                                                    <p class="mb-0 birthday">@Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11)</p>
+                                                                        Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11);
 
-                                                                }
+                                                                    }
+                                                                    </p>
+                                                                  
 
-                                                                
-                                                                
 
 
-                                                            </div>
+
+
+
+                                                                </div>
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -3801,7 +3805,7 @@
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Birthday">Birth date</label>
-                                                        <input asp-for="@Model.AccountDetailViewModel.Birthday" type="date" min="1930-01-01" max="2010-01-01" class="form-control form-control-md onchange" placeholder="dd/mm/yyyy">
+                                                        <input asp-for="@Model.AccountDetailViewModel.Birthday" type="date" min="1930-01-01" max="2010-01-01" class="form-control form-control-md onchangess" placeholder="dd/mm/yyyy">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
@@ -4742,7 +4746,7 @@
                 let Name = $("#AccountDetailViewModel_Name").val().trim();
                 let Surname = $("#AccountDetailViewModel_Surname").val().trim();
                 let Phone = $("#AccountDetailViewModel_Phone").val().trim();
-                let Birthday = $("#AccountDetailViewModel_Birthday").val().trim();
+                let Birthday = $("#AccountDetailViewModel_Birthday").val();
                 let Email = $("#AccountDetailViewModel_Email").val().trim();
                 let Website = $("#AccountDetailViewModel_Website").val().trim();
                 let Address = $("#AccountDetailViewModel_Address").val().trim();
@@ -4902,6 +4906,9 @@
             $(document).on("keydown", ".chpassword", function (e) {
                     $(".changepassword").prop("disabled", false)
             });
+            $(document).on("change", ".onchangess", function (e) {
+                $(".onchangesubmit").prop("disabled", false)
+              });
         </script>
 
         <!--Privacy Dropdown & Security checkboxs Js-->

@@ -42,7 +42,8 @@ namespace Messenger.Controllers
                         updateuser.Address != user.Address ||
                         updateuser.Birthday != user.Birthday ||
                         updateuser.Email != user.Email ||
-                        updateuser.Website != user.Website)
+                        updateuser.Website != user.Website ||
+                        updateuser.Phone != user.Phone)
                     {
 
                         _authRepository.UpdateAccount(updateuser, user);

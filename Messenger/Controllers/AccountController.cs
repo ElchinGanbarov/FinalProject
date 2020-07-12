@@ -98,6 +98,7 @@ namespace Messenger.Controllers
 
                 AccountSecurity accountSecurity = new AccountSecurity
                 {
+                    AccountId=user.Id,
                     TwoFactoryAuth = false,
                     LoginAlerts = false
                 };
