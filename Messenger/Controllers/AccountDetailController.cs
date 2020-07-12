@@ -3,6 +3,7 @@ using Messenger.Filters;
 using Messenger.Models;
 using Messenger.Models.Account;
 using Messenger.Models.AccountDetail;
+using Messenger.Models.AccountPrivacySecurity;
 using Messenger.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
@@ -47,10 +48,6 @@ namespace Messenger.Controllers
                         _authRepository.UpdateAccount(updateuser, user);
                         return Ok(user);
                     }
-             
-            
-
-
             }
             return View("Views/Pages/Chat1.cshtml", new GeneralViewModel
             {
@@ -92,5 +89,36 @@ namespace Messenger.Controllers
                 AccountDetailViewModel = _mapper.Map<Account, AccountDetailViewModel>(updateuser)
             });
         }
+
+        //Privacy & Security Start
+        #region Privacy & Security
+
+        [TypeFilter(typeof(Auth))]
+        [HttpPost]
+        public IActionResult UpdatePrivacy(AccountPrivacyViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Account account = _authRepository.CheckByToken(_user.Token);
+                if (account != null)
+                {
+                    _accountDetailRepository.UpdatePrivacy(account.Id,
+                                                           model.ProfileImg,
+                                                           model.StatusText,
+                                                           model.LastSeen,
+                                                           model.Phone,
+                                                           model.Birthday,
+                                                           model.Address,
+                                                           model.SocialLink,
+                                                           model.AcceptAllMessages);
+                    return Ok(new { status = true, message = "Account Privacy Successfully Updated!" });
+                }
+            }
+
+            return Ok(new { status = false, message = "Unexpected Error Ocoured! Update account privacy Failed!" });
+        }
+
+        #endregion
+        //Privacy & Security End
     }
 }

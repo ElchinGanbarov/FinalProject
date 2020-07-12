@@ -3779,8 +3779,6 @@
 
                                         <div class="card-body">
                                             <div class="row">
-
-
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label asp-for="@Model.AccountDetailViewModel.Name">First Name</label>
@@ -3932,110 +3930,186 @@
                                 </div>
                                 <!--Account Privacy-->
                                 <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h6 class="mb-1">Privacy</h6>
-                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                    </div>
+                                    <form method="post" class="update-account-privacy" asp-controller="accountdetail" asp-action="updateprivacy">
 
-                                    <div class="card-body p-0">
-                                        <ul class="list-group list-group-flush list-group-sm-column">
+                                        <div class="card-header">
+                                            <h6 class="mb-1">Privacy</h6>
+                                            <p class="mb-0 text-muted small">Update personal account privacy</p>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <ul class="list-group list-group-flush list-group-sm-column">
 
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Profile Picture</p>
-                                                        <p class="small text-muted mb-0">Select who can see my profile picture</p>
-                                                    </div>
-                                                    <div class="dropdown mr-2">
-                                                        <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Public
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#">Public</a>
-                                                            <a class="dropdown-item" href="#">Friends</a>
-                                                            <a class="dropdown-item" href="#">Selected Friends</a>
+                                                <!--privacy profile img-->
+                                                <li class="list-group-item py-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="mb-0">Profile Picture</p>
+                                                            <p class="small text-muted mb-0">Select who can see your profile picture</p>
+                                                        </div>
+                                                        <div class="dropdown mr-2">
+                                                            <button class="btn btn-outline-default dropdown-toggle"
+                                                                    data-privacy-profile-picture-text="" type="button"
+                                                                    data-selected-value="@Model.AccountPrivacyViewModel.ProfileImg"
+                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                @(Model.AccountPrivacyViewModel.ProfileImg ? "Public " : "Friends")
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" data-privacy-profile-picture data-privacy-value="true" href="#">Public </a>
+                                                                <a class="dropdown-item" data-privacy-profile-picture data-privacy-value="false" href="#">Friends</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Last Seen</p>
-                                                        <p class="small text-muted mb-0">Select who can see my last seen</p>
-                                                    </div>
-                                                    <div class="dropdown mr-2">
-                                                        <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Public
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#">Public</a>
-                                                            <a class="dropdown-item" href="#">Friends</a>
-                                                            <a class="dropdown-item" href="#">Selected Friends</a>
+                                                </li>
+                                                <!--privacy status-->
+                                                <li class="list-group-item py-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="mb-0">Status</p>
+                                                            <p class="small text-muted mb-0">Select who can see your status updates</p>
+                                                        </div>
+                                                        <div class="dropdown mr-2">
+                                                            <button class="btn btn-outline-default dropdown-toggle"
+                                                                    data-privacy-status-text="" type="button"
+                                                                    data-selected-value="@Model.AccountPrivacyViewModel.StatusText"
+                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                @(Model.AccountPrivacyViewModel.StatusText ? "Public " : "Friends")
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" data-privacy-status data-privacy-value="true" href="#">Public </a>
+                                                                <a class="dropdown-item" data-privacy-status data-privacy-value="false" href="#">Friends</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Groups</p>
-                                                        <p class="small text-muted mb-0">Select who can add you in groups</p>
-                                                    </div>
-                                                    <div class="dropdown mr-2">
-                                                        <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Public
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#">Public</a>
-                                                            <a class="dropdown-item" href="#">Friends</a>
-                                                            <a class="dropdown-item" href="#">Selected Friends</a>
+                                                </li>
+                                                <!--privacy last seen-->
+                                                <li class="list-group-item py-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="mb-0">Last Seen</p>
+                                                            <p class="small text-muted mb-0">Select who can see your last seen</p>
+                                                        </div>
+                                                        <div class="dropdown mr-2">
+                                                            <button class="btn btn-outline-default dropdown-toggle"
+                                                                    data-privacy-last-seen-text="" type="button"
+                                                                    data-selected-value="@Model.AccountPrivacyViewModel.LastSeen"
+                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                @(Model.AccountPrivacyViewModel.LastSeen ? "Public " : "Friends")
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" data-privacy-last-seen data-privacy-value="true" href="#">Public </a>
+                                                                <a class="dropdown-item" data-privacy-last-seen data-privacy-value="false" href="#">Friends</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Status</p>
-                                                        <p class="small text-muted mb-0">Select who can see my status updates</p>
-                                                    </div>
-                                                    <div class="dropdown mr-2">
-                                                        <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Public
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#">Public</a>
-                                                            <a class="dropdown-item" href="#">Friends</a>
-                                                            <a class="dropdown-item" href="#">Selected Friends</a>
+                                                </li>
+                                                <!--privacy phone-->
+                                                <li class="list-group-item py-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="mb-0">Phone</p>
+                                                            <p class="small text-muted mb-0">Select who can see your phone number</p>
+                                                        </div>
+                                                        <div class="dropdown mr-2">
+                                                            <button class="btn btn-outline-default dropdown-toggle"
+                                                                    data-privacy-phone-text="" type="button"
+                                                                    data-selected-value="@Model.AccountPrivacyViewModel.Phone"
+                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                @(Model.AccountPrivacyViewModel.Phone ? "Public " : "Friends")
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" data-privacy-phone data-privacy-value="true" href="#">Public </a>
+                                                                <a class="dropdown-item" data-privacy-phone data-privacy-value="false" href="#">Friends</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Read receipts</p>
-                                                        <p class="small text-muted mb-0">If turn off this option you won't be able to see read recipts</p>
+                                                </li>
+                                                <!--privacy birthday-->
+                                                <li class="list-group-item py-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="mb-0">Birthday</p>
+                                                            <p class="small text-muted mb-0">Select who can see your birthday</p>
+                                                        </div>
+                                                        <div class="dropdown mr-2">
+                                                            <button class="btn btn-outline-default dropdown-toggle"
+                                                                    data-privacy-birthday-text="" type="button"
+                                                                    data-selected-value="@Model.AccountPrivacyViewModel.Birthday"
+                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                @(Model.AccountPrivacyViewModel.Birthday ? "Public " : "Friends")
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" data-privacy-birthday data-privacy-value="true" href="#">Public </a>
+                                                                <a class="dropdown-item" data-privacy-birthday data-privacy-value="false" href="#">Friends</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="custom-control custom-switch mr-2">
-                                                        <input type="checkbox" class="custom-control-input" id="readReceiptsSwitch" checked="">
-                                                        <label class="custom-control-label" for="readReceiptsSwitch">&nbsp;</label>
+                                                </li>
+                                                <!--privacy address-->
+                                                <li class="list-group-item py-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="mb-0">Address</p>
+                                                            <p class="small text-muted mb-0">Select who can see your address</p>
+                                                        </div>
+                                                        <div class="dropdown mr-2">
+                                                            <button class="btn btn-outline-default dropdown-toggle"
+                                                                    data-privacy-address-text="" type="button"
+                                                                    data-selected-value="@Model.AccountPrivacyViewModel.Address"
+                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                @(Model.AccountPrivacyViewModel.Address ? "Public " : "Friends")
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" data-privacy-address data-privacy-value="true" href="#">Public </a>
+                                                                <a class="dropdown-item" data-privacy-address data-privacy-value="false" href="#">Friends</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
+                                                </li>
+                                                <!--privacy social links-->
+                                                <li class="list-group-item py-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="mb-0">Social network links</p>
+                                                            <p class="small text-muted mb-0">Select who can see your social network links</p>
+                                                        </div>
+                                                        <div class="dropdown mr-2">
+                                                            <button class="btn btn-outline-default dropdown-toggle"
+                                                                    data-privacy-social-links-text="" type="button"
+                                                                    data-selected-value="@Model.AccountPrivacyViewModel.SocialLink"
+                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                @(Model.AccountPrivacyViewModel.SocialLink ? "Public " : "Friends")
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" data-privacy-social-links data-privacy-value="true" href="#">Public </a>
+                                                                <a class="dropdown-item" data-privacy-social-links data-privacy-value="false" href="#">Friends</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
 
-                                        </ul>
-                                    </div>
+                                                <!--privacy accept all messages-->
+                                                <li class="list-group-item py-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="mb-0">Accept all messages</p>
+                                                            <p class="small text-muted mb-0">If turn off this option, only accounts that are friends with you can send you messages</p>
+                                                        </div>
+                                                        <div class="custom-control custom-switch mr-2">
+                                                            <input type="checkbox" class="custom-control-input" id="privacy-accept-messages" 
+                                                                   @(Model.AccountPrivacyViewModel.AcceptAllMessages ? "checked" : "")>
+                                                            <label class="custom-control-label" for="privacy-accept-messages">&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
 
-                                    <div class="card-footer d-flex justify-content-end">
-                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                        <button type="button" class="btn btn-primary">Save Changes</button>
-                                    </div>
+                                            </ul>
+                                        </div>
+
+                                        <div class="card-footer d-flex justify-content-end">
+                                            <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
+                                            <button type="submit" class="btn btn-primary changeprivacy" disabled>Save Changes</button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <!--Account Security-->
                                 <div class="card mb-3">
@@ -4668,9 +4742,7 @@
                 let Birthday = $("#AccountDetailViewModel_Birthday").val().trim();
                 let Email = $("#AccountDetailViewModel_Email").val().trim();
                 let Website = $("#AccountDetailViewModel_Website").val().trim();
-
                 let Address = $("#AccountDetailViewModel_Address").val().trim();
-
 
                 $.ajax({
                     url: '/accountdetail/update',
@@ -4704,14 +4776,15 @@
                             position: 'top-right',
                             hideAfter: 4000
                         });
+                        $(".onchangesubmit").prop("disabled", true);
                     }
                 });
 
                 e.preventDefault();
             });
         </script>
-        <!--Account Add Database-->
 
+        <!--Account update social links-->
         <script>
             $(document).on("submit", ".sociallink", function (e) {
 
@@ -4730,7 +4803,6 @@
                         twitter: Twitter,
                         instagram: Instagram,
                         linkedin: Linkedin
-
                     },
                     success: function (res) {
                         console.log(res);
@@ -4738,8 +4810,6 @@
                         $(".twitter").text(Twitter);
                         $(".instagram").text(Instagram);
                         $(".linkedin").text(Linkedin);
-
-
 
                         $.toast({
                             heading: 'Məlumat',
@@ -4751,24 +4821,21 @@
                             position: 'top-right',
                             hideAfter: 4000
                         });
+
+                        $(".onchangesocial").prop("disabled", true);
                     }
                 });
 
                 e.preventDefault();
             });
         </script>
-        <!--Account Update Password-->
 
+        <!--Account Update Password-->
         <script>
             $(document).on("submit", ".bir", function (e) {
-
-                
-
                 let CurrentPassword = $("#UpdatePasswordViewModel_CurrentPassword").val().trim();
                 let NewPassword = $("#UpdatePasswordViewModel_Password").val().trim();
                 let RepeatPassword = $("#UpdatePasswordViewModel_PasswordConfirm").val().trim();
-
-                
 
                 $.ajax({
                     url: '/account/updatepassword',
@@ -4779,7 +4846,6 @@
                         currentpassword: CurrentPassword,
                         password: NewPassword,
                         passwordconfirm: RepeatPassword
-
                     },
                   
                     success: function (res) {
@@ -4808,30 +4874,23 @@
                                 bgColor: '#3988ff',
                                 loaderBg: '#f7d40d',
                                 position: 'top-right',
-                                hideAfter: 4000
+                                hideAfter: 5000
                             });
                             $("#UpdatePasswordViewModel_Password").val("");
                             $("#UpdatePasswordViewModel_PasswordConfirm").val("");
                             $("#UpdatePasswordViewModel_CurrentPassword").val("");
+                            $(".changepassword").prop("disabled", true);
                         }
-                       
-                       
-                       
-
                     }
                 });
-              
-               
                 e.preventDefault();
             });
         </script>
-        <!--/Account Password Update-->
 
         <!--Disabled Removed Account-->
         <script>
             $(document).on("keydown", ".onchange", function (e) {
                 $(".onchangesubmit").prop("disabled", false)
-
             });
             $(document).on("keydown", ".onchanges", function (e) {
                 $(".onchangesocial").prop("disabled", false)
@@ -4839,9 +4898,129 @@
             });
             $(document).on("keydown", ".chpassword", function (e) {
                     $(".changepassword").prop("disabled", false)
+            });
+        </script>
 
+        <!--Privacy Dropdown Js-->
+        <script>
+            $('[data-privacy-profile-picture]').on('click', function () {
+                $('[data-privacy-profile-picture-text]').text($(this).text());
+                $('button[data-privacy-profile-picture-text]').attr("data-selected-value", $(this).data("privacy-value"));
+                $(".changeprivacy").prop("disabled", false)
             });
 
+            $('[data-privacy-status]').on('click', function () {
+                $('[data-privacy-status-text]').text($(this).text());
+                $('button[data-privacy-status-text]').attr("data-selected-value", $(this).data("privacy-value"));
+                $(".changeprivacy").prop("disabled", false)
+            });
+
+            $('[data-privacy-last-seen]').on('click', function () {
+                $('[data-privacy-last-seen-text]').text($(this).text());
+                $('button[data-privacy-last-seen-text]').attr("data-selected-value", $(this).data("privacy-value"));
+                $(".changeprivacy").prop("disabled", false)
+            });
+
+            $('[data-privacy-phone]').on('click', function () {
+                $('[data-privacy-phone-text]').text($(this).text());
+                $('button[data-privacy-phone-text]').attr("data-selected-value", $(this).data("privacy-value"));
+                $(".changeprivacy").prop("disabled", false)
+            });
+
+            $('[data-privacy-birthday]').on('click', function () {
+                $('[data-privacy-birthday-text]').text($(this).text());
+                $('button[data-privacy-birthday-text]').attr("data-selected-value", $(this).data("privacy-value"));
+                $(".changeprivacy").prop("disabled", false)
+            });
+
+            $('[data-privacy-address]').on('click', function () {
+                $('[data-privacy-address-text]').text($(this).text());
+                $('button[data-privacy-address-text]').attr("data-selected-value", $(this).data("privacy-value"));
+                $(".changeprivacy").prop("disabled", false)
+            });
+
+            $('[data-privacy-social-links]').on('click', function () {
+                $('[data-privacy-social-links-text]').text($(this).text());
+                $('button[data-privacy-social-links-text]').attr("data-selected-value", $(this).data("privacy-value"));
+                $(".changeprivacy").prop("disabled", false)
+            });
+
+            $('#privacy-accept-messages').on('click', function () {
+                $(".changeprivacy").prop("disabled", false)
+            });
+        </script>
+
+        <!--Update Privacy-->
+        <script>
+            $(document).on("submit", ".update-account-privacy", function (e) {
+
+                let ProfileImg = $('button[data-privacy-profile-picture-text]').attr("data-selected-value");
+                let StatusText = $('button[data-privacy-status-text]').attr("data-selected-value");
+                let LastSeen = $('button[data-privacy-last-seen-text]').attr("data-selected-value");
+                let Phone = $('button[data-privacy-phone-text]').attr("data-selected-value");
+                let UserBirthday = $('button[data-privacy-birthday-text]').attr("data-selected-value");
+                let Address = $('button[data-privacy-address-text]').attr("data-selected-value");
+                let SocialLink = $('button[data-privacy-social-links-text]').attr("data-selected-value");
+                let AcceptMessages = $("#privacy-accept-messages").prop("checked");
+
+                $.ajax({
+                    url: '/accountdetail/updateprivacy',
+                    type: "POST",
+                    dataType: "json",
+                    data:
+                    {
+                        profileImg: ProfileImg,
+                        statusText: StatusText,
+                        lastSeen: LastSeen,
+                        phone: Phone,
+                        birthday: UserBirthday,
+                        address: Address,
+                        socialLink: SocialLink,
+                        acceptAllMessages: AcceptMessages
+                    },
+
+                    success: function (res) {
+                        if (res.status) {
+                            $.toast({
+                                heading: 'Completed!',
+                                text: res.message,
+                                icon: 'info',
+                                loader: true,
+                                bgColor: '#3988ff',
+                                loaderBg: '#f7d40d',
+                                position: 'top-right',
+                                hideAfter: 6000
+                            });
+                            $(".changeprivacy").prop("disabled", true);
+                        }
+                        if (res.status == false) {
+                            $.toast({
+                                heading: 'Error',
+                                text: res.message,
+                                icon: 'error',
+                                loader: true,
+                                bgColor: '#dc3545',
+                                loaderBg: '#f7d40d',
+                                position: 'top-right',
+                                hideAfter: 6000
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        $.toast({
+                            heading: 'Error',
+                            text: "System Error 500 !",
+                            icon: 'error',
+                            loader: true,
+                            bgColor: '#dc3545',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 6000
+                        });
+                    }
+                });
+                e.preventDefault();
+            });
         </script>
     </body>
 

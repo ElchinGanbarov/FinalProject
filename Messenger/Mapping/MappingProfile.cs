@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Messenger.Models.Account;
 using Messenger.Models.AccountDetail;
+using Messenger.Models.AccountPrivacySecurity;
 using Repository.Models;
 
 namespace Messenger.Mapping
@@ -17,6 +18,9 @@ namespace Messenger.Mapping
 
             CreateMap<AccountSocialLink, AccountSocialLinkViewModel>();
             CreateMap<AccountSocialLinkViewModel, AccountSocialLink>();
+
+            CreateMap<AccountPrivacy, AccountPrivacyViewModel>();
+            CreateMap<AccountPrivacyViewModel, AccountPrivacy>();
 
         }
     }
