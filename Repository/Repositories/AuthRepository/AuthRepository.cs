@@ -23,6 +23,7 @@ namespace Repository.Repositories.AuthRepositories
         bool UpdatePassword(int accountId, string password);
         void AddedSocial(AccountSocialLink accountSocialLink);
         void CreatePrivacy(AccountPrivacy accountPrivacy);
+        void CreateSecurity(AccountSecurity accountSecurity);
     }
     public class AuthRepository : IAuthRepository
     {
@@ -148,6 +149,15 @@ namespace Repository.Repositories.AuthRepositories
             if (accountPrivacy != null)
             {
                 _context.AccountPrivacies.Add(accountPrivacy);
+                _context.SaveChanges();
+            }
+        }
+        //create account's security Database
+        public void CreateSecurity(AccountSecurity accountSecurity)
+        {
+            if (accountSecurity != null)
+            {
+                _context.AccountSecurities.Add(accountSecurity);
                 _context.SaveChanges();
             }
         }

@@ -22,6 +22,9 @@ namespace Messenger.Mapping
             CreateMap<AccountPrivacy, AccountPrivacyViewModel>();
             CreateMap<AccountPrivacyViewModel, AccountPrivacy>();
 
+            CreateMap<AccountSecurity, AccountSecurityViewModel>();
+            CreateMap<AccountSecurityViewModel, AccountSecurity>();
+
         }
     }
 }

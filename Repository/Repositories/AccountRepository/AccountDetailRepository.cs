@@ -9,9 +9,11 @@ namespace Repository.Repositories.AccountRepository
     {
         AccountSocialLink GetAccountSocialLink(int id);
         AccountPrivacy GetAccountPrivacy(int id);
+        AccountSecurity GetAccountSecurity(int id);
         AccountSocialLink GetByAccountId(int id);
         void UpdateSocialLink(AccountSocialLink updatesociallink, AccountSocialLink socialLink);
         void UpdatePrivacy(int accountId, bool profileImg, bool statusText, bool lastSeen, bool phone, bool birthday, bool address, bool socials, bool acceptAllMessages);
+        void UpdateSecurity(int accountId, bool tfa, bool loginAlerts);
     }
     public class AccountDetailRepository : IAccountDetailRepository
     {
@@ -27,6 +29,10 @@ namespace Repository.Repositories.AccountRepository
         public AccountPrivacy GetAccountPrivacy(int id)
         {
             return _context.AccountPrivacies.Include(ap => ap.Account).FirstOrDefault(ap => ap.AccountId == id);
+        }
+        public AccountSecurity GetAccountSecurity(int id)
+        {
+            return _context.AccountSecurities.Include(s => s.Account).FirstOrDefault(s => s.AccountId == id);
         }
         public AccountSocialLink GetByAccountId(int id)
         {
@@ -62,6 +68,20 @@ namespace Repository.Repositories.AccountRepository
                 accountPrivacy.Address = address;
                 accountPrivacy.SocialLink = socials;
                 accountPrivacy.AcceptAllMessages = acceptAllMessages;
+
+                _context.SaveChanges();
+            }
+        }
+
+
+
+        public void UpdateSecurity(int accountId, bool tfa, bool loginAlerts)
+        {
+            AccountSecurity accountSecurity = _context.AccountSecurities.FirstOrDefault(p => p.AccountId == accountId);
+            if (accountSecurity != null)
+            {
+                accountSecurity.TwoFactoryAuth = tfa;
+                accountSecurity.LoginAlerts = loginAlerts;
 
                 _context.SaveChanges();
             }

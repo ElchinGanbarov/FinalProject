@@ -33,7 +33,8 @@ namespace Messenger.Controllers
             {
                 AccountDetailViewModel = _mapper.Map<Account, AccountDetailViewModel>(_authRepository.CheckByToken(_user.Token)),
                 AccountSocialLinkViewModel =_mapper.Map<AccountSocialLink,AccountSocialLinkViewModel>(_accountDetailRepository.GetAccountSocialLink(_user.Id)),
-                AccountPrivacyViewModel =_mapper.Map<AccountPrivacy, AccountPrivacyViewModel>(_accountDetailRepository.GetAccountPrivacy(_user.Id))
+                AccountPrivacyViewModel =_mapper.Map<AccountPrivacy, AccountPrivacyViewModel>(_accountDetailRepository.GetAccountPrivacy(_user.Id)),
+                AccountSecurityViewModel =_mapper.Map<AccountSecurity, AccountSecurityViewModel>(_accountDetailRepository.GetAccountSecurity(_user.Id))
             };
             return View(model);
         }

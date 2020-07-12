@@ -118,6 +118,22 @@ namespace Messenger.Controllers
             return Ok(new { status = false, message = "Unexpected Error Ocoured! Update account privacy Failed!" });
         }
 
+        [TypeFilter(typeof(Auth))]
+        [HttpPost]
+        public IActionResult UpdateSecurity(AccountSecurityViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Account account = _authRepository.CheckByToken(_user.Token);
+                if (account != null)
+                {
+                    _accountDetailRepository.UpdateSecurity(account.Id, model.TwoFactoryAuth, model.LoginAlerts);
+                    return Ok(new { status = true, message = "Account Security Successfully Updated!" });
+                }
+            }
+
+            return Ok(new { status = false, message = "Unexpected Error Ocoured! Update account security Failed!" });
+        }
         #endregion
         //Privacy & Security End
     }

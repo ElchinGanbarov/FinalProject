@@ -35,6 +35,7 @@ namespace Messenger.Controllers
 
         //SignUp; SignIn; Logout Start
         #region signUp,singIn,Logout
+
         public IActionResult SignUp()
         {
             return View();
@@ -94,6 +95,13 @@ namespace Messenger.Controllers
                     Website = true
                 };
                 _authRepository.CreatePrivacy(accountPrivacy);
+
+                AccountSecurity accountSecurity = new AccountSecurity
+                {
+                    TwoFactoryAuth = false,
+                    LoginAlerts = false
+                };
+                _authRepository.CreateSecurity(accountSecurity);
 
                 //send verification link email
                 string userFullname = user.Name + " " + user.Surname;
