@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using Messenger.Filters;
-using Messenger.Models;
-using Messenger.Models.Account;
+using Messenger.Lib;
 using Messenger.Models.AccountDetail;
 using Messenger.Models.AccountPrivacySecurity;
 using Messenger.Models.General;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AccountRepository;
 using Repository.Repositories.AuthRepositories;
+using Repository.Services;
 
 namespace Messenger.Controllers
 {
@@ -18,15 +19,22 @@ namespace Messenger.Controllers
         private readonly IAuthRepository _authRepository;
         private readonly IMapper _mapper;
         private readonly IAccountDetailRepository _accountDetailRepository;
+        private readonly ICloudinaryService _cloudinaryService;
+        private readonly IFileManager _fileManager;
+
         private Repository.Models.Account _user => RouteData.Values["User"] as Repository.Models.Account;
 
         public AccountDetailController(IAuthRepository authRepository,
                                        IMapper mapper,
-                                       IAccountDetailRepository accountDetailRepository)
+                                       IAccountDetailRepository accountDetailRepository,
+                                       ICloudinaryService cloudinaryService,
+                                       IFileManager fileManager)
         {
             _authRepository = authRepository;
             _mapper = mapper;
             _accountDetailRepository = accountDetailRepository;
+            _cloudinaryService = cloudinaryService;
+            _fileManager = fileManager;
         }
         [HttpPost]
         public IActionResult Update(AccountDetailViewModel model)
@@ -89,6 +97,32 @@ namespace Messenger.Controllers
                 AccountSocialLinkViewModel = model,
                 AccountDetailViewModel = _mapper.Map<Account, AccountDetailViewModel>(updateuser)
             });
+        }
+
+        [HttpPost]
+        public IActionResult ProfileImgUpload(IFormFile file)
+        {
+            var filename = _fileManager.Upload(file);
+            var publicId = _cloudinaryService.Store(filename);
+            _fileManager.Delete(filename);
+
+            _accountDetailRepository.ProfileImgUpload(_user.Id, publicId);
+
+
+
+            return Ok(new
+            {
+                filename = publicId,
+                src = _cloudinaryService.BuildUrl(publicId)
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Remove(string name, int? id)
+        {
+            _cloudinaryService.Delete(name);
+
+            return Ok(new { status = 200 });
         }
 
         //Privacy & Security Start
