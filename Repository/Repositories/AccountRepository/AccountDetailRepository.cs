@@ -14,6 +14,7 @@ namespace Repository.Repositories.AccountRepository
         void UpdateSocialLink(AccountSocialLink updatesociallink, AccountSocialLink socialLink);
         void UpdatePrivacy(int accountId, bool profileImg, bool statusText, bool lastSeen, bool phone, bool birthday, bool address, bool socials, bool acceptAllMessages);
         void UpdateSecurity(int accountId, bool tfa, bool loginAlerts);
+        void ProfileImgUpload(int userId, string publicId);
     }
     public class AccountDetailRepository : IAccountDetailRepository
     {
@@ -83,6 +84,16 @@ namespace Repository.Repositories.AccountRepository
                 accountSecurity.TwoFactoryAuth = tfa;
                 accountSecurity.LoginAlerts = loginAlerts;
 
+                _context.SaveChanges();
+            }
+        }
+
+        public void ProfileImgUpload(int userId, string publicId)
+        {
+            Account account = _context.Accounts.Find(userId);
+            if (account != null)
+            {
+                account.ProfileImg = publicId;
                 _context.SaveChanges();
             }
         }

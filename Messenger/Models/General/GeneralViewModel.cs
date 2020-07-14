@@ -11,5 +11,6 @@ namespace Messenger.Models.General
         public AccountSocialLinkViewModel AccountSocialLinkViewModel { get; set; }
         public AccountPrivacyViewModel AccountPrivacyViewModel { get; set; }
         public AccountSecurityViewModel AccountSecurityViewModel { get; set; }
+        public AccountProfileImgViewModel AccountProfilImgViewModel { get; set; }
     }
 }

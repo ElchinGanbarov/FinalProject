@@ -1135,8 +1135,8 @@
                                                 <!-- Card Details Start -->
                                                 <div class="d-flex flex-column align-items-center">
                                                     <div class="avatar avatar-lg mb-3">
-                                                        <i class="far fa-user" style=" font-size: 55px;text-align: center;padding: 15px;"></i>
-                                                        @*<img class="avatar-img" src="~/media/avatar/3.png" alt="">*@
+                                                        @*<i class="far fa-user" style=" font-size: 55px;text-align: center;padding: 15px;"></i>*@
+                                                        <img class="avatar-img" src="~/media/avatar/3.png" alt="">
                                                     </div>
 
                                                     <div class="d-flex flex-column align-items-center">
@@ -1180,9 +1180,12 @@
                                                             <!-- Alternate :: External File link -->
                                                             <!-- <img class="injectable hw-20" src="./~/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                                         </button>
+                                                        <!--update profile img-->
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Change Profile Picture</a>
-                                                            <a class="dropdown-item" href="#">Change Number</a>
+                                                            <a class="dropdown-item profile-img-view" href="#">View Photo</a>
+                                                            <a class="dropdown-item profile-img-upload" href="#">Upload Photo</a>
+                                                            <input type="file" name="files" id="files" multiple="" class="d-none" accept="image/*">
+                                                            <a class="dropdown-item profile-img-remove text-danger" href="#">Remove Photo</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1224,19 +1227,10 @@
                                                                 <p class="mb-0 birthday">
                                                                     @if (Model.AccountDetailViewModel.Birthday != null)
                                                                     {
-
                                                                         Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11);
-
                                                                     }
-                                                                    </p>
-                                                                  
-
-
-
-
-
-
-                                                                </div>
+                                                                </p>
+                                                            </div>
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -3928,7 +3922,7 @@
                                             <button type="submit" class="btn btn-primary changepassword" disabled>Save Changes</button>
                                         </div>
                                     </form>
-                                  
+
                                 </div>
                                 <!--Account Privacy-->
                                 <div class="card mb-3">
@@ -4097,7 +4091,7 @@
                                                             <p class="small text-muted mb-0">If turn off this option, only accounts that are friends with you can send you messages</p>
                                                         </div>
                                                         <div class="custom-control custom-switch mr-2">
-                                                            <input type="checkbox" class="custom-control-input" id="privacy-accept-messages" 
+                                                            <input type="checkbox" class="custom-control-input" id="privacy-accept-messages"
                                                                    @(Model.AccountPrivacyViewModel.AcceptAllMessages ? "checked" : "")>
                                                             <label class="custom-control-label" for="privacy-accept-messages">&nbsp;</label>
                                                         </div>
@@ -4131,7 +4125,7 @@
                                                             <p class="small text-muted mb-0">Ask for a code if attempted login from an unrecognised device or browser.</p>
                                                         </div>
                                                         <div class="custom-control custom-switch mr-2">
-                                                            <input type="checkbox" class="custom-control-input" id="security-tfa" 
+                                                            <input type="checkbox" class="custom-control-input" id="security-tfa"
                                                                    @(Model.AccountSecurityViewModel.TwoFactoryAuth ? "checked" : "")>
                                                             <label class="custom-control-label" for="security-tfa">&nbsp;</label>
                                                         </div>
@@ -4144,7 +4138,7 @@
                                                             <p class="small text-muted mb-0">You will be notified if anyone logs in from a device or browser you don't usually use</p>
                                                         </div>
                                                         <div class="custom-control custom-switch mr-2">
-                                                            <input type="checkbox" class="custom-control-input" id="security-login-alerts" 
+                                                            <input type="checkbox" class="custom-control-input" id="security-login-alerts"
                                                                    @(Model.AccountSecurityViewModel.LoginAlerts ? "checked" : "")>
                                                             <label class="custom-control-label" for="security-login-alerts">&nbsp;</label>
                                                         </div>
@@ -4854,7 +4848,7 @@
                         password: NewPassword,
                         passwordconfirm: RepeatPassword
                     },
-                  
+
                     success: function (res) {
                         if (res.status == false) {
                             $(".currentpassworderror").text(res.message);
@@ -4871,7 +4865,7 @@
                             $("#UpdatePasswordViewModel_Password").val("");
                             $("#UpdatePasswordViewModel_PasswordConfirm").val("");
                         }
-                       
+
                         if (res.status == true) {
                             $.toast({
                                 heading: 'Correct',
@@ -4904,11 +4898,11 @@
 
             });
             $(document).on("keydown", ".chpassword", function (e) {
-                    $(".changepassword").prop("disabled", false)
+                $(".changepassword").prop("disabled", false)
             });
             $(document).on("change", ".onchangess", function (e) {
                 $(".onchangesubmit").prop("disabled", false)
-              });
+            });
         </script>
 
         <!--Privacy Dropdown & Security checkboxs Js-->
@@ -5101,5 +5095,16 @@
                 e.preventDefault();
             });
         </script>
+
+        <!--Update Profile Img-->
+        <script>
+            $(document).on("click", ".profile-img-upload", function (e) {
+                $('#files').trigger('click');
+
+
+            });
+        </script>
+
+        
     </body>
 
