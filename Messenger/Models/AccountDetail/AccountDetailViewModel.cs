@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -31,9 +32,8 @@ namespace Messenger.Models.AccountDetail
         [MaxLength(50)]
         public string Website { get; set; }
         public DateTime? LastLogin { get; set; }
-
-
-
+        public string ProfileImg { get; set; }
+        public IFormFile Image { get; set; }
 
 
     }

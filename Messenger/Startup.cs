@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Messenger.Lib;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,7 +40,8 @@ namespace Messenger
 
             services.AddTransient<IAuthRepository, AuthRepository>();  //AuthRepository Service Added
             services.AddTransient<IAccountDetailRepository, AccountDetailRepository>();  //AccountDetailRepository Service Added
-
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IFileManager, FileManager>();
             services.AddTransient<ISendEmail, SendEmail>();  //For send email service
         }
 

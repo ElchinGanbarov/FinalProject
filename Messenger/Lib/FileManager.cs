@@ -28,9 +28,9 @@ namespace Messenger.Lib
             string filename;
 
             if (newName == null)
-                filename = Guid.NewGuid() + "." + Path.GetExtension(file.Name);
+                filename = Guid.NewGuid()  + Path.GetExtension(file.FileName);
             else
-                filename = newName + "." + Path.GetExtension(file.Name);
+                filename = newName  + Path.GetExtension(file.FileName);
 
             var writePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", savePath);
             if (!Directory.Exists(writePath))

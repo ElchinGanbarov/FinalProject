@@ -40,7 +40,7 @@ namespace Repository.Services
             {
                 File = new FileDescription(sourcePath),
                 UniqueFilename = true,
-                Folder = "MessengerApp/uploads/",
+                Folder = "MessengerApp/",
             };
 
             var uploadResult = _cloudinary.Upload(uploadParams);
@@ -55,7 +55,7 @@ namespace Repository.Services
             {
                 File = new FileDescription(sourcePath),
                 UniqueFilename = true,
-                Folder = "MessengerApp/uploads/",
+                Folder = "MessengerApp/",
                 Transformation = new Transformation().Width(width).Height(height).Crop(crop)
             };
 
@@ -82,7 +82,7 @@ namespace Repository.Services
             {
                 File = new FileDescription(url),
                 UniqueFilename = true,
-                Folder = "MessengerApp/uploads/"
+                Folder = "MessengerApp/"
             };
 
             var uploadResult = _cloudinary.Upload(uploadParams);

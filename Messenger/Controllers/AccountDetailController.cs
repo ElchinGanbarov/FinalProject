@@ -10,6 +10,7 @@ using Repository.Models;
 using Repository.Repositories.AccountRepository;
 using Repository.Repositories.AuthRepositories;
 using Repository.Services;
+using System.Collections.Generic;
 
 namespace Messenger.Controllers
 {
@@ -53,7 +54,6 @@ namespace Messenger.Controllers
                         updateuser.Website != user.Website ||
                         updateuser.Phone != user.Phone)
                     {
-
                         _authRepository.UpdateAccount(updateuser, user);
                         return Ok(user);
                     }
@@ -102,10 +102,12 @@ namespace Messenger.Controllers
         [HttpPost]
         public IActionResult ProfileImgUpload(IFormFile file)
         {
+        
             var filename = _fileManager.Upload(file);
+            
             var publicId = _cloudinaryService.Store(filename);
             _fileManager.Delete(filename);
-
+          
             _accountDetailRepository.ProfileImgUpload(_user.Id, publicId);
 
 
@@ -118,13 +120,20 @@ namespace Messenger.Controllers
         }
 
         [HttpPost]
-        public IActionResult Remove(string name, int? id)
+        public IActionResult RemovePhoto()
         {
-            _cloudinaryService.Delete(name);
+        
+            if (_user.ProfileImg != null)
+            {
+                _cloudinaryService.Delete(_user.ProfileImg);
+                _accountDetailRepository.DeletePhoto(_user.ProfileImg);
+              
+            }
+           
 
             return Ok(new { status = 200 });
         }
-
+    
         //Privacy & Security Start
         #region Privacy & Security
 

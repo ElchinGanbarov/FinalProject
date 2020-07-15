@@ -15,6 +15,7 @@ namespace Repository.Repositories.AccountRepository
         void UpdatePrivacy(int accountId, bool profileImg, bool statusText, bool lastSeen, bool phone, bool birthday, bool address, bool socials, bool acceptAllMessages);
         void UpdateSecurity(int accountId, bool tfa, bool loginAlerts);
         void ProfileImgUpload(int userId, string publicId);
+        void DeletePhoto(string profileImg);
     }
     public class AccountDetailRepository : IAccountDetailRepository
     {
@@ -98,5 +99,11 @@ namespace Repository.Repositories.AccountRepository
             }
         }
 
+        public void DeletePhoto(string profileImg)
+        {
+            var account = _context.Accounts.FirstOrDefault(p => p.ProfileImg == profileImg);
+            account.ProfileImg = null;
+            _context.SaveChanges();
+        }
     }
 }
