@@ -50,7 +50,6 @@
 
     //====================
 
-
     //Disabled Removed Account
     $(document).on("keydown", ".onchange", function (e) {
         $(".onchangesubmit").prop("disabled", false)
@@ -96,15 +95,16 @@
 
         });
     }
+    //Remove Image
     $(".profile-img-remove").click(function (e) {
         console.log("test");
         let elem = $(this).parents(".item");
         let href = $(this).attr("href");
         $.confirm({
-            title: 'Şəkil',
-            content: 'Şəkil silinsin mi?',
+            title: 'Remove Photo',
+            content: 'Are you sure delete current profile photo?',
             buttons: {
-                'Bəli': {
+                'Yes': {
                     btnClass: "btn-danger",
                     action: function () {
                         $.ajax({
@@ -118,7 +118,7 @@
                         });
                     }
                 },
-                'Xeyir': function () {
+                'No': function () {
                 }
             }
         });
@@ -126,6 +126,20 @@
     });
     //Update profile Img END
 
+
+    //Sweet Alert View Photo
+    $(".viewphoto").click(function (e) {
+
+        Swal.fire({
+            title: $(".fullnameprofilimage").text(),
+            imageUrl: $(".avatar-img").attr("src"),
+            imageWidth: 400,
+            imageHeight: 400,
+            imageAlt: $(".fullnameprofilimage").text()
+
+        })
+        e.preventDefault();
+    })
 
 
 });

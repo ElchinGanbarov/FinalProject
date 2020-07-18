@@ -857,7 +857,7 @@
                                                 </div>
 
                                                 <div class="d-flex flex-column align-items-center">
-                                                    <h5 class="profilename">@(Model.AccountDetailViewModel.Name+" "+Model.AccountDetailViewModel.Surname)</h5>
+                                                    <h5 class="profilename fullnameprofilimage">@(Model.AccountDetailViewModel.Name+" "+Model.AccountDetailViewModel.Surname)</h5>
                                                 </div>
 
                                                 <div class="d-flex">
@@ -4752,19 +4752,6 @@
         });
     </script>
     <!--View Profile Img-->
-    <script>
-        $(".viewphoto").click(function (e) {
-        
-            Swal.fire({
-                imageUrl: $(".avatar-img").attr("src"),
-                imageWidth: 400,
-                imageHeight: 400,
-                imageAlt: '@Model.AccountDetailViewModel.Name',
-            })
-            e.preventDefault();
-        })
-    </script>
-
 
     <!--Friends List-->
     <script>
