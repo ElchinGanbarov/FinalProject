@@ -7,6 +7,8 @@ namespace Messenger.Models.AccountDetail
 {
     public class AccountDetailViewModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Ad daxil edin..")]
         [MaxLength(50)]
         public string Name { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Data;
 
 namespace Repository.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    partial class MessengerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200717113158_testFriendModel")]
+    partial class testFriendModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -403,7 +405,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FromUserId")
+                    b.Property<int?>("FromUserId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsConfirmed")
@@ -422,10 +424,14 @@ namespace Repository.Migrations
                     b.Property<int>("StatusCode")
                         .HasColumnType("int");
 
-                    b.Property<int>("ToUserId")
+                    b.Property<int?>("ToUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FromUserId");
+
+                    b.HasIndex("ToUserId");
 
                     b.ToTable("Friends");
                 });
@@ -772,6 +778,17 @@ namespace Repository.Migrations
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Repository.Models.Friend", b =>
+                {
+                    b.HasOne("Repository.Models.Account", "FromUser")
+                        .WithMany()
+                        .HasForeignKey("FromUserId");
+
+                    b.HasOne("Repository.Models.Account", "ToUser")
+                        .WithMany()
+                        .HasForeignKey("ToUserId");
                 });
 
             modelBuilder.Entity("Repository.Models.FriendShip", b =>

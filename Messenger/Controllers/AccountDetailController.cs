@@ -20,6 +20,7 @@ namespace Messenger.Controllers
         private readonly IAuthRepository _authRepository;
         private readonly IMapper _mapper;
         private readonly IAccountDetailRepository _accountDetailRepository;
+        private readonly IFriendsRepository _friendsRepository;
         private readonly ICloudinaryService _cloudinaryService;
         private readonly IFileManager _fileManager;
 
@@ -28,12 +29,14 @@ namespace Messenger.Controllers
         public AccountDetailController(IAuthRepository authRepository,
                                        IMapper mapper,
                                        IAccountDetailRepository accountDetailRepository,
+                                       IFriendsRepository friendsRepository,
                                        ICloudinaryService cloudinaryService,
                                        IFileManager fileManager)
         {
             _authRepository = authRepository;
             _mapper = mapper;
             _accountDetailRepository = accountDetailRepository;
+            _friendsRepository = friendsRepository;
             _cloudinaryService = cloudinaryService;
             _fileManager = fileManager;
         }
@@ -84,11 +87,6 @@ namespace Messenger.Controllers
                         _accountDetailRepository.UpdateSocialLink(updatesociallink, socialLink);
                         return Ok(socialLink);
                     }
-                
-             
-
-
-
                 }
          
 
@@ -180,5 +178,17 @@ namespace Messenger.Controllers
         }
         #endregion
         //Privacy & Security End
+
+
+        //testing
+
+        public IActionResult Friends()
+        {
+            //var count = _friendsRepository.GetAllFriendsCount(_user.Id);
+            ICollection<Account> friends = _friendsRepository.GetAllFriends(_user.Id);
+
+
+            return Ok(friends);
+        }
     }
 }

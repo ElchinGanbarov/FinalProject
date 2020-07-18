@@ -43,6 +43,7 @@ namespace Messenger
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IFileManager, FileManager>();
             services.AddTransient<ISendEmail, SendEmail>();  //For send email service
+            services.AddTransient<IFriendsRepository, FriendsRepository>();  //testing
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,9 +1,74 @@
-﻿//Update Profile Img
-$(document).ready(function () {
+﻿$(document).ready(function () {
+    //Privacy Dropdown & Security checkboxs Js
+    $('[data-privacy-profile-picture]').on('click', function () {
+        $('[data-privacy-profile-picture-text]').text($(this).text());
+        $('button[data-privacy-profile-picture-text]').attr("data-selected-value", $(this).data("privacy-value"));
+        $(".changeprivacy").prop("disabled", false)
+    });
+    $('[data-privacy-status]').on('click', function () {
+        $('[data-privacy-status-text]').text($(this).text());
+        $('button[data-privacy-status-text]').attr("data-selected-value", $(this).data("privacy-value"));
+        $(".changeprivacy").prop("disabled", false)
+    });
+    $('[data-privacy-last-seen]').on('click', function () {
+        $('[data-privacy-last-seen-text]').text($(this).text());
+        $('button[data-privacy-last-seen-text]').attr("data-selected-value", $(this).data("privacy-value"));
+        $(".changeprivacy").prop("disabled", false)
+    });
+    $('[data-privacy-phone]').on('click', function () {
+        $('[data-privacy-phone-text]').text($(this).text());
+        $('button[data-privacy-phone-text]').attr("data-selected-value", $(this).data("privacy-value"));
+        $(".changeprivacy").prop("disabled", false)
+    });
+    $('[data-privacy-birthday]').on('click', function () {
+        $('[data-privacy-birthday-text]').text($(this).text());
+        $('button[data-privacy-birthday-text]').attr("data-selected-value", $(this).data("privacy-value"));
+        $(".changeprivacy").prop("disabled", false)
+    });
+    $('[data-privacy-address]').on('click', function () {
+        $('[data-privacy-address-text]').text($(this).text());
+        $('button[data-privacy-address-text]').attr("data-selected-value", $(this).data("privacy-value"));
+        $(".changeprivacy").prop("disabled", false)
+    });
+    $('[data-privacy-social-links]').on('click', function () {
+        $('[data-privacy-social-links-text]').text($(this).text());
+        $('button[data-privacy-social-links-text]').attr("data-selected-value", $(this).data("privacy-value"));
+        $(".changeprivacy").prop("disabled", false)
+    });
+    $('#privacy-accept-messages').on('click', function () {
+        $(".changeprivacy").prop("disabled", false)
+    });
+    //security
+    $('#security-tfa').on('click', function () {
+        $(".changesecurity").prop("disabled", false)
+    });
+    $('#security-login-alerts').on('click', function () {
+        $(".changesecurity").prop("disabled", false)
+    });
+    //Privacy Dropdown & Security checkboxs Js END
+
+
+    //====================
+
+
+    //Disabled Removed Account
+    $(document).on("keydown", ".onchange", function (e) {
+        $(".onchangesubmit").prop("disabled", false)
+    });
+    $(document).on("keydown", ".onchanges", function (e) {
+        $(".onchangesocial").prop("disabled", false)
+    });
+    $(document).on("keydown", ".chpassword", function (e) {
+        $(".changepassword").prop("disabled", false)
+    });
+    $(document).on("change", ".onchangess", function (e) {
+        $(".onchangesubmit").prop("disabled", false)
+    });
+
+    //Update Profile Img 
     $(".deletedshow").click(function () {
         $(".deletedshow").removeClass("show");
     });
-
     if ($("input[name='AccountDetailViewModel.Image']").length) {
         $("input[name='AccountDetailViewModel.Image']").change(function () {
             var fileinput = document.getElementById('AccountDetailViewModel_Image');
@@ -31,7 +96,6 @@ $(document).ready(function () {
 
         });
     }
-
     $(".profile-img-remove").click(function (e) {
         console.log("test");
         let elem = $(this).parents(".item");
@@ -60,6 +124,8 @@ $(document).ready(function () {
         });
         e.preventDefault();
     });
+    //Update profile Img END
 
-   
+
+
 });
