@@ -5,10 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
-    <Folder Include="Repositories\" />
+    <Compile Remove="Migrations\20200628234041_AccountEmailVerificationPropsAdded.cs" />
+    <Compile Remove="Migrations\20200628234041_AccountEmailVerificationPropsAdded.Designer.cs" />
+    <Compile Remove="Migrations\20200628234208_AccountEmailVerificationPropsAdded.cs" />
+    <Compile Remove="Migrations\20200628234208_AccountEmailVerificationPropsAdded.Designer.cs" />
+    <Compile Remove="Migrations\20200628235601_AccountVerifyEmailPropsAdded.cs" />
+    <Compile Remove="Migrations\20200628235601_AccountVerifyEmailPropsAdded.Designer.cs" />
+    <Compile Remove="Migrations\20200629001036_AccountVerifyEmailAdded.cs" />
+    <Compile Remove="Migrations\20200629001036_AccountVerifyEmailAdded.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

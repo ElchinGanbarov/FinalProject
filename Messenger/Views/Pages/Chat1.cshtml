@@ -1,11 +1,13 @@
-﻿<body class="chats-tab-open">
+﻿@model GeneralViewModel
+@inject ICloudinaryService _cloudinaryService
+<body class="chats-tab-open">
 
     <!-- Main Layout Start -->
     <div class="main-layout">
         <!-- Navigation Start -->
         <div class="navigation navbar navbar-light bg-primary">
             <!-- Logo Start -->
-            <a class="d-none d-xl-block bg-light rounded p-1" href="http://frontendmatters.org/quicky/index.html">
+            <a class="d-none d-xl-block bg-light rounded p-1" asp-controller="quickymessanger" asp-action="index">
                 <svg height="30" width="30" viewBox="0 0 512 511"><g><path d="m120.65625 512.476562c-7.25 0-14.445312-2.023437-20.761719-6.007812-10.929687-6.902344-17.703125-18.734375-18.117187-31.660156l-1.261719-41.390625c-51.90625-46.542969-80.515625-111.890625-80.515625-183.992188 0-68.816406 26.378906-132.101562 74.269531-178.199219 47.390625-45.609374 111.929688-70.726562 181.730469-70.726562s134.339844 25.117188 181.730469 70.726562c47.890625 46.097657 74.269531 109.382813 74.269531 178.199219 0 68.8125-26.378906 132.097657-74.269531 178.195313-47.390625 45.609375-111.929688 70.730468-181.730469 70.730468-25.164062 0-49.789062-3.253906-73.195312-9.667968l-46.464844 20.5c-5.035156 2.207031-10.371094 3.292968-15.683594 3.292968zm135.34375-471.976562c-123.140625 0-216 89.816406-216 208.925781 0 60.667969 23.957031 115.511719 67.457031 154.425781 8.023438 7.226563 12.628907 17.015626 13.015625 27.609376l.003906.125 1.234376 40.332031 45.300781-19.988281c8.15625-3.589844 17.355469-4.28125 25.921875-1.945313 20.132812 5.554687 41.332031 8.363281 63.066406 8.363281 123.140625 0 216-89.816406 216-208.921875 0-119.109375-92.859375-208.925781-216-208.925781zm-125.863281 290.628906 74.746093-57.628906c5.050782-3.789062 12.003907-3.839844 17.101563-.046875l55.308594 42.992187c16.578125 12.371094 40.304687 8.007813 51.355469-9.433593l69.519531-110.242188c6.714843-10.523437-6.335938-22.417969-16.292969-14.882812l-74.710938 56.613281c-5.050781 3.792969-12.003906 3.839844-17.101562.046875l-55.308594-41.988281c-16.578125-12.371094-40.304687-8.011719-51.355468 9.429687l-69.554688 110.253907c-6.714844 10.523437 6.335938 22.421874 16.292969 14.886718zm0 0" data-original="#000000" class="active-path" data-old_color="#000000" fill="#665dfe" /></g> </svg>
             </a>
             <!-- Logo End -->
@@ -133,7 +135,7 @@
                                         <!-- Dropdown Button End -->
                                         <!-- Dropdown Menu Start -->
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" data-chat-filter="" data-select="all-chats" href="#">All Chats</a>
+                                            <a class="dropdown-item" data-chat-filter="" data-select="all-chats" href="#">test</a>
                                             <a class="dropdown-item" data-chat-filter="" data-select="friends" href="#">Friends</a>
                                             <a class="dropdown-item" data-chat-filter="" data-select="groups" href="#">Groups</a>
                                             <a class="dropdown-item" data-chat-filter="" data-select="unread" href="#">Unread</a>
@@ -168,7 +170,7 @@
                             <ul class="contacts-list" id="chatContactTab" data-chat-list="">
                                 <!-- Chat Item Start -->
                                 <li class="contacts-item friends active">
-                                    <a class="contacts-link">
+                                    <a class="contacts-link" asp-controller="pages" asp-action="chat1">
                                         <div class="avatar avatar-online">
                                             <img src="~/media/avatar/2.png" alt="">
                                         </div>
@@ -434,12 +436,12 @@
                                     <div class="dropdown mr-2">
                                         <!-- Dropdown Button Start -->
                                         <button class="btn btn-outline-default dropdown-toggle" type="button" data-chat-filter-list="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            All Chats
+                                            All Chats Calls
                                         </button>
                                         <!-- Dropdown Button End -->
                                         <!-- Dropdown Menu Start -->
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" data-chat-filter="" data-select="all-chats" href="#">All Chats</a>
+                                            <a class="dropdown-item" data-chat-filter="" data-select="all-chats" href="#">All Chats okk</a>
                                             <a class="dropdown-item" data-chat-filter="" data-select="friends" href="#">Friends</a>
                                             <a class="dropdown-item" data-chat-filter="" data-select="groups" href="#">Groups</a>
                                             <a class="dropdown-item" data-chat-filter="" data-select="unread" href="#">Unread</a>
@@ -789,28 +791,10 @@
 
 
                                 <!-- Sidebar Header Start -->
-                                <div class="sidebar-sub-header">
-                                    <!-- Sidebar Header Dropdown Start -->
-                                    <div class="dropdown mr-2">
-                                        <!-- Dropdown Button Start -->
-                                        <button class="btn btn-outline-default dropdown-toggle" type="button" data-chat-filter-list="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            All Chats
-                                        </button>
-                                        <!-- Dropdown Button End -->
-                                        <!-- Dropdown Menu Start -->
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" data-chat-filter="" data-select="all-chats" href="#">All Chats</a>
-                                            <a class="dropdown-item" data-chat-filter="" data-select="friends" href="#">Friends</a>
-                                            <a class="dropdown-item" data-chat-filter="" data-select="groups" href="#">Groups</a>
-                                            <a class="dropdown-item" data-chat-filter="" data-select="unread" href="#">Unread</a>
-                                            <a class="dropdown-item" data-chat-filter="" data-select="archived" href="#">Archived</a>
-                                        </div>
-                                        <!-- Dropdown Menu End -->
-                                    </div>
-                                    <!-- Sidebar Header Dropdown End -->
+                                <div class="sidebar-sub-header" style="display: block;">
                                     <!-- Sidebar Search Start -->
                                     <form class="form-inline">
-                                        <div class="input-group">
+                                        <div class="input-group w-100">
                                             <input type="text" class="form-control search border-right-0 transparent-bg pr-0" placeholder="Search users...">
                                             <div class="input-group-append">
                                                 <div class="input-group-text transparent-bg border-left-0" role="button">
@@ -832,282 +816,8 @@
                             <!-- Chat Header End -->
                             <!-- Friends Contact List Start -->
                             <ul class="contacts-list" id="friendsTab" data-friends-list="">
-                                <!-- Item Series Start -->
-                                <li>
-                                    <small class="font-weight-medium text-uppercase text-muted">A</small>
-                                </li>
-                                <!-- Item Series End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item active">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Albert K. Johansen</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
 
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">San Fransisco, CA</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Alice R. Botello</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">Brentwood, NY</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-                                <!-- Item Series Start -->
-                                <li>
-                                    <small class="font-weight-medium text-uppercase text-muted">b</small>
-                                </li>
-                                <!-- Item Series End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Brittany K. Williams</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">Scranton, PA</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-                                <!-- Item Series Start -->
-                                <li>
-                                    <small class="font-weight-medium text-uppercase text-muted">C</small>
-                                </li>
-                                <!-- Item Series End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Christopher Garcia</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">Riverside, CA</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Casey Mcbride</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">Zephyr, NC</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-                                <!-- Item Series Start -->
-                                <li>
-                                    <small class="font-weight-medium text-uppercase text-muted">G</small>
-                                </li>
-                                <!-- Item Series End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Gemma Mendez</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">Frederick, MD</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-                                <!-- Item Series Start -->
-                                <li>
-                                    <small class="font-weight-medium text-uppercase text-muted">k</small>
-                                </li>
-                                <!-- Item Series End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Katelyn Valdez</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">Jackson, TN</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Katherine Schneider</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">Saginaw, MI</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-                                <!-- Item Series Start -->
-                                <li>
-                                    <small class="font-weight-medium text-uppercase text-muted">m</small>
-                                </li>
-                                <!-- Item Series End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Maizie Edwards</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">Greensboro, NC</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-                                <!-- Item Series Start -->
-                                <li>
-                                    <small class="font-weight-medium text-uppercase text-muted">s</small>
-                                </li>
-                                <!-- Item Series End -->
-                                <!-- friends Item Start -->
-                                <li class="contacts-item">
-                                    <a class="contacts-link" href="#">
-                                        <div class="avatar">
-                                            <img src="~/media/avatar/3.png" alt="">
-                                        </div>
-                                        <div class="contacts-content">
-                                            <div class="contacts-info">
-                                                <h6 class="chat-name text-truncate">Susan K. Taylor</h6>
-                                            </div>
-                                            <div class="contacts-texts">
-                                                <!-- Default :: Inline SVG -->
-                                                <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-
-                                                <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-16 text-muted mr-1" src="./~/media/heroicons/solid/location-marker.svg" alt=""> -->
-                                                <p class="text-muted mb-0">Centerville, VA</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- friends Item End -->
-
+                               
                             </ul>
                             <!-- Friends Contact List End -->
                         </div>
@@ -1128,22 +838,30 @@
                             <div class="container-xl">
                                 <div class="row">
                                     <div class="col">
-
                                         <!-- Card Start -->
                                         <div class="card card-body card-bg-5">
-
                                             <!-- Card Details Start -->
                                             <div class="d-flex flex-column align-items-center">
                                                 <div class="avatar avatar-lg mb-3">
-                                                    <img class="avatar-img" src="~/media/avatar/3.png" alt="">
+                                                    @if (Model.AccountDetailViewModel.ProfileImg == null)
+                                                    {
+
+                                                        <img class="avatar-img" src="~/uploads/default-profile-img.jpg" alt="">
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="avatar-img" src="@_cloudinaryService.BuildUrl(Model.AccountDetailViewModel.ProfileImg)" alt="">
+                                                    }
+
                                                 </div>
 
                                                 <div class="d-flex flex-column align-items-center">
-                                                    <h5>Catherine Richardson</h5>
+                                                    <h5 class="profilename fullnameprofilimage">@(Model.AccountDetailViewModel.Name+" "+Model.AccountDetailViewModel.Surname)</h5>
                                                 </div>
 
                                                 <div class="d-flex">
-                                                    <button class="btn btn-outline-default mx-1" type="button">
+                                                    <a class="btn btn-outline-default mx-1 logout" asp-controller="account" asp-action="logout">
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="hw-18 d-none d-sm-inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -1152,7 +870,7 @@
                                                         <!-- Alternate :: External File link -->
                                                         <!-- <img class="injectable hw-18 d-sm-inline-block" src="./~/media/heroicons/outline/logout.svg" alt=""> -->
                                                         <span>Logout</span>
-                                                    </button>
+                                                    </a>
                                                     <button class="btn btn-outline-default mx-1 d-xl-none" data-profile-edit="" type="button">
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="hw-18 d-none d-sm-inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1169,7 +887,7 @@
                                             <!-- Card Details End -->
                                             <!-- Card Options Start -->
                                             <div class="card-options">
-                                                <div class="dropdown">
+                                                <div class="dropdown ">
                                                     <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1179,10 +897,15 @@
                                                         <!-- Alternate :: External File link -->
                                                         <!-- <img class="injectable hw-20" src="./~/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                                     </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Change Profile Picture</a>
-                                                        <a class="dropdown-item" href="#">Change Number</a>
-                                                    </div>
+                                                    <!--update profile img-->
+                                                    <form method="post" enctype="multipart/form-data">
+                                                        <div class="dropdown-menu deletedshow">
+                                                            <button class="dropdown-item profile-img-view viewphoto">View Photo</button>
+                                                            <label asp-for="@Model.AccountDetailViewModel.Image" class="ml-3" style="cursor:pointer">Upload Photo</label>
+                                                            <input asp-for="@Model.AccountDetailViewModel.Image" class="d-none" accept="image/*">
+                                                            <a class="dropdown-item profile-img-remove text-danger" asp-controller="accountdetail" asp-action="removephoto">Remove Photo</a>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <!-- Card Options End -->
@@ -1200,7 +923,10 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Local Time</p>
-                                                            <p class="mb-0">10:25 PM</p>
+
+                                                            <p class="mb-0 localtime">@Model.AccountDetailViewModel.LastLogin</p>
+
+
                                                         </div>
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1217,7 +943,12 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Birthdate</p>
-                                                            <p class="mb-0">20/11/1992</p>
+                                                            <p class="mb-0 birthday">
+                                                                @if (Model.AccountDetailViewModel.Birthday != null)
+                                                                {
+                                                                    <span>@Model.AccountDetailViewModel.Birthday.ToString().Substring(0, 11)</span>
+                                                                }
+                                                            </p>
                                                         </div>
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1234,7 +965,7 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Phone</p>
-                                                            <p class="mb-0">+01-222-364522</p>
+                                                            <p class="mb-0 phone">@Model.AccountDetailViewModel.Phone</p>
                                                         </div>
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1251,7 +982,7 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Email</p>
-                                                            <p class="mb-0">catherine.richardson@gmail.com</p>
+                                                            <p class="mb-0 email">@Model.AccountDetailViewModel.Email</p>
                                                         </div>
 
                                                         <!-- Default :: Inline SVG -->
@@ -1269,7 +1000,9 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Website</p>
-                                                            <p class="mb-0">www.catherichardson.com</p>
+
+                                                            <p class="mb-0 website">@Model.AccountDetailViewModel.Website</p>
+
                                                         </div>
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1286,7 +1019,10 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Address</p>
-                                                            <p class="mb-0">1134 Ridder Park Road, San Fransisco, CA 94851</p>
+
+                                                            <p class="mb-0 address">@Model.AccountDetailViewModel.Address</p>
+
+
                                                         </div>
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1315,7 +1051,11 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Facebook</p>
-                                                            <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                            @if (Model.AccountSocialLinkViewModel != null)
+                                                            {
+                                                                <a class="font-size-sm font-weight-medium facebook" href="#">@Model.AccountSocialLinkViewModel.Facebook</a>
+                                                            }
+
                                                         </div>
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="text-muted hw-20 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1332,7 +1072,11 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Twitter</p>
-                                                            <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                            @if (Model.AccountSocialLinkViewModel != null)
+                                                            {
+                                                                <a class="font-size-sm font-weight-medium twitter" href="#">@Model.AccountSocialLinkViewModel.Twitter</a>
+                                                            }
+
                                                         </div>
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="text-muted hw-20 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1349,7 +1093,10 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Instagram</p>
-                                                            <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                            @if (Model.AccountSocialLinkViewModel != null)
+                                                            {
+                                                                <a class="font-size-sm font-weight-medium instagram" href="#">@Model.AccountSocialLinkViewModel.Instagram</a>
+                                                            }
                                                         </div>
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="text-muted hw-20 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1368,7 +1115,11 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">Linkedin</p>
-                                                            <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                            @if (Model.AccountSocialLinkViewModel != null)
+                                                            {
+                                                                <a class="font-size-sm font-weight-medium linkedin" href="#">@Model.AccountSocialLinkViewModel.Linkedin</a>
+                                                            }
+
                                                         </div>
                                                         <!-- Default :: Inline SVG -->
                                                         <svg class="text-muted hw-20 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3509,18 +3260,39 @@
             <!-- Call Log Page End -->
             <!-- Friends Page Start -->
             <div class="friends px-0 py-2 p-xl-3">
-                <div class="container-xl">
+                <!--nice to see you-->
+                <div class="friends-intro-wrapper d-flex flex-column justify-content-center text-center h-100 w-100">
+                    <div class="container">
+                        <div class="avatar avatar-lg mb-2">
+                            @if (Model.AccountDetailViewModel.ProfileImg == null)
+	                        {
+                                <img class="avatar-img" src="~/uploads/default-profile-img.jpg" alt="">
+                            }
+                            else
+                            {
+                                <img class="avatar-img" src="@_cloudinaryService.BuildUrl(Model.AccountDetailViewModel.ProfileImg)" alt="">
+                            }
+                        </div>
+
+                        <h5>Nice to see you, @Model.AccountDetailViewModel.Name!</h5>
+                        <p class="text-muted friends-intro-text">Click on the account you want to see profile information.</p>
+                    </div>
+                </div>
+
+                <!--Selected Account's Details-->
+                <div class="selected-account-details container-xl friend-details-container d-none">
                     <div class="row">
                         <div class="col">
                             <div class="card card-body card-bg-1 mb-3">
                                 <div class="d-flex flex-column align-items-center">
+                                    <!--selected account's profile img-->
                                     <div class="avatar avatar-lg mb-3">
-                                        <img class="avatar-img" src="~/media/avatar/3.png" alt="">
+                                        <img class="avatar-img selected-account-details-img" src="~/uploads/default-profile-img.jpg" alt="">
                                     </div>
 
                                     <div class="d-flex flex-column align-items-center">
-                                        <h5 class="mb-1">Catherine Richardson</h5>
-                                        <!-- <p class="text-white rounded px-2 bg-primary">+01-202-265462</p> -->
+                                        <h5 class="mb-1 selected-account-details-fullname"></h5>
+                                         <p class="text-white rounded px-2 bg-info selected-account-details-statusText"></p> 
                                         <div class="d-flex mt-2">
                                             <div class="btn btn-primary btn-icon rounded-circle text-light mx-2">
                                                 <svg class="hw-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -3538,7 +3310,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <!--card setting options-->
                                 <div class="card-options">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -3549,12 +3321,10 @@
                                             <!-- <img class="injectable hw-20" src="./~/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Remove</a>
-                                            <a class="dropdown-item" href="#">Block</a>
+                                            <a class="dropdown-item hide-friend-details" href="#">Hide account details</a>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="chat-closer d-xl-none">
                                     <!-- Chat Back Button (Visible only in Small Devices) -->
                                     <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-close="">
@@ -3568,28 +3338,28 @@
                             </div>
                         </div>
                     </div>
-
+                    <!--Select Account's Details-->
                     <div class="row friends-info">
                         <div class="col">
                             <div class="card">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
+                                    <!--???-->
+                                    @*<li class="list-group-item">
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Local Time</p>
-                                                <p class="mb-0">10:25 PM</p>
+                                                <p class="mb-0 ">10:25 PM</p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
-                                            <!-- <img class="injectable text-muted hw-20" src="./~/media/heroicons/outline/clock.svg" alt=""> -->
                                         </div>
-                                    </li>
+                                    </li>*@
                                     <li class="list-group-item">
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Birthdate</p>
-                                                <p class="mb-0">20/11/1992</p>
+                                                <p class="mb-0 selected-account-details-birthday"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -3602,7 +3372,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Phone</p>
-                                                <p class="mb-0">+01-222-364522</p>
+                                                <p class="mb-0 selected-account-details-phone"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -3614,7 +3384,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Email</p>
-                                                <p class="mb-0">catherine.richardson@gmail.com</p>
+                                                <p class="mb-0 selected-account-details-email"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -3626,7 +3396,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Website</p>
-                                                <p class="mb-0">www.catherichardson.com</p>
+                                                <p class="mb-0 selected-account-details-website"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -3638,7 +3408,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Address</p>
-                                                <p class="mb-0">1134 Ridder Park Road, San Fransisco, CA 94851</p>
+                                                <p class="mb-0 selected-account-details-address"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -3649,14 +3419,14 @@
                                 </ul>
                             </div>
 
-
+                            <!--Selected Account's Social Links-->
                             <div class="card">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Facebook</p>
-                                                <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                <a class="font-size-sm font-weight-medium selected-account-social-facebook" href="#"></a>
                                             </div>
                                             <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -3668,7 +3438,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Twitter</p>
-                                                <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                <a class="font-size-sm font-weight-medium selected-account-social-twitter" href="#"></a>
                                             </div>
                                             <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
@@ -3680,7 +3450,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Instagram</p>
-                                                <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                <a class="font-size-sm font-weight-medium selected-account-social-instagram" href="#"></a>
                                             </div>
                                             <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -3694,7 +3464,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Linkedin</p>
-                                                <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                <a class="font-size-sm font-weight-medium selected-account-social-linkedin" href="#"></a>
                                             </div>
                                             <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -3733,292 +3503,394 @@
                 <div class="container-xl px-2 px-sm-3">
                     <div class="row">
                         <div class="col">
+                            <!--Account Information-->
                             <div class="card mb-3">
-                                <div class="card-header">
-                                    <h6 class="mb-1">Account</h6>
-                                    <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                </div>
-
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="firstName">First Name</label>
-                                                <input type="text" class="form-control form-control-md" id="firstName" placeholder="Type your first name" value="Catherine">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="lastName">Last Name</label>
-                                                <input type="text" class="form-control form-control-md" id="lastName" placeholder="Type your last name" value="Richardson">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="mobileNumber">Mobile number</label>
-                                                <input type="text" class="form-control form-control-md" id="mobileNumber" placeholder="Type your mobile number" value="+01-222-364522">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="birthDate">Birth date</label>
-                                                <input type="text" class="form-control form-control-md" id="birthDate" placeholder="dd/mm/yyyy" value="20/11/1992">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="emailAddress">Email address</label>
-                                                <input type="email" class="form-control form-control-md" id="emailAddress" placeholder="Type your email address" value="catherine.richardson@gmail.com">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="webSite">Website</label>
-                                                <input type="text" class="form-control form-control-md" id="webSite" placeholder="Type your website" value="www.catherichardson.com">
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="Address">Address</label>
-                                                <input type="text" class="form-control form-control-md" id="Address" placeholder="Type your address" value="1134 Ridder Park Road, San Fransisco, CA 94851">
-                                            </div>
-                                        </div>
+                                <form method="post" class="accountchange" asp-controller="accountdetail" asp-action="update">
+                                    <div class="card-header">
+                                        <h6 class="mb-1">Account</h6>
+                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
                                     </div>
-                                </div>
 
-                                <div class="card-footer d-flex justify-content-end">
-                                    <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                    <button type="button" class="btn btn-primary">Save Changes</button>
-                                </div>
-                            </div>
-
-                            <div class="card mb-3">
-                                <div class="card-header">
-                                    <h6 class="mb-1">Social network profiles</h6>
-                                    <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                </div>
-
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="facebookId">Facebook</label>
-                                                <input type="text" class="form-control form-control-md" id="facebookId" placeholder="Username">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="twitterId">Twitter</label>
-                                                <input type="text" class="form-control form-control-md" id="twitterId" placeholder="Username">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="instagramId">Instagram</label>
-                                                <input type="text" class="form-control form-control-md" id="instagramId" placeholder="Username">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="linkedinId">Linkedin</label>
-                                                <input type="text" class="form-control form-control-md" id="linkedinId" placeholder="Username">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card-footer d-flex justify-content-end">
-                                    <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                    <button type="button" class="btn btn-primary">Save Changes</button>
-                                </div>
-                            </div>
-
-                            <div class="card mb-3">
-                                <div class="card-header">
-                                    <h6 class="mb-1">Password</h6>
-                                    <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                </div>
-
-                                <div class="card-body">
-                                    <form>
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="current-password">Current Password</label>
-                                                    <input type="password" class="form-control form-control-md" id="current-password" placeholder="Current password" autocomplete="on">
+                                                    <label asp-for="@Model.AccountDetailViewModel.Name">First Name</label>
+                                                    <input asp-for="@Model.AccountDetailViewModel.Name" class="form-control form-control-md onchange" placeholder="Type your first name">
+                                                    <span asp-validation-for="@Model.AccountDetailViewModel.Name" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountDetailViewModel.Surname">Last Name</label>
+                                                    <input asp-for="@Model.AccountDetailViewModel.Surname" class="form-control form-control-md onchange" placeholder="Type your last name">
+                                                    <span asp-validation-for="@Model.AccountDetailViewModel.Surname" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountDetailViewModel.Phone">Mobile number</label>
+                                                    <input asp-for="@Model.AccountDetailViewModel.Phone" class="form-control form-control-md onchange" placeholder="Type your mobile number">
+                                                    <span asp-validation-for="@Model.AccountDetailViewModel.Phone" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountDetailViewModel.Birthday">Birth date</label>
+                                                    <input asp-for="@Model.AccountDetailViewModel.Birthday" type="date" min="1930-01-01" max="2010-01-01" class="form-control form-control-md onchangess" placeholder="dd/mm/yyyy">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountDetailViewModel.Email">Email address</label>
+                                                    <input asp-for="@Model.AccountDetailViewModel.Email" class="form-control form-control-md onchange" placeholder="Type your email address">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountDetailViewModel.Website">Website</label>
+                                                    <input asp-for="@Model.AccountDetailViewModel.Website" class="form-control form-control-md onchange" placeholder="Type your website">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountDetailViewModel.Address">Address</label>
+                                                    <input asp-for="@Model.AccountDetailViewModel.Address" class="form-control form-control-md onchange" placeholder="Type your address">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
+                                        <button type="submit" class="btn btn-primary onchangesubmit " disabled>Save Changes</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <!--Account Social Links-->
+                            <div class="card mb-3">
+                                <form method="post" class="sociallink" asp-controller="accountdetail" asp-action="updatesocialLink">
+                                    <div class="card-header">
+                                        <h6 class="mb-1">Social network profiles</h6>
+                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountSocialLinkViewModel.Facebook">Facebook</label>
+                                                    <input asp-for="@Model.AccountSocialLinkViewModel.Facebook" class="form-control form-control-md onchanges" placeholder="Username">
+                                                    <span asp-validation-for="@Model.AccountSocialLinkViewModel.Facebook" class="text-danger "></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountSocialLinkViewModel.Twitter">Twitter</label>
+                                                    <input asp-for="@Model.AccountSocialLinkViewModel.Twitter" class="form-control form-control-md onchanges" placeholder="Username">
+                                                    <span asp-validation-for="@Model.AccountSocialLinkViewModel.Twitter" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountSocialLinkViewModel.Instagram">Instagram</label>
+                                                    <input asp-for="@Model.AccountSocialLinkViewModel.Instagram" class="form-control form-control-md onchanges" placeholder="Username">
+                                                    <span asp-validation-for="@Model.AccountSocialLinkViewModel.Instagram" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.AccountSocialLinkViewModel.Linkedin">Linkedin</label>
+                                                    <input asp-for="@Model.AccountSocialLinkViewModel.Linkedin" class="form-control form-control-md onchanges" placeholder="Username">
+                                                    <span asp-validation-for="@Model.AccountSocialLinkViewModel.Linkedin" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
+                                        <button type="submit" class="btn btn-primary onchangesocial" disabled>Save Changes</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <!--Update Password-->
+                            <div class="card mb-3">
+                                <form method="post" class="bir" asp-controller="account" asp-action="updatepassword">
+                                    <div class="card-header">
+                                        <h6 class="mb-1">Password</h6>
+                                        <p class="mb-0 text-muted small">Update personal account password</p>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label asp-for="@Model.UpdatePasswordViewModel.CurrentPassword">Current Password</label>
+                                                    <input asp-for="@Model.UpdatePasswordViewModel.CurrentPassword" class="form-control form-control-md chpassword" placeholder="Current password">
+                                                    <span asp-validation-for="@Model.UpdatePasswordViewModel.CurrentPassword" class="text-danger currentpassworderror "></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="new-password">New Password</label>
-                                                    <input type="password" class="form-control form-control-md" id="new-password" placeholder="New password" autocomplete="off">
+                                                    <label asp-for="@Model.UpdatePasswordViewModel.Password">New Password</label>
+                                                    <input asp-for="@Model.UpdatePasswordViewModel.Password" class="form-control form-control-md " placeholder="New password">
+                                                    <span asp-validation-for="@Model.UpdatePasswordViewModel.Password" class="text-danger "></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="repeat-password">Repeat Password</label>
-                                                    <input type="password" class="form-control form-control-md" id="repeat-password" placeholder="Repeat password" autocomplete="off">
+                                                    <label asp-for="@Model.UpdatePasswordViewModel.PasswordConfirm">Repeat Password</label>
+                                                    <input asp-for="@Model.UpdatePasswordViewModel.PasswordConfirm" class="form-control form-control-md " placeholder="Repeat password">
+                                                    <span asp-validation-for="@Model.UpdatePasswordViewModel.PasswordConfirm" class="text-danger "></span>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
 
-                                <div class="card-footer d-flex justify-content-end">
-                                    <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                    <button type="button" class="btn btn-primary">Save Changes</button>
-                                </div>
+                                    </div>
+
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
+                                        <button type="submit" class="btn btn-primary changepassword" disabled>Save Changes</button>
+                                    </div>
+                                </form>
+
                             </div>
-
+                            <!--Account Privacy-->
                             <div class="card mb-3">
-                                <div class="card-header">
-                                    <h6 class="mb-1">Privacy</h6>
-                                    <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                </div>
+                                <form method="post" class="update-account-privacy" asp-controller="accountdetail" asp-action="updateprivacy">
 
-                                <div class="card-body p-0">
-                                    <ul class="list-group list-group-flush list-group-sm-column">
+                                    <div class="card-header">
+                                        <h6 class="mb-1">Privacy</h6>
+                                        <p class="mb-0 text-muted small">Update personal account privacy</p>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <ul class="list-group list-group-flush list-group-sm-column">
 
-                                        <li class="list-group-item py-2">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <p class="mb-0">Profile Picture</p>
-                                                    <p class="small text-muted mb-0">Select who can see my profile picture</p>
-                                                </div>
-                                                <div class="dropdown mr-2">
-                                                    <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Public
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Public</a>
-                                                        <a class="dropdown-item" href="#">Friends</a>
-                                                        <a class="dropdown-item" href="#">Selected Friends</a>
+                                            <!--privacy profile img-->
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Profile Picture</p>
+                                                        <p class="small text-muted mb-0">Select who can see your profile picture</p>
+                                                    </div>
+                                                    <div class="dropdown mr-2">
+                                                        <button class="btn btn-outline-default dropdown-toggle"
+                                                                data-privacy-profile-picture-text="" type="button"
+                                                                data-selected-value="@Model.AccountPrivacyViewModel.ProfileImg"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @(Model.AccountPrivacyViewModel.ProfileImg ? "Public " : "Friends")
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-privacy-profile-picture data-privacy-value="true" href="#">Public </a>
+                                                            <a class="dropdown-item" data-privacy-profile-picture data-privacy-value="false" href="#">Friends</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="list-group-item py-2">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <p class="mb-0">Last Seen</p>
-                                                    <p class="small text-muted mb-0">Select who can see my last seen</p>
-                                                </div>
-                                                <div class="dropdown mr-2">
-                                                    <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Public
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Public</a>
-                                                        <a class="dropdown-item" href="#">Friends</a>
-                                                        <a class="dropdown-item" href="#">Selected Friends</a>
+                                            </li>
+                                            <!--privacy status-->
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Status</p>
+                                                        <p class="small text-muted mb-0">Select who can see your status updates</p>
+                                                    </div>
+                                                    <div class="dropdown mr-2">
+                                                        <button class="btn btn-outline-default dropdown-toggle"
+                                                                data-privacy-status-text="" type="button"
+                                                                data-selected-value="@Model.AccountPrivacyViewModel.StatusText"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @(Model.AccountPrivacyViewModel.StatusText ? "Public " : "Friends")
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-privacy-status data-privacy-value="true" href="#">Public </a>
+                                                            <a class="dropdown-item" data-privacy-status data-privacy-value="false" href="#">Friends</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="list-group-item py-2">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <p class="mb-0">Groups</p>
-                                                    <p class="small text-muted mb-0">Select who can add you in groups</p>
-                                                </div>
-                                                <div class="dropdown mr-2">
-                                                    <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Public
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Public</a>
-                                                        <a class="dropdown-item" href="#">Friends</a>
-                                                        <a class="dropdown-item" href="#">Selected Friends</a>
+                                            </li>
+                                            <!--privacy last seen-->
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Last Seen</p>
+                                                        <p class="small text-muted mb-0">Select who can see your last seen</p>
+                                                    </div>
+                                                    <div class="dropdown mr-2">
+                                                        <button class="btn btn-outline-default dropdown-toggle"
+                                                                data-privacy-last-seen-text="" type="button"
+                                                                data-selected-value="@Model.AccountPrivacyViewModel.LastSeen"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @(Model.AccountPrivacyViewModel.LastSeen ? "Public " : "Friends")
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-privacy-last-seen data-privacy-value="true" href="#">Public </a>
+                                                            <a class="dropdown-item" data-privacy-last-seen data-privacy-value="false" href="#">Friends</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="list-group-item py-2">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <p class="mb-0">Status</p>
-                                                    <p class="small text-muted mb-0">Select who can see my status updates</p>
-                                                </div>
-                                                <div class="dropdown mr-2">
-                                                    <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Public
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Public</a>
-                                                        <a class="dropdown-item" href="#">Friends</a>
-                                                        <a class="dropdown-item" href="#">Selected Friends</a>
+                                            </li>
+                                            <!--privacy phone-->
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Phone</p>
+                                                        <p class="small text-muted mb-0">Select who can see your phone number</p>
+                                                    </div>
+                                                    <div class="dropdown mr-2">
+                                                        <button class="btn btn-outline-default dropdown-toggle"
+                                                                data-privacy-phone-text="" type="button"
+                                                                data-selected-value="@Model.AccountPrivacyViewModel.Phone"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @(Model.AccountPrivacyViewModel.Phone ? "Public " : "Friends")
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-privacy-phone data-privacy-value="true" href="#">Public </a>
+                                                            <a class="dropdown-item" data-privacy-phone data-privacy-value="false" href="#">Friends</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="list-group-item py-2">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <p class="mb-0">Read receipts</p>
-                                                    <p class="small text-muted mb-0">If turn off this option you won't be able to see read recipts</p>
+                                            </li>
+                                            <!--privacy birthday-->
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Birthday</p>
+                                                        <p class="small text-muted mb-0">Select who can see your birthday</p>
+                                                    </div>
+                                                    <div class="dropdown mr-2">
+                                                        <button class="btn btn-outline-default dropdown-toggle"
+                                                                data-privacy-birthday-text="" type="button"
+                                                                data-selected-value="@Model.AccountPrivacyViewModel.Birthday"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @(Model.AccountPrivacyViewModel.Birthday ? "Public " : "Friends")
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-privacy-birthday data-privacy-value="true" href="#">Public </a>
+                                                            <a class="dropdown-item" data-privacy-birthday data-privacy-value="false" href="#">Friends</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="custom-control custom-switch mr-2">
-                                                    <input type="checkbox" class="custom-control-input" id="readReceiptsSwitch" checked="">
-                                                    <label class="custom-control-label" for="readReceiptsSwitch">&nbsp;</label>
+                                            </li>
+                                            <!--privacy address-->
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Address</p>
+                                                        <p class="small text-muted mb-0">Select who can see your address</p>
+                                                    </div>
+                                                    <div class="dropdown mr-2">
+                                                        <button class="btn btn-outline-default dropdown-toggle"
+                                                                data-privacy-address-text="" type="button"
+                                                                data-selected-value="@Model.AccountPrivacyViewModel.Address"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @(Model.AccountPrivacyViewModel.Address ? "Public " : "Friends")
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-privacy-address data-privacy-value="true" href="#">Public </a>
+                                                            <a class="dropdown-item" data-privacy-address data-privacy-value="false" href="#">Friends</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                            <!--privacy social links-->
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Social network links</p>
+                                                        <p class="small text-muted mb-0">Select who can see your social network links</p>
+                                                    </div>
+                                                    <div class="dropdown mr-2">
+                                                        <button class="btn btn-outline-default dropdown-toggle"
+                                                                data-privacy-social-links-text="" type="button"
+                                                                data-selected-value="@Model.AccountPrivacyViewModel.SocialLink"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @(Model.AccountPrivacyViewModel.SocialLink ? "Public " : "Friends")
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-privacy-social-links data-privacy-value="true" href="#">Public </a>
+                                                            <a class="dropdown-item" data-privacy-social-links data-privacy-value="false" href="#">Friends</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
 
-                                    </ul>
-                                </div>
+                                            <!--privacy accept all messages-->
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Accept all messages</p>
+                                                        <p class="small text-muted mb-0">If turn off this option, only accounts that are friends with you can send you messages</p>
+                                                    </div>
+                                                    <div class="custom-control custom-switch mr-2">
+                                                        <input type="checkbox" class="custom-control-input" id="privacy-accept-messages"
+                                                               @(Model.AccountPrivacyViewModel.AcceptAllMessages ? "checked" : "")>
+                                                        <label class="custom-control-label" for="privacy-accept-messages">&nbsp;</label>
+                                                    </div>
+                                                </div>
+                                            </li>
 
-                                <div class="card-footer d-flex justify-content-end">
-                                    <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                    <button type="button" class="btn btn-primary">Save Changes</button>
-                                </div>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
+                                        <button type="submit" class="btn btn-primary changeprivacy" disabled>Save Changes</button>
+                                    </div>
+                                </form>
                             </div>
-
+                            <!--Account Security-->
                             <div class="card mb-3">
-                                <div class="card-header">
-                                    <h6 class="mb-1">Security</h6>
-                                    <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                </div>
+                                <form method="post" class="update-account-security" asp-controller="accountdetail" asp-action="updatesecurity">
 
-                                <div class="card-body p-0">
-                                    <ul class="list-group list-group-flush list-group-sm-column">
-                                        <li class="list-group-item py-2">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <p class="mb-0">Use two-factor authentication</p>
-                                                    <p class="small text-muted mb-0">Ask for a code if attempted login from an unrecognised device or browser.</p>
-                                                </div>
-                                                <div class="custom-control custom-switch mr-2">
-                                                    <input type="checkbox" class="custom-control-input" id="twoFactorSwitch" checked="">
-                                                    <label class="custom-control-label" for="twoFactorSwitch">&nbsp;</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item py-2">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <p class="mb-0">Get alerts about unrecognised logins</p>
-                                                    <p class="small text-muted mb-0">You will be notified if anyone logs in from a device or browser you don't usually use</p>
-                                                </div>
-                                                <div class="custom-control custom-switch mr-2">
-                                                    <input type="checkbox" class="custom-control-input" id="unrecognisedSwitch" checked="">
-                                                    <label class="custom-control-label" for="unrecognisedSwitch">&nbsp;</label>
-                                                </div>
-                                            </div>
-                                        </li>
+                                    <div class="card-header">
+                                        <h6 class="mb-1">Security</h6>
+                                        <p class="mb-0 text-muted small">Update security personal account information</p>
+                                    </div>
 
-                                    </ul>
-                                </div>
+                                    <div class="card-body p-0">
+                                        <ul class="list-group list-group-flush list-group-sm-column">
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Use two-factor authentication</p>
+                                                        <p class="small text-muted mb-0">Ask for a code if attempted login from an unrecognised device or browser.</p>
+                                                    </div>
+                                                    <div class="custom-control custom-switch mr-2">
+                                                        <input type="checkbox" class="custom-control-input" id="security-tfa"
+                                                               @(Model.AccountSecurityViewModel.TwoFactoryAuth ? "checked" : "")>
+                                                        <label class="custom-control-label" for="security-tfa">&nbsp;</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="mb-0">Get alerts about unrecognised logins</p>
+                                                        <p class="small text-muted mb-0">You will be notified if anyone logs in from a device or browser you don't usually use</p>
+                                                    </div>
+                                                    <div class="custom-control custom-switch mr-2">
+                                                        <input type="checkbox" class="custom-control-input" id="security-login-alerts"
+                                                               @(Model.AccountSecurityViewModel.LoginAlerts ? "checked" : "")>
+                                                        <label class="custom-control-label" for="security-login-alerts">&nbsp;</label>
+                                                    </div>
+                                                </div>
+                                            </li>
 
-                                <div class="card-footer d-flex justify-content-end">
-                                    <button class="btn btn-link text-muted mx-1">Reset</button>
-                                    <button class="btn btn-primary" type="button">Save Changes</button>
-                                </div>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <button class="btn btn-link text-muted mx-1">Reset</button>
+                                        <button class="btn btn-primary changesecurity" type="submit" disabled>Save Changes</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -4165,7 +4037,7 @@
                         </button>
                     </div>
                     <div class="modal-body py-0 hide-scrollbar">
-                        <div class="row hide pt-2" data-step="1" data-title="Create a New Group">
+                        <div class="row hide pt-2 " data-step="1" data-title="Create a New Group">
 
                             <div class="col-12">
                                 <div class="form-group">
@@ -4215,7 +4087,7 @@
 
                         </div>
 
-                        <div class="row hide pt-2" data-step="2" data-title="Add Group Members">
+                        <div class="row hide pt-2 " data-step="2" data-title="Add Group Members">
                             <div class="col-12 px-0">
                                 <!-- Search Start -->
                                 <form class="form-inline w-100 px-2 pb-2 border-bottom">
@@ -4565,7 +4437,6 @@
                                     </li>
                                     <!-- List Group Item End -->
 
-
                                 </ul>
                                 <!-- List Group End -->
                             </div>
@@ -4587,7 +4458,13 @@
     <script src="~/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="~/vendors/svg-inject/svg-inject.min.js"></script>
     <script src="~/vendors/modal-stepes/modal-steps.min.js"></script>
+    <script src="~/lib/jquery-toast-plugin/jquery.toast.min.js"></script>
     <script src="~/js/app.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-confirm/jquery-confirm.min.js"></script>
+
+    <script src="~/js/main.js"></script>
 
     <script>
         // Scroll to end of chat
@@ -4595,6 +4472,462 @@
             block: 'end',               // "start" | "center" | "end" | "nearest",
             behavior: 'auto'          //"auto"  | "instant" | "smooth",
         });
+    </script>
+
+    <!--Account Add Database-->
+    <script>
+        $(document).on("submit", ".accountchange", function (e) {
+            let Name = $("#AccountDetailViewModel_Name").val().trim();
+            let Surname = $("#AccountDetailViewModel_Surname").val().trim();
+            let Phone = $("#AccountDetailViewModel_Phone").val().trim();
+            let Birthday = $("#AccountDetailViewModel_Birthday").val();
+            let Email = $("#AccountDetailViewModel_Email").val().trim();
+            let Website = $("#AccountDetailViewModel_Website").val().trim();
+            let Address = $("#AccountDetailViewModel_Address").val().trim();
+            $.ajax({
+                url: '/accountdetail/update',
+                type: "POST",
+                dataType: "json",
+                data:
+                {
+                    name: Name,
+                    surname: Surname,
+                    phone: Phone,
+                    birthday: Birthday,
+                    email: Email,
+                    website: Website,
+                    address: Address
+                },
+                success: function (res) {
+                    $(".email").text(Email);
+                    $(".profilename").text(Name + " " + Surname);
+                    $(".birthday").text(Birthday);
+                    $(".phone").text(Phone);
+                    $(".website").text(Website);
+                    $(".address").text(Address);
+                    $.toast({
+                        heading: 'Məlumat',
+                        text: "Hesabiniz deisdirildi",
+                        icon: 'info',
+                        loader: true,
+                        bgColor: '#3988ff',
+                        loaderBg: '#f7d40d',
+                        position: 'top-right',
+                        hideAfter: 4000
+                    });
+                    $(".onchangesubmit").prop("disabled", true);
+                }
+            });
+            e.preventDefault();
+        });
+    </script>
+
+    <!--Account update social links-->
+    <script>
+        $(document).on("submit", ".sociallink", function (e) {
+            let Facebook = $("#AccountSocialLinkViewModel_Facebook").val().trim();
+            let Twitter = $("#AccountSocialLinkViewModel_Twitter").val().trim();
+            let Instagram = $("#AccountSocialLinkViewModel_Instagram").val().trim();
+            let Linkedin = $("#AccountSocialLinkViewModel_Linkedin").val().trim();
+            $.ajax({
+                url: '/accountdetail/updatesociallink',
+                type: "POST",
+                dataType: "json",
+                data:
+                {
+                    facebook: Facebook,
+                    twitter: Twitter,
+                    instagram: Instagram,
+                    linkedin: Linkedin
+                },
+                success: function (res) {
+                    console.log(res);
+                    $(".facebook").text(Facebook);
+                    $(".twitter").text(Twitter);
+                    $(".instagram").text(Instagram);
+                    $(".linkedin").text(Linkedin);
+                    $.toast({
+                        heading: 'Məlumat',
+                        text: "Hesabiniz deisdirildi",
+                        icon: 'info',
+                        loader: true,
+                        bgColor: '#3988ff',
+                        loaderBg: '#f7d40d',
+                        position: 'top-right',
+                        hideAfter: 4000
+                    });
+                    $(".onchangesocial").prop("disabled", true);
+                }
+            });
+            e.preventDefault();
+        });
+    </script>
+
+    <!--Account Update Password-->
+    <script>
+        $(document).on("submit", ".bir", function (e) {
+            let CurrentPassword = $("#UpdatePasswordViewModel_CurrentPassword").val().trim();
+            let NewPassword = $("#UpdatePasswordViewModel_Password").val().trim();
+            let RepeatPassword = $("#UpdatePasswordViewModel_PasswordConfirm").val().trim();
+            $.ajax({
+                url: '/account/updatepassword',
+                type: "POST",
+                dataType: "json",
+                data:
+                {
+                    currentpassword: CurrentPassword,
+                    password: NewPassword,
+                    passwordconfirm: RepeatPassword
+                },
+
+                success: function (res) {
+                    if (res.status == false) {
+                        $(".currentpassworderror").text(res.message);
+                        $.toast({
+                            heading: 'Error',
+                            text: res.message,
+                            icon: 'error',
+                            loader: true,
+                            bgColor: '#dc3545',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 4000
+                        });
+                        $("#UpdatePasswordViewModel_Password").val("");
+                        $("#UpdatePasswordViewModel_PasswordConfirm").val("");
+                    }
+
+                    if (res.status == true) {
+                        $.toast({
+                            heading: 'Correct',
+                            text: res.message,
+                            icon: 'info',
+                            loader: true,
+                            bgColor: '#3988ff',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 5000
+                        });
+                        $("#UpdatePasswordViewModel_Password").val("");
+                        $("#UpdatePasswordViewModel_PasswordConfirm").val("");
+                        $("#UpdatePasswordViewModel_CurrentPassword").val("");
+                        $(".changepassword").prop("disabled", true);
+                    }
+                }
+            });
+            e.preventDefault();
+        });
+    </script>
+
+
+    <!--Update Privacy-->
+    <script>
+        $(document).on("submit", ".update-account-privacy", function (e) {
+            let ProfileImg = $('button[data-privacy-profile-picture-text]').attr("data-selected-value");
+            let StatusText = $('button[data-privacy-status-text]').attr("data-selected-value");
+            let LastSeen = $('button[data-privacy-last-seen-text]').attr("data-selected-value");
+            let Phone = $('button[data-privacy-phone-text]').attr("data-selected-value");
+            let UserBirthday = $('button[data-privacy-birthday-text]').attr("data-selected-value");
+            let Address = $('button[data-privacy-address-text]').attr("data-selected-value");
+            let SocialLink = $('button[data-privacy-social-links-text]').attr("data-selected-value");
+            let AcceptMessages = $("#privacy-accept-messages").prop("checked");
+            $.ajax({
+                url: '/accountdetail/updateprivacy',
+                type: "POST",
+                dataType: "json",
+                data:
+                {
+                    profileImg: ProfileImg,
+                    statusText: StatusText,
+                    lastSeen: LastSeen,
+                    phone: Phone,
+                    birthday: UserBirthday,
+                    address: Address,
+                    socialLink: SocialLink,
+                    acceptAllMessages: AcceptMessages
+                },
+                success: function (res) {
+                    if (res.status) {
+                        $.toast({
+                            heading: 'Completed!',
+                            text: res.message,
+                            icon: 'info',
+                            loader: true,
+                            bgColor: '#3988ff',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 6000
+                        });
+                        $(".changeprivacy").prop("disabled", true);
+                    }
+                    if (res.status == false) {
+                        $.toast({
+                            heading: 'Error',
+                            text: res.message,
+                            icon: 'error',
+                            loader: true,
+                            bgColor: '#dc3545',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 6000
+                        });
+                    }
+                },
+                error: function (res) {
+                    $.toast({
+                        heading: 'Error',
+                        text: "System Error 500 !",
+                        icon: 'error',
+                        loader: true,
+                        bgColor: '#dc3545',
+                        loaderBg: '#f7d40d',
+                        position: 'top-right',
+                        hideAfter: 6000
+                    });
+                }
+            });
+            e.preventDefault();
+        });
+    </script>
+
+    <!--Update Security-->
+    <script>
+        $(document).on("submit", ".update-account-security", function (e) {
+
+            let TFA = $("#security-tfa").prop("checked");
+            let LoginAlerts = $("#security-login-alerts").prop("checked");
+
+            $.ajax({
+                url: '/accountdetail/updatesecurity',
+                type: "POST",
+                dataType: "json",
+                data:
+                {
+                    twoFactoryAuth: TFA,
+                    loginAlerts: LoginAlerts
+                },
+
+                success: function (res) {
+                    if (res.status) {
+                        $.toast({
+                            heading: 'Completed!',
+                            text: res.message,
+                            icon: 'info',
+                            loader: true,
+                            bgColor: '#3988ff',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 6000
+                        });
+                        $(".changesecurity").prop("disabled", true);
+                    }
+                    if (res.status == false) {
+                        $.toast({
+                            heading: 'Error',
+                            text: res.message,
+                            icon: 'error',
+                            loader: true,
+                            bgColor: '#dc3545',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 6000
+                        });
+                    }
+                },
+                error: function (res) {
+                    $.toast({
+                        heading: 'Error',
+                        text: "System Error 500 !",
+                        icon: 'error',
+                        loader: true,
+                        bgColor: '#dc3545',
+                        loaderBg: '#f7d40d',
+                        position: 'top-right',
+                        hideAfter: 6000
+                    });
+                }
+            });
+            e.preventDefault();
+        });
+    </script>
+    <!--View Profile Img-->
+
+    <!--Friends List-->
+    <script>
+        $(document).ready(function () {
+            let id = @Model.AccountDetailViewModel.Id;
+            $.ajax({
+                url: '/friends/allfriends',
+                type: "POST",
+                dataType: "json",
+                data:
+                {
+                    userId: id
+                },
+                success: function (res) {
+                    for (var i = 0; i < res.length; i++) {
+                        let statustext = res[i].statusText;
+                        let imgSrc;
+                        if (res[i].profileImg == null) {
+                            imgSrc = "/uploads/default-profile-img.jpg"
+                        } else {
+                            imgSrc = "https://res.cloudinary.com/djmiksiim/v1/" + res[i].profileImg
+                        }
+                        if (res[i].statusText == null) {
+                            statustext = "";
+                        }
+                        //Get Friends List
+                        $("#friendsTab").append('<li class="contacts-item" data-account-info data-id="' + res[i].id  +'">' + '<a class="contacts-link" href="#">' + '<div class="avatar">' +
+                            '<img src="'+ imgSrc +'"/></div>' + //profile img div
+                            '<div class="contacts-content">' +
+                            '<div class="contacts-info"><h6 class="chat-name text-truncate">' + res[i].name +" "+res[i].surname + //fullname
+                            '</h6></div>' + //info div end
+                            '<div class="contacts-texts"><i class="fas fa-hashtag" style="font-size:12px;margin-right:4px;"></i><p class="text-muted mb-0">'
+                            + statustext + '</p></div > ' + //status text end
+                            '</div></a></li>'); //end li
+                    }
+                },
+                error: function (res) {
+                    $.toast({
+                        heading: 'Error',
+                        text: "System Error 500 ! All Friends Not Response!",
+                        icon: 'error',
+                        loader: true,
+                        bgColor: '#dc3545',
+                        loaderBg: '#f7d40d',
+                        position: 'top-right',
+                        hideAfter: 6000
+                    });
+                }
+            });
+        })
+    </script>
+
+    <!--Show/Hide selected accounts's Details-->
+    <script>
+        $(document).ready(function () {
+            $('#friendsTab').on('click', 'li', function (e) {
+                e.preventDefault();
+                $('#friendsTab li.active').removeClass('active');
+                $(this).addClass('active');
+
+                //show selected friend's details
+                if ($('.friends-intro-wrapper').hasClass('d-flex')) {
+                    $('.friends-intro-wrapper').removeClass('d-flex').addClass('d-none');
+                    $('.selected-account-details').toggleClass('d-none')
+                }
+                //selected-account-details-img
+
+                let accountId = $('#friendsTab li.active').attr('data-id')
+                $.ajax({
+                    url: '/friends/friendinfos',
+                    type: "POST",
+                    dataType: "json",
+                    data:
+                    {
+                        friendId: accountId
+                    },
+                    success: function (res) {
+                        //img
+                        if (res.profileImg != null) {
+                            $(".selected-account-details-img").attr("src", "https://res.cloudinary.com/djmiksiim/v1/" + res.profileImg)
+                        } else {
+                            $(".selected-account-details-img").attr("src", "/uploads/default-profile-img.jpg")
+                        }
+                        //statusText
+                        if (res.statusText == null) {
+                            document.querySelector(".selected-account-details-statusText").textContent = ""
+                        } else {
+                            document.querySelector(".selected-account-details-statusText").innerHTML = '<i class="fas fa-hashtag" style="font-size:12px;margin-right:4px;" aria-hidden="true"></i>' + res.statusText
+                        }
+                        //website
+                        if (res.website == null) {
+                            document.querySelector(".selected-account-details-website").textContent = ""
+                        } else {
+                            document.querySelector(".selected-account-details-website").textContent = res.website
+                        }
+                        //birthday
+                        if (res.birthday == null) {
+                            document.querySelector(".selected-account-details-birthday").textContent = ""
+                        } else {
+                            document.querySelector(".selected-account-details-birthday").textContent = res.birthday.slice(0, -9);
+                        }
+                        //address
+                        if (res.birthday == null) {
+                            document.querySelector(".selected-account-details-address").textContent = ""
+                        } else {
+                            document.querySelector(".selected-account-details-address").textContent = res.address;
+                        }
+
+                        document.querySelector(".selected-account-details-fullname").textContent = res.name + " " + res.surname;
+                        document.querySelector(".selected-account-details-phone").textContent = res.phone;
+                        document.querySelector(".selected-account-details-email").textContent = res.email;
+
+                        //get social links from db
+                        $.ajax({
+                            url: '/friends/friendsociallinks',
+                            type: "POST",
+                            dataType: "json",
+                            data:
+                            {
+                                friendId: accountId
+                            },
+                            success: function (socialresp) {
+                                //facebook
+                                if (socialresp.facebook == null) {
+                                    document.querySelector(".selected-account-social-facebook").textContent = ""
+                                } else {
+                                    document.querySelector(".selected-account-social-facebook").textContent = socialresp.facebook;
+                                }
+                                //twitter
+                                if (socialresp.twitter == null) {
+                                    document.querySelector(".selected-account-social-twitter").textContent = ""
+                                } else {
+                                    document.querySelector(".selected-account-social-twitter").textContent = socialresp.twitter;
+                                }
+                                //instagram
+                                if (socialresp.instagram == null) {
+                                    document.querySelector(".selected-account-social-instagram").textContent = ""
+                                } else {
+                                    document.querySelector(".selected-account-social-instagram").textContent = socialresp.instagram;
+                                }
+                                //linkedin
+                                if (socialresp.linkedin == null) {
+                                    document.querySelector(".selected-account-social-linkedin").textContent = ""
+                                } else {
+                                    document.querySelector(".selected-account-social-linkedin").textContent = socialresp.linkedin;
+                                }
+
+                            }
+                        })
+                    },
+                    error: function (res) {
+                        $.toast({
+                            heading: 'Error',
+                            text: "System Error 500 ! All Friends Not Response!",
+                            icon: 'error',
+                            loader: true,
+                            bgColor: '#dc3545',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 6000
+                        });
+                    }
+                });
+            });
+        })
+
+        // hide selected account's details
+        if ($('.hide-friend-details').length) {
+            $('.hide-friend-details').click(function (e) {
+                e.preventDefault();
+                if ($('.friends-intro-wrapper').hasClass('d-none')) {
+                    $('.friends-intro-wrapper').removeClass('d-none').addClass('d-flex');
+                    $('.selected-account-details').toggleClass('d-none')
+                    $('#friendsTab li.active').removeClass('active');
+                }
+            })
+        }
     </script>
 </body>
 

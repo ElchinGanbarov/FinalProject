@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "VerifyEmail";
+}
+
+<body class="authentication-page">
+
+    <!-- Main Layout Start -->
+    <div class="main-layout card-bg-1">
+        <div class="container d-flex flex-column">
+            <div class="row no-gutters text-center align-items-center justify-content-center min-vh-100">
+                <div class="col-md-12">
+
+                    <h1 class="font-weight-bold">Your account is Unconfirmed !</h1>
+                    <p style="font-weight: bold">Please, verify your e-mail addres to use messenger application.</p>
+                    <p class="text-dark mb-3">
+                        If you have not received a confirmation message within 15 minutes of the registration process, click to retrieve the confirmation letter again.
+                        <a class="font-weight-semibold" href="/account/signin"> Get a confirmation link</a>.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Main Layout End -->
+    <!-- Javascript Files -->
+
+</body>
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

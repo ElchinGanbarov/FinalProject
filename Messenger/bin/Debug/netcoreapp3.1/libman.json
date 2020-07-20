@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery-toast-plugin@1.3.2",
+      "destination": "wwwroot/lib/jquery-toast-plugin/"
+    },
+    {
+      "library": "limonte-sweetalert2@8.11.8",
+      "destination": "wwwroot/lib/limonte-sweetalert2/",
+      "files": [
+        "sweetalert2.min.css",
+        "sweetalert2.all.min.js"
+      ]
+    },
+    {
+      "library": "jquery-confirm@3.3.4",
+      "destination": "wwwroot/lib/jquery-confirm/"
+    }
+  ]
+}

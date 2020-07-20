@@ -1,0 +1,55 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+    <body class="authentication-page">
+
+        <!-- Main Layout Start -->
+        <div class="main-layout card-bg-1">
+            <div class="container d-flex flex-column">
+                <div class="row no-gutters text-center align-items-center justify-content-center min-vh-100">
+                    <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+                        <h1 class="font-weight-bold">Sign in</h1>
+                        <p class="text-dark mb-3">We are Different, We Make You Different.</p>
+                        <form class="mb-3" method="post">
+                            <div class="form-group" style="text-align:left !important">
+                                <label asp-for="Email" class="sr-only">Email Address</label>
+                                <input asp-for="Email" class="form-control form-control-md" placeholder="Enter your email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" style="text-align:left !important">
+                                <label asp-for="Password" class="sr-only">Password</label>
+                                <input asp-for="Password" class="form-control form-control-md" placeholder="Enter your password">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group d-flex justify-content-between">
+                                <div class="custom-control custom-checkbox">
+                                    <input asp-for="RememberMe" type="checkbox" class="custom-control-input" id="checkbox-remember">
+                                    <label asp-for="RememberMe" class="custom-control-label text-muted font-size-sm" for="checkbox-remember">Remember me</label>
+                                </div>
+                                <a class="font-size-sm" asp-controller="account" asp-action="resetpassword">Reset password</a>
+                            </div>
+                            <button class="btn btn-primary btn-lg btn-block text-uppercase font-weight-semibold" type="submit">Sign in</button>
+                        </form>
+
+                        <p>Don't have an account? <a class="font-weight-semibold" asp-controller="account" asp-action="signup">Sign up</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Layout End -->
+        <!-- Javascript Files -->
+        <script src="~/vendors/jquery/jquery-3.5.0.min.js"></script>
+        <script src="~/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="~/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script src="~/vendors/svg-inject/svg-inject.min.js"></script>
+        <script src="~/vendors/modal-stepes/modal-steps.min.js"></script>
+        <script src="~/lib/jquery-toast-plugin/jquery.toast.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    </body>
+
+
