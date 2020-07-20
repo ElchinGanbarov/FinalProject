@@ -1,15 +1,14 @@
 ﻿using Repository.Data;
 using Repository.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Repository.Repositories.AccountRepository
 {
     public interface IFriendsRepository
     {
         int GetAllFriendsCount(int userId);
+        Account GetFriendById(int friendId);
         ICollection<Account> GetAllFriends(int userId);
     }
     public class FriendsRepository : IFriendsRepository
@@ -61,6 +60,14 @@ namespace Repository.Repositories.AccountRepository
         {
             return _context.Friends.Where(a => a.FromUserId == userId).Count(f => f.IsConfirmed) + 
                 _context.Friends.Where(a => a.ToUserId == userId).Count(f => f.IsConfirmed);
+        }
+
+        public Account GetFriendById(int friendId)
+        {
+            Account account = _context.Accounts.Find(friendId);
+            if (account == null) return null;
+
+            return account;
         }
     }
 }

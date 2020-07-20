@@ -37,5 +37,25 @@ namespace Messenger.Controllers
 
             return Ok(friends);
         }
+
+        [HttpPost]
+        public IActionResult FriendInfos(int friendId)
+        {
+            Account account = _friendsRepository.GetFriendById(friendId);
+            if (account != null)
+            {
+                return Ok(account);
+            };
+            
+            return Ok(StatusCode(404));
+        }
+
+        //testing
+
+        public IActionResult testing()
+        {
+            Account account = _friendsRepository.GetFriendById(9025);
+            return Ok(account);
+        }
     }
 }

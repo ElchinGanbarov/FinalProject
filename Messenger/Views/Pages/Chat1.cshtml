@@ -3260,7 +3260,8 @@
             <!-- Call Log Page End -->
             <!-- Friends Page Start -->
             <div class="friends px-0 py-2 p-xl-3">
-                <div class="d-flex flex-column justify-content-center text-center h-100 w-100">
+                <!--nice to see you-->
+                <div class="friends-intro-wrapper d-flex flex-column justify-content-center text-center h-100 w-100">
                     <div class="container">
                         <div class="avatar avatar-lg mb-2">
                             @if (Model.AccountDetailViewModel.ProfileImg == null)
@@ -3274,22 +3275,23 @@
                         </div>
 
                         <h5>Nice to see you, @Model.AccountDetailViewModel.Name!</h5>
-                        <p class="text-muted friends-intro-text">Click on the account you want to see your profile information.</p>
+                        <p class="text-muted friends-intro-text">Click on the account you want to see profile information.</p>
                     </div>
                 </div>
 
-                <!--Friends Details-->
-                <div class="container-xl friend-details-container d-none">
+                <!--Selected Account's Details-->
+                <div class="selected-account-details container-xl friend-details-container d-none">
                     <div class="row">
                         <div class="col">
                             <div class="card card-body card-bg-1 mb-3">
                                 <div class="d-flex flex-column align-items-center">
+                                    <!--selected account's profile img-->
                                     <div class="avatar avatar-lg mb-3">
-                                        <img class="avatar-img" src="~/media/avatar/3.png" alt="">
+                                        <img class="avatar-img selected-account-details-img" src="~/uploads/default-profile-img.jpg" alt="">
                                     </div>
 
                                     <div class="d-flex flex-column align-items-center">
-                                        <h5 class="mb-1">Catherine Richardson</h5>
+                                        <h5 class="mb-1 selected-account-details-fullname"></h5>
                                         <!-- <p class="text-white rounded px-2 bg-primary">+01-202-265462</p> -->
                                         <div class="d-flex mt-2">
                                             <div class="btn btn-primary btn-icon rounded-circle text-light mx-2">
@@ -3308,7 +3310,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <!--card setting options-->
                                 <div class="card-options">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -3319,12 +3321,10 @@
                                             <!-- <img class="injectable hw-20" src="./~/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Remove</a>
-                                            <a class="dropdown-item" href="#">Block</a>
+                                            <a class="dropdown-item hide-friend-details" href="#">Hide account details</a>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="chat-closer d-xl-none">
                                     <!-- Chat Back Button (Visible only in Small Devices) -->
                                     <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-close="">
@@ -3338,16 +3338,17 @@
                             </div>
                         </div>
                     </div>
-
+                    <!--Select Account's Details-->
                     <div class="row friends-info">
                         <div class="col">
                             <div class="card">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
+                                        <!--???-->
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Local Time</p>
-                                                <p class="mb-0">10:25 PM</p>
+                                                <p class="mb-0 ">10:25 PM</p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -3359,7 +3360,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Birthdate</p>
-                                                <p class="mb-0">20/11/1992</p>
+                                                <p class="mb-0 selected-account-details-birthday"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -3372,7 +3373,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Phone</p>
-                                                <p class="mb-0">+01-222-364522</p>
+                                                <p class="mb-0 selected-account-details-phone"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -3384,7 +3385,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Email</p>
-                                                <p class="mb-0">catherine.richardson@gmail.com</p>
+                                                <p class="mb-0 selected-account-details-email"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -3396,7 +3397,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Website</p>
-                                                <p class="mb-0">www.catherichardson.com</p>
+                                                <p class="mb-0 selected-account-details-website"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -3408,7 +3409,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Address</p>
-                                                <p class="mb-0">1134 Ridder Park Road, San Fransisco, CA 94851</p>
+                                                <p class="mb-0 selected-account-details-address"></p>
                                             </div>
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -4437,7 +4438,6 @@
                                     </li>
                                     <!-- List Group Item End -->
 
-
                                 </ul>
                                 <!-- List Group End -->
                             </div>
@@ -4766,10 +4766,6 @@
                     userId: id
                 },
                 success: function (res) {
-                    //if (res.length != 10) {
-                    //    $(".friends-intro-text").text = "ok"
-                    //}
-
                     for (var i = 0; i < res.length; i++) {
                         let statustext = res[i].statusText;
                         let imgSrc;
@@ -4781,14 +4777,13 @@
                         if (res[i].statusText == null) {
                             statustext = "";
                         }
-
                         //Get Friends List
-                        $("#friendsTab").append('<li class="contacts-item">' + '<a class="contacts-link" href="#">' + '<div class="avatar">' +
+                        $("#friendsTab").append('<li class="contacts-item" data-account-info data-id="' + res[i].id  +'">' + '<a class="contacts-link" href="#">' + '<div class="avatar">' +
                             '<img src="'+ imgSrc +'"/></div>' + //profile img div
                             '<div class="contacts-content">' +
                             '<div class="contacts-info"><h6 class="chat-name text-truncate">' + res[i].name +" "+res[i].surname + //fullname
                             '</h6></div>' + //info div end
-                            '<div class="contacts-texts"><i class="fas fa-hashtag" style="font-size:12px;margin-right:2px;"></i><p class="text-muted mb-0">'
+                            '<div class="contacts-texts"><i class="fas fa-hashtag" style="font-size:12px;margin-right:4px;"></i><p class="text-muted mb-0">'
                             + statustext + '</p></div > ' + //status text end
                             '</div></a></li>'); //end li
                     }
@@ -4807,9 +4802,91 @@
                 }
             });
         })
+    </script>
 
-        //friend - details - container
-        
+    <!--Show/Hide selected accounts's Details-->
+    <script>
+        $(document).ready(function () {
+            $('#friendsTab').on('click', 'li', function (e) {
+                e.preventDefault();
+                $('#friendsTab li.active').removeClass('active');
+                $(this).addClass('active');
+
+                //show selected friend's details
+                if ($('.friends-intro-wrapper').hasClass('d-flex')) {
+                    $('.friends-intro-wrapper').removeClass('d-flex').addClass('d-none');
+                    $('.selected-account-details').toggleClass('d-none')
+                }
+                //selected-account-details-img
+
+                let accountId = $('#friendsTab li.active').attr('data-id')
+                $.ajax({
+                    url: '/friends/friendinfos',
+                    type: "POST",
+                    dataType: "json",
+                    data:
+                    {
+                        friendId: accountId
+                    },
+                    success: function (res) {
+                        //img
+                        if (res.profileImg != null) {
+                            $(".selected-account-details-img").attr("src", "https://res.cloudinary.com/djmiksiim/v1/" + res.profileImg)
+                        } else {
+                            $(".selected-account-details-img").attr("src", "/uploads/default-profile-img.jpg")
+                        }
+                        //website
+                        if (res.website == null) {
+                            document.querySelector(".selected-account-details-website").textContent = ""
+                        } else {
+                            document.querySelector(".selected-account-details-website").textContent = res.website
+                        }
+                        //birthday
+                        if (res.birthday == null) {
+                            document.querySelector(".selected-account-details-birthday").textContent = ""
+                        } else {
+                            document.querySelector(".selected-account-details-birthday").textContent = res.birthday.slice(0, -9);
+                        }
+                        //address
+                        if (res.birthday == null) {
+                            document.querySelector(".selected-account-details-address").textContent = ""
+                        } else {
+                            document.querySelector(".selected-account-details-address").textContent = res.address;
+                        }
+
+                        document.querySelector(".selected-account-details-fullname").textContent = res.name + " " + res.surname;
+                        document.querySelector(".selected-account-details-phone").textContent = res.phone;
+                        document.querySelector(".selected-account-details-email").textContent = res.email;
+
+
+                    },
+                    error: function (res) {
+                        $.toast({
+                            heading: 'Error',
+                            text: "System Error 500 ! All Friends Not Response!",
+                            icon: 'error',
+                            loader: true,
+                            bgColor: '#dc3545',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 6000
+                        });
+                    }
+                });
+            });
+        })
+
+        // hide selected account's details
+        if ($('.hide-friend-details').length) {
+            $('.hide-friend-details').click(function (e) {
+                e.preventDefault();
+                if ($('.friends-intro-wrapper').hasClass('d-none')) {
+                    $('.friends-intro-wrapper').removeClass('d-none').addClass('d-flex');
+                    $('.selected-account-details').toggleClass('d-none')
+                    $('#friendsTab li.active').removeClass('active');
+                }
+            })
+        }
     </script>
 </body>
 

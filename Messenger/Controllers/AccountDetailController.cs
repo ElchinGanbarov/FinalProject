@@ -178,17 +178,5 @@ namespace Messenger.Controllers
         }
         #endregion
         //Privacy & Security End
-
-
-        //testing
-
-        public IActionResult Friends()
-        {
-            //var count = _friendsRepository.GetAllFriendsCount(_user.Id);
-            ICollection<Account> friends = _friendsRepository.GetAllFriends(_user.Id);
-
-
-            return Ok(friends);
-        }
     }
 }
