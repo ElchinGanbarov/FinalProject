@@ -135,7 +135,20 @@ namespace Messenger.Controllers
 
             return Ok(new { status = 200 });
         }
+        [HttpPost]
+        public IActionResult RemovePhotos()
+        {
 
+            if (_user.ProfileImg != null)
+            {
+                _cloudinaryService.Delete(_user.ProfileImg);
+                _accountDetailRepository.DeletePhoto(_user.ProfileImg);
+
+            }
+
+
+            return Ok(new { status = 200 });
+        }
 
         //Privacy & Security Start
         #region Privacy & Security

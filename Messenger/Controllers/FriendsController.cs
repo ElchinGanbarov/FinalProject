@@ -50,6 +50,18 @@ namespace Messenger.Controllers
             return Ok(StatusCode(404));
         }
 
+        [HttpPost]
+        public IActionResult FriendSocialLinks(int friendId)
+        {
+            AccountSocialLink friendsocials = _friendsRepository.GetFriendSocialLinks(friendId);
+            if (friendsocials != null)
+            {
+                return Ok(friendsocials);
+            };
+
+            return Ok(StatusCode(404));
+        }
+
         //testing
 
         public IActionResult testing()
