@@ -3292,7 +3292,7 @@
 
                                     <div class="d-flex flex-column align-items-center">
                                         <h5 class="mb-1 selected-account-details-fullname"></h5>
-                                        <!-- <p class="text-white rounded px-2 bg-primary">+01-202-265462</p> -->
+                                         <p class="text-white rounded px-2 bg-info selected-account-details-statusText"></p> 
                                         <div class="d-flex mt-2">
                                             <div class="btn btn-primary btn-icon rounded-circle text-light mx-2">
                                                 <svg class="hw-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -3343,8 +3343,8 @@
                         <div class="col">
                             <div class="card">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <!--???-->
+                                    <!--???-->
+                                    @*<li class="list-group-item">
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Local Time</p>
@@ -3353,9 +3353,8 @@
                                             <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
-                                            <!-- <img class="injectable text-muted hw-20" src="./~/media/heroicons/outline/clock.svg" alt=""> -->
                                         </div>
-                                    </li>
+                                    </li>*@
                                     <li class="list-group-item">
                                         <div class="media align-items-center">
                                             <div class="media-body">
@@ -3420,14 +3419,14 @@
                                 </ul>
                             </div>
 
-
+                            <!--Selected Account's Social Links-->
                             <div class="card">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Facebook</p>
-                                                <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                <a class="font-size-sm font-weight-medium selected-account-social-facebook" href="#"></a>
                                             </div>
                                             <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -3439,7 +3438,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Twitter</p>
-                                                <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                <a class="font-size-sm font-weight-medium selected-account-social-twitter" href="#"></a>
                                             </div>
                                             <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
@@ -3451,7 +3450,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Instagram</p>
-                                                <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                <a class="font-size-sm font-weight-medium selected-account-social-instagram" href="#"></a>
                                             </div>
                                             <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -3465,7 +3464,7 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <p class="small text-muted mb-0">Linkedin</p>
-                                                <a class="font-size-sm font-weight-medium" href="#">cathe.richardson</a>
+                                                <a class="font-size-sm font-weight-medium selected-account-social-linkedin" href="#"></a>
                                             </div>
                                             <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -4835,6 +4834,12 @@
                         } else {
                             $(".selected-account-details-img").attr("src", "/uploads/default-profile-img.jpg")
                         }
+                        //statusText
+                        if (res.statusText == null) {
+                            document.querySelector(".selected-account-details-statusText").textContent = ""
+                        } else {
+                            document.querySelector(".selected-account-details-statusText").innerHTML = '<i class="fas fa-hashtag" style="font-size:12px;margin-right:4px;" aria-hidden="true"></i>' + res.statusText
+                        }
                         //website
                         if (res.website == null) {
                             document.querySelector(".selected-account-details-website").textContent = ""
@@ -4858,7 +4863,43 @@
                         document.querySelector(".selected-account-details-phone").textContent = res.phone;
                         document.querySelector(".selected-account-details-email").textContent = res.email;
 
+                        //get social links from db
+                        $.ajax({
+                            url: '/friends/friendsociallinks',
+                            type: "POST",
+                            dataType: "json",
+                            data:
+                            {
+                                friendId: accountId
+                            },
+                            success: function (socialresp) {
+                                //facebook
+                                if (socialresp.facebook == null) {
+                                    document.querySelector(".selected-account-social-facebook").textContent = ""
+                                } else {
+                                    document.querySelector(".selected-account-social-facebook").textContent = socialresp.facebook;
+                                }
+                                //twitter
+                                if (socialresp.twitter == null) {
+                                    document.querySelector(".selected-account-social-twitter").textContent = ""
+                                } else {
+                                    document.querySelector(".selected-account-social-twitter").textContent = socialresp.twitter;
+                                }
+                                //instagram
+                                if (socialresp.instagram == null) {
+                                    document.querySelector(".selected-account-social-instagram").textContent = ""
+                                } else {
+                                    document.querySelector(".selected-account-social-instagram").textContent = socialresp.instagram;
+                                }
+                                //linkedin
+                                if (socialresp.linkedin == null) {
+                                    document.querySelector(".selected-account-social-linkedin").textContent = ""
+                                } else {
+                                    document.querySelector(".selected-account-social-linkedin").textContent = socialresp.linkedin;
+                                }
 
+                            }
+                        })
                     },
                     error: function (res) {
                         $.toast({

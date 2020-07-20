@@ -9,6 +9,7 @@ namespace Repository.Repositories.AccountRepository
     {
         int GetAllFriendsCount(int userId);
         Account GetFriendById(int friendId);
+        AccountSocialLink GetFriendSocialLinks(int friendId);
         ICollection<Account> GetAllFriends(int userId);
     }
     public class FriendsRepository : IFriendsRepository
@@ -68,6 +69,13 @@ namespace Repository.Repositories.AccountRepository
             if (account == null) return null;
 
             return account;
+        }
+
+        public AccountSocialLink GetFriendSocialLinks(int friendId)
+        {
+            AccountSocialLink socialLinks = _context.AccountSocialLinks.FirstOrDefault(f => f.AccountId == friendId);
+            
+            return socialLinks;
         }
     }
 }
