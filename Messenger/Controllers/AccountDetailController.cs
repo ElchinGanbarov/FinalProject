@@ -105,9 +105,13 @@ namespace Messenger.Controllers
             
             var publicId = _cloudinaryService.Store(filename);
             _fileManager.Delete(filename);
-          
-            _accountDetailRepository.ProfileImgUpload(_user.Id, publicId);
+            if(_user.ProfileImg != null)
+            {
+                _cloudinaryService.Delete(_user.ProfileImg);
 
+            }
+            _accountDetailRepository.ProfileImgUpload(_user.Id, publicId);
+        
 
 
             return Ok(new
@@ -131,7 +135,8 @@ namespace Messenger.Controllers
 
             return Ok(new { status = 200 });
         }
-    
+
+
         //Privacy & Security Start
         #region Privacy & Security
 
