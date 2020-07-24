@@ -2,12 +2,15 @@
 using Repository.Data;
 using Repository.Models;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Repository.Repositories.AccountRepository
 {
     public interface IAccountDetailRepository
     {
-        AccountSocialLink GetAccountSocialLink(int id);
+        Account GetPublicDatas(int accountId);
+        AccountSocialLink GetAccountSocialLink(int id); //private friends
+        AccountSocialLink GetPublicSocialLinks(int id); //public
         AccountPrivacy GetAccountPrivacy(int id);
         AccountSecurity GetAccountSecurity(int id);
         AccountSocialLink GetByAccountId(int id);
@@ -24,9 +27,91 @@ namespace Repository.Repositories.AccountRepository
         {
             _context = context;
         }
+
+        public Account GetPublicDatas(int accountId)
+        {
+            Account account = _context.Accounts.Find(accountId);
+            AccountPrivacy accountPrivacy = _context.AccountPrivacies.FirstOrDefault(p => p.AccountId == account.Id);
+            
+            if (accountPrivacy != null)
+            {
+                if (accountPrivacy.Address == false)
+                {
+                    account.Address = null;
+                }
+                if (accountPrivacy.Birthday == false)
+                {
+                    account.Birthday = null;
+                }
+                if (accountPrivacy.Phone == false)
+                {
+                    account.Phone = null;
+                }
+                if (accountPrivacy.ProfileImg == false)
+                {
+                    account.ProfileImg = null;
+                }
+                if (accountPrivacy.StatusText == false)
+                {
+                    account.StatusText = null;
+                }
+                //if (accountPrivacy.SocialLink == false)
+                //{
+                //    account.AccountSocialLinks.Clear();
+                //}
+                //if (accountPrivacy.AcceptAllMessages == false) //PROBLEM!!!
+                //{
+                //    account.AccountSocialLinks.Clear();
+                //}
+
+                Account resultAccount = new Account
+                {
+                    Id = account.Id,
+                    Status = account.Status,
+                    AddedDate = account.AddedDate,
+                    ModifiedDate = account.ModifiedDate,
+                    AddedBy = account.AddedBy,
+                    ModifiedBy = account.ModifiedBy,
+                    Name = account.Name,
+                    Surname = account.Surname,
+                    IsEmailVerified = account.IsEmailVerified,
+                    Email = account.Email, //email is static public
+                    Website = account.Website, //email is static public
+                    Address = account.Address, //privacy
+                    Birthday = account.Birthday, //privacy
+                    Phone = account.Phone, //privacy
+                    ProfileImg = account.ProfileImg, //privacy
+                    StatusText = account.StatusText, //privacy
+                    AccountSocialLinks = account.AccountSocialLinks, //privacy
+                };
+
+                return resultAccount;
+            }
+            return null;
+        }
         public AccountSocialLink GetAccountSocialLink(int id)
         {
             return _context.AccountSocialLinks.Include(a => a.Account).FirstOrDefault(a => a.AccountId == id);
+        }
+
+        public AccountSocialLink GetPublicSocialLinks(int id)
+        {
+            Account account = _context.Accounts.Find(id);
+            AccountPrivacy accountPrivacy = _context.AccountPrivacies.FirstOrDefault(p => p.AccountId == account.Id);
+            AccountSocialLink accountSocial = _context.AccountSocialLinks.FirstOrDefault(s => s.AccountId == account.Id);
+            if (accountPrivacy.SocialLink)
+            {
+                return accountSocial;
+            }
+            else
+            {
+                accountSocial.Facebook = null;
+                accountSocial.Twitter = null;
+                accountSocial.Instagram = null;
+                accountSocial.Linkedin = null;
+
+                return accountSocial;
+            }
         }
         public AccountPrivacy GetAccountPrivacy(int id)
         {
@@ -74,8 +159,6 @@ namespace Repository.Repositories.AccountRepository
                 _context.SaveChanges();
             }
         }
-
-
 
         public void UpdateSecurity(int accountId, bool tfa, bool loginAlerts)
         {

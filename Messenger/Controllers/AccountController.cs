@@ -20,17 +20,20 @@ namespace Messenger.Controllers
         private readonly IAuthRepository _authRepository;
         private readonly ISendEmail _emailService;
         private readonly IAccountDetailRepository _accountDetailRepository;
+        private readonly IFriendsRepository _friendsRepository;
 
 
         public AccountController(IMapper mapper,
                                  IAuthRepository authRepository,
                                  ISendEmail sendEmail,
-                                 IAccountDetailRepository accountDetailRepository)
+                                 IAccountDetailRepository accountDetailRepository,
+                                 IFriendsRepository friendsRepository)
         {
             _mapper = mapper;
             _authRepository = authRepository;
             _emailService = sendEmail;
             _accountDetailRepository = accountDetailRepository;
+            _friendsRepository = friendsRepository;
         }
 
         //SignUp; SignIn; Logout Start
@@ -347,6 +350,23 @@ namespace Messenger.Controllers
         #endregion
         //VerifyEmail, UnVerified, CheckEmailAddress, CheckForgetCode Start
 
-        
+        [HttpPost]
+        public IActionResult GetAccountDatas(int currentAccountId, int searchedAccountId)
+        {
+            Account searchedAccount = _authRepository.GetById(searchedAccountId);
+            if (searchedAccount == null) return null;
+            if (currentAccountId == searchedAccountId) //search & view own profile
+            {
+                return Ok(_friendsRepository.GetFriendById(searchedAccountId));
+            } 
+            if (_friendsRepository.IsFriends(currentAccountId, searchedAccountId))
+            {
+                return Ok(_friendsRepository.GetFriendById(searchedAccountId));
+            }
+            else
+            {
+                return Ok(_accountDetailRepository.GetPublicDatas(searchedAccountId));
+            }
+        }
     }
 }

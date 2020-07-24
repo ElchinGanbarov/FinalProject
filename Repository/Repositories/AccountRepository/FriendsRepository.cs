@@ -1,16 +1,20 @@
 ﻿using Repository.Data;
 using Repository.Models;
+using Repository.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Repository.Repositories.AccountRepository
 {
     public interface IFriendsRepository
     {
         int GetAllFriendsCount(int userId);
+        bool IsFriends(int currentAccountId, int searchedAccountId);
         Account GetFriendById(int friendId);
         AccountSocialLink GetFriendSocialLinks(int friendId);
         ICollection<Account> GetAllFriends(int userId);
+        ICollection<SearchAccount> SearchByName(string term);
     }
     public class FriendsRepository : IFriendsRepository
     {
@@ -57,6 +61,19 @@ namespace Repository.Repositories.AccountRepository
             return friendAccounts;
         }
 
+        public bool IsFriends(int currentAccountId, int searchedAccountId)
+        {
+            Friend friendship = _context.Friends.FirstOrDefault(f => (f.FromUserId == currentAccountId && f.ToUserId == searchedAccountId)
+                                                                 || f.FromUserId == searchedAccountId && f.ToUserId == currentAccountId);
+
+            if (friendship != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public int GetAllFriendsCount(int userId)
         {
             return _context.Friends.Where(a => a.FromUserId == userId).Count(f => f.IsConfirmed) + 
@@ -76,6 +93,27 @@ namespace Repository.Repositories.AccountRepository
             AccountSocialLink socialLinks = _context.AccountSocialLinks.FirstOrDefault(f => f.AccountId == friendId);
             
             return socialLinks;
+        }
+
+        public ICollection<SearchAccount> SearchByName(string term)
+        {
+            List<SearchAccount> results = new List<SearchAccount>();
+
+            ICollection<Account> accounts = _context.Accounts.Where(a => a.Name.Contains(term) || a.Surname.Contains(term))
+                                                             //.Select(a => a.Name + " " + a.Surname)
+                                                             .ToList();
+
+            foreach (var item in accounts)
+            {
+                SearchAccount searchItem = new SearchAccount();
+                searchItem.Label = item.Name + " " + item.Surname;
+                searchItem.Id = item.Id;
+                searchItem.Img = item.ProfileImg;
+
+                results.Add(searchItem);
+            }
+
+            return results;
         }
     }
 }

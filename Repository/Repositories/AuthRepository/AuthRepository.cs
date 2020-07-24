@@ -12,6 +12,7 @@ namespace Repository.Repositories.AuthRepositories
         Account Login(string email, string password);
         Account CheckByToken(string token);
         Account GetByEmail(string email);
+        Account GetById(int id);
         Account GetByForgetToken(string forgetToken);
         void UpdateToken(int id, string token);
         bool CheckEmail(string email);
@@ -32,6 +33,13 @@ namespace Repository.Repositories.AuthRepositories
         {
             _context = context;
         }
+
+        //get account by id
+        public Account GetById(int id)
+        {
+            return _context.Accounts.Find(id);
+        }
+
         public Account CheckByToken(string token)
         {
             return _context.Accounts.FirstOrDefault(u => u.Token == token);

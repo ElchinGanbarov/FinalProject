@@ -795,7 +795,9 @@
                                     <!-- Sidebar Search Start -->
                                     <form class="form-inline">
                                         <div class="input-group w-100">
-                                            <input type="text" class="form-control search border-right-0 transparent-bg pr-0" placeholder="Search users...">
+                                            <input type="hidden" id="hidden-search-id" value="" />
+                                            <input type="text" id="search-accounts-input"
+                                                   class="form-control search border-right-0 transparent-bg pr-0" placeholder="Search users...">
                                             <div class="input-group-append">
                                                 <div class="input-group-text transparent-bg border-left-0" role="button">
                                                     <!-- Default :: Inline SVG -->
@@ -3506,6 +3508,9 @@
                             <!--Account Information-->
                             <div class="card mb-3">
                                 <form method="post" class="accountchange" asp-controller="accountdetail" asp-action="update">
+
+                                    <input type="hidden" id="hidden-account-id" value="@Model.AccountDetailViewModel.Id" />
+
                                     <div class="card-header">
                                         <h6 class="mb-1">Account</h6>
                                         <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
@@ -4463,8 +4468,9 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/jquery-confirm/jquery-confirm.min.js"></script>
+    <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
 
-    <script src="~/js/main.js"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
 
     <script>
         // Scroll to end of chat
@@ -4693,10 +4699,8 @@
     <!--Update Security-->
     <script>
         $(document).on("submit", ".update-account-security", function (e) {
-
             let TFA = $("#security-tfa").prop("checked");
             let LoginAlerts = $("#security-login-alerts").prop("checked");
-
             $.ajax({
                 url: '/accountdetail/updatesecurity',
                 type: "POST",
@@ -4706,7 +4710,6 @@
                     twoFactoryAuth: TFA,
                     loginAlerts: LoginAlerts
                 },
-
                 success: function (res) {
                     if (res.status) {
                         $.toast({
@@ -4929,5 +4932,6 @@
             })
         }
     </script>
-</body>
 
+
+</body>
