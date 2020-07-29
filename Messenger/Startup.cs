@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Repository.Data;
 using Repository.Repositories.AccountRepository;
 using Repository.Repositories.AuthRepositories;
+using Repository.Repositories.SearchRepository;
 using Repository.Services;
 
 namespace Messenger
@@ -43,6 +44,8 @@ namespace Messenger
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IFileManager, FileManager>();
             services.AddTransient<ISendEmail, SendEmail>();  //For send email service
+            services.AddTransient<ISearchRepository, SearchRepository>();  
+
             services.AddTransient<IFriendsRepository, FriendsRepository>();  //testing
         }
 

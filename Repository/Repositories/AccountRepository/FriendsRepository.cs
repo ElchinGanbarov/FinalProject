@@ -106,7 +106,7 @@ namespace Repository.Repositories.AccountRepository
             foreach (var item in accounts)
             {
                 SearchAccount searchItem = new SearchAccount();
-                searchItem.Label = item.Name + " " + item.Surname;
+                //searchItem.Label = item.Name + " " + item.Surname;
                 searchItem.Id = item.Id;
                 searchItem.Img = item.ProfileImg;
 

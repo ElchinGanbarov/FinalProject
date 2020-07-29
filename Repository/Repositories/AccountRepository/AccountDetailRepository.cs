@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Data;
 using Repository.Models;
+using Repository.Services;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 
@@ -8,7 +9,8 @@ namespace Repository.Repositories.AccountRepository
 {
     public interface IAccountDetailRepository
     {
-        Account GetPublicDatas(int accountId);
+        SearchAccount GetDatasPublic(int accountId);
+        SearchAccount GetDatasFriend(int friendId);
         AccountSocialLink GetAccountSocialLink(int id); //private friends
         AccountSocialLink GetPublicSocialLinks(int id); //public
         AccountPrivacy GetAccountPrivacy(int id);
@@ -28,64 +30,126 @@ namespace Repository.Repositories.AccountRepository
             _context = context;
         }
 
-        public Account GetPublicDatas(int accountId)
+        public SearchAccount GetDatasFriend(int friendId)
+        {
+            Account friend = _context.Accounts.Find(friendId);
+
+            if (friend != null)
+            {
+                SearchAccount searchItem = new SearchAccount(); //result model
+
+                searchItem.Id = friend.Id;
+                searchItem.Label = friend.Fullname;
+                searchItem.Img = friend.ProfileImg;
+                searchItem.Email = friend.Email;
+                searchItem.Phone = friend.Phone;
+                searchItem.Birthday = friend.Birthday;
+                searchItem.Address = friend.Address;
+                searchItem.Website = friend.Website;
+                searchItem.StatusText = friend.StatusText;
+
+                AccountSocialLink accountSocials = _context.AccountSocialLinks.FirstOrDefault(a => a.AccountId == friendId);
+
+                searchItem.Facebook = accountSocials.Facebook;
+                searchItem.Twitter = accountSocials.Twitter;
+                searchItem.Instagram = accountSocials.Instagram;
+                searchItem.Linkedin = accountSocials.Linkedin;
+
+                return searchItem;
+            }
+
+            return null;
+        }
+
+        public SearchAccount GetDatasPublic(int accountId)
         {
             Account account = _context.Accounts.Find(accountId);
             AccountPrivacy accountPrivacy = _context.AccountPrivacies.FirstOrDefault(p => p.AccountId == account.Id);
             
             if (accountPrivacy != null)
             {
+                SearchAccount searchItem = new SearchAccount();
+                //id
+                searchItem.Id = account.Id;
+                //fullname
+                searchItem.Label = account.Fullname;
+                //address
                 if (accountPrivacy.Address == false)
                 {
-                    account.Address = null;
+                    searchItem.Address = null;
                 }
+                else
+                {
+                    searchItem.Address = account.Address;
+                }
+                //website
+                if (accountPrivacy.Website == false)
+                {
+                    searchItem.Website = null;
+                }
+                else
+                {
+                    searchItem.Website = account.Website;
+                }
+                //birthday
                 if (accountPrivacy.Birthday == false)
                 {
-                    account.Birthday = null;
+                    searchItem.Birthday = null;
                 }
+                else
+                {
+                    searchItem.Birthday = account.Birthday;
+                }
+                //phone
                 if (accountPrivacy.Phone == false)
                 {
-                    account.Phone = null;
+                    searchItem.Phone = null;
                 }
+                else
+                {
+                    searchItem.Phone = account.Phone;
+                }
+                //profile img
                 if (accountPrivacy.ProfileImg == false)
                 {
-                    account.ProfileImg = null;
+                    searchItem.Img = null;
                 }
+                else
+                {
+                    searchItem.Img = account.ProfileImg;
+                }
+                //status text
                 if (accountPrivacy.StatusText == false)
                 {
-                    account.StatusText = null;
+                    searchItem.StatusText = null;
                 }
-                //if (accountPrivacy.SocialLink == false)
-                //{
-                //    account.AccountSocialLinks.Clear();
-                //}
+                else
+                {
+                    searchItem.StatusText = account.StatusText;
+                }
+                //social links
+                if (accountPrivacy.SocialLink == false)
+                {
+                    searchItem.Facebook = null;
+                    searchItem.Twitter = null;
+                    searchItem.Instagram = null;
+                    searchItem.Linkedin = null;
+                }
+                else
+                {
+                    AccountSocialLink accountSocials = _context.AccountSocialLinks.FirstOrDefault(a => a.AccountId == accountId);
+
+                    searchItem.Facebook = accountSocials.Facebook;
+                    searchItem.Twitter = accountSocials.Twitter;
+                    searchItem.Instagram = accountSocials.Instagram;
+                    searchItem.Linkedin = accountSocials.Linkedin;
+                }
                 //if (accountPrivacy.AcceptAllMessages == false) //PROBLEM!!!
                 //{
-                //    account.AccountSocialLinks.Clear();
+                //    
                 //}
 
-                Account resultAccount = new Account
-                {
-                    Id = account.Id,
-                    Status = account.Status,
-                    AddedDate = account.AddedDate,
-                    ModifiedDate = account.ModifiedDate,
-                    AddedBy = account.AddedBy,
-                    ModifiedBy = account.ModifiedBy,
-                    Name = account.Name,
-                    Surname = account.Surname,
-                    IsEmailVerified = account.IsEmailVerified,
-                    Email = account.Email, //email is static public
-                    Website = account.Website, //email is static public
-                    Address = account.Address, //privacy
-                    Birthday = account.Birthday, //privacy
-                    Phone = account.Phone, //privacy
-                    ProfileImg = account.ProfileImg, //privacy
-                    StatusText = account.StatusText, //privacy
-                    AccountSocialLinks = account.AccountSocialLinks, //privacy
-                };
-
-                return resultAccount;
+                return searchItem;
             }
             return null;
         }

@@ -12,6 +12,8 @@ namespace Repository.Models
         [Required]
         [MaxLength(50)]
         public string Surname { get; set; }
+        [MaxLength(101)]
+        public string Fullname { get; set; }
         [Required]
         [MaxLength(50)]
         public string Email { get; set; }

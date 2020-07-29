@@ -145,7 +145,9 @@
     $(document).ready(function () {
 
         $("#search-accounts-input").autocomplete({
-            source: '/api/friendapi/searchaccount',
+            //source: '/api/searchapi/searchaccount',
+            source: '/friends/searchaccount',
+
             minLength: 2,
             select: function (event, ui) {
                 event.preventDefault();
@@ -202,8 +204,8 @@
             },
             success: function (res) {
                 //img
-                if (res.profileImg != null) {
-                    $(".selected-account-details-img").attr("src", "https://res.cloudinary.com/djmiksiim/v1/" + res.profileImg)
+                if (res.img != null) {
+                    $(".selected-account-details-img").attr("src", "https://res.cloudinary.com/djmiksiim/v1/" + res.img)
                 } else {
                     $(".selected-account-details-img").attr("src", "/uploads/default-profile-img.jpg")
                 }
@@ -232,47 +234,32 @@
                     document.querySelector(".selected-account-details-address").textContent = res.address;
                 }
 
-                document.querySelector(".selected-account-details-fullname").textContent = res.name + " " + res.surname;
+                document.querySelector(".selected-account-details-fullname").textContent = res.label; //fullname
                 document.querySelector(".selected-account-details-phone").textContent = res.phone;
                 document.querySelector(".selected-account-details-email").textContent = res.email;
 
-                //get social links from db
-                //$.ajax({
-                //    url: '/friends/friendsociallinks',
-                //    type: "POST",
-                //    dataType: "json",
-                //    data:
-                //    {
-                //        friendId: accountId
-                //    },
-                //    success: function (socialresp) {
-                //        //facebook
-                //        if (socialresp.facebook == null) {
-                //            document.querySelector(".selected-account-social-facebook").textContent = ""
-                //        } else {
-                //            document.querySelector(".selected-account-social-facebook").textContent = socialresp.facebook;
-                //        }
-                //        //twitter
-                //        if (socialresp.twitter == null) {
-                //            document.querySelector(".selected-account-social-twitter").textContent = ""
-                //        } else {
-                //            document.querySelector(".selected-account-social-twitter").textContent = socialresp.twitter;
-                //        }
-                //        //instagram
-                //        if (socialresp.instagram == null) {
-                //            document.querySelector(".selected-account-social-instagram").textContent = ""
-                //        } else {
-                //            document.querySelector(".selected-account-social-instagram").textContent = socialresp.instagram;
-                //        }
-                //        //linkedin
-                //        if (socialresp.linkedin == null) {
-                //            document.querySelector(".selected-account-social-linkedin").textContent = ""
-                //        } else {
-                //            document.querySelector(".selected-account-social-linkedin").textContent = socialresp.linkedin;
-                //        }
-
-                //    }
-                //})
+                //socials start
+                if (res.facebook == null) {
+                    document.querySelector(".selected-account-social-facebook").textContent = ""
+                } else {
+                    document.querySelector(".selected-account-social-facebook").textContent = res.facebook;
+                }
+                if (res.twitter == null) {
+                    document.querySelector(".selected-account-social-twitter").textContent = ""
+                } else {
+                    document.querySelector(".selected-account-social-twitter").textContent = res.twitter;
+                }
+                if (res.instagram == null) {
+                    document.querySelector(".selected-account-social-instagram").textContent = ""
+                } else {
+                    document.querySelector(".selected-account-social-instagram").textContent = res.instagram;
+                }
+                if (res.linkedin == null) {
+                    document.querySelector(".selected-account-social-linkedin").textContent = ""
+                } else {
+                    document.querySelector(".selected-account-social-linkedin").textContent = res.linkedin;
+                }
+                //socials end
             },
             error: function (res) {
                 $.toast({

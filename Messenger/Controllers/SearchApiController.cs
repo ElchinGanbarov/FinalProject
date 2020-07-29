@@ -5,31 +5,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Repositories.AccountRepository;
+using Repository.Repositories.SearchRepository;
 
 namespace Messenger.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FriendApiController : ControllerBase
+    public class SearchApiController : ControllerBase
     {
-        private readonly IFriendsRepository _friendsRepository;
-        private Repository.Models.Account _user => RouteData.Values["User"] as Repository.Models.Account;
+        private readonly ISearchRepository _searchRepository;
 
-
-        public FriendApiController(IFriendsRepository friendsRepository)
+        public SearchApiController(ISearchRepository searchRepository)
         {
-            _friendsRepository = friendsRepository;
+            _searchRepository = searchRepository;
         }
 
         [Produces("application/json")]
         [HttpGet("searchaccount")]
-        public async Task<IActionResult> SearchAccount()
+        public async Task<IActionResult> SearchAccount(int currentUserId)
         {
             try
             {
                 string term = HttpContext.Request.Query["term"].ToString();
-                var accouns = _friendsRepository.SearchByName(term);
-                return Ok(accouns);
+                var results = _searchRepository.SearchAccounts(currentUserId, term);
+                return Ok(results);
             }
             catch
             {

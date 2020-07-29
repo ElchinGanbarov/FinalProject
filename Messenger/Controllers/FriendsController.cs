@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AccountRepository;
 using Repository.Repositories.AuthRepositories;
+using Repository.Repositories.SearchRepository;
 
 namespace Messenger.Controllers
 {
@@ -17,17 +18,20 @@ namespace Messenger.Controllers
         private readonly IAuthRepository _authRepository;
         private readonly IMapper _mapper;
         private readonly IFriendsRepository _friendsRepository;
+        private readonly ISearchRepository _searchRepository;
         private Repository.Models.Account _user => RouteData.Values["User"] as Repository.Models.Account;
 
 
         public FriendsController(IAuthRepository authRepository,
                                        IMapper mapper,
                                        IAccountDetailRepository accountDetailRepository,
-                                       IFriendsRepository friendsRepository)
+                                       IFriendsRepository friendsRepository,
+                                       ISearchRepository searchRepository)
         {
             _authRepository = authRepository;
             _mapper = mapper;
             _friendsRepository = friendsRepository;
+            _searchRepository = searchRepository;
         }
 
         [HttpPost]
@@ -68,6 +72,21 @@ namespace Messenger.Controllers
         {
             Account account = _friendsRepository.GetFriendById(9025);
             return Ok(account);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchAccount()
+        {
+            try
+            {
+                string term = HttpContext.Request.Query["term"].ToString();
+                var results = _searchRepository.SearchAccounts(_user.Id, term);
+                return Ok(results);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }
