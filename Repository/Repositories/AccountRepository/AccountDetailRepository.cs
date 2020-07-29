@@ -73,6 +73,8 @@ namespace Repository.Repositories.AccountRepository
                 searchItem.Id = account.Id;
                 //fullname
                 searchItem.Label = account.Fullname;
+                //email
+                searchItem.Email = account.Email; // static public
                 //address
                 if (accountPrivacy.Address == false)
                 {

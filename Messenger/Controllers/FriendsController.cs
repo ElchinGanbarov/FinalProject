@@ -16,6 +16,7 @@ namespace Messenger.Controllers
     public class FriendsController : Controller
     {
         private readonly IAuthRepository _authRepository;
+        private readonly IAccountDetailRepository _accountDetailRepository;
         private readonly IMapper _mapper;
         private readonly IFriendsRepository _friendsRepository;
         private readonly ISearchRepository _searchRepository;
@@ -29,6 +30,7 @@ namespace Messenger.Controllers
                                        ISearchRepository searchRepository)
         {
             _authRepository = authRepository;
+            _accountDetailRepository = accountDetailRepository;
             _mapper = mapper;
             _friendsRepository = friendsRepository;
             _searchRepository = searchRepository;
@@ -43,15 +45,11 @@ namespace Messenger.Controllers
         }
 
         [HttpPost]
-        public IActionResult FriendInfos(int friendId)
+        public IActionResult GetFriendInfo(int friendId)
         {
-            Account account = _friendsRepository.GetFriendById(friendId);
-            if (account != null)
-            {
-                return Ok(account);
-            };
-            
-            return Ok(StatusCode(404));
+            return Ok(_accountDetailRepository.GetDatasFriend(friendId));
+
+            //return Ok(StatusCode(404));
         }
 
         [HttpPost]

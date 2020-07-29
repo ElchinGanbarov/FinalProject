@@ -351,50 +351,24 @@ namespace Messenger.Controllers
         #endregion
         //VerifyEmail, UnVerified, CheckEmailAddress, CheckForgetCode Start
 
-        //[HttpPost]
+        [HttpPost]
         public IActionResult GetAccountDatas(int currentAccountId, int searchedAccountId)
         {
-            //Account searchedAccount = _authRepository.GetById(searchedAccountId);
-            //if (searchedAccount == null) return null;
-            //if (currentAccountId == searchedAccountId) //search & view own profile
-            //{
-            //    return Ok(_friendsRepository.GetFriendById(searchedAccountId));
-            //} 
-            //if (_friendsRepository.IsFriends(currentAccountId, searchedAccountId))
-            //{
-            //    return Ok(_friendsRepository.GetFriendById(searchedAccountId));
-            //}
-            //else
-            //{
-            //    return Ok(_accountDetailRepository.GetDatasPublic(searchedAccountId));
-            //}
-
-            List<SearchAccount> results = new List<SearchAccount>();
-
-
-            if (_friendsRepository.IsFriends(currentAccountId, searchedAccountId))
+            if (currentAccountId != searchedAccountId)
             {
-                //SearchAccount searchItem = _accountDetailRepository.GetDatasFriend(searchedAccountId);
-                //if (searchItem != null)
-                //{
-                //    results.Add(searchItem);
-                //}
-
+                if (_friendsRepository.IsFriends(currentAccountId, searchedAccountId)) //friends true
+                {
+                    return Ok(_accountDetailRepository.GetDatasFriend(searchedAccountId));
+                }
+                else //not friends
+                {
+                    return Ok(_accountDetailRepository.GetDatasPublic(searchedAccountId));
+                }
+            }
+            else //view own profile
+            {
                 return Ok(_accountDetailRepository.GetDatasFriend(searchedAccountId));
             }
-            else //not friends
-            {
-                //SearchAccount searchItem = _accountDetailRepository.GetDatasPublic(searchedAccountId);
-                //if (searchItem != null)
-                //{
-                //    results.Add(searchItem);
-                //}
-
-                return Ok(_accountDetailRepository.GetDatasPublic(searchedAccountId));
-
-            }
-
-            //return Ok(results);
         }
     }
 }
