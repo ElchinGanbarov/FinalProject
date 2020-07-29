@@ -367,7 +367,7 @@ namespace Messenger.Controllers
             }
             else //view own profile
             {
-                return Ok(_accountDetailRepository.GetDatasFriend(searchedAccountId));
+                return Ok(_accountDetailRepository.GetDatasOwn(searchedAccountId));
             }
         }
     }

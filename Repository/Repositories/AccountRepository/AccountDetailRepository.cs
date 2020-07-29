@@ -11,6 +11,7 @@ namespace Repository.Repositories.AccountRepository
     {
         SearchAccount GetDatasPublic(int accountId);
         SearchAccount GetDatasFriend(int friendId);
+        SearchAccount GetDatasOwn(int accountId);
         AccountSocialLink GetAccountSocialLink(int id); //private friends
         AccountSocialLink GetPublicSocialLinks(int id); //public
         AccountPrivacy GetAccountPrivacy(int id);
@@ -39,6 +40,7 @@ namespace Repository.Repositories.AccountRepository
                 SearchAccount searchItem = new SearchAccount(); //result model
 
                 searchItem.Id = friend.Id;
+                searchItem.Friendship = SearchAccountFriendship.Friends;
                 searchItem.Label = friend.Fullname;
                 searchItem.Img = friend.ProfileImg;
                 searchItem.Email = friend.Email;
@@ -73,6 +75,8 @@ namespace Repository.Repositories.AccountRepository
                 searchItem.Id = account.Id;
                 //fullname
                 searchItem.Label = account.Fullname;
+                //friendship
+                searchItem.Friendship = SearchAccountFriendship.NotFriend;
                 //email
                 searchItem.Email = account.Email; // static public
                 //address
@@ -155,6 +159,38 @@ namespace Repository.Repositories.AccountRepository
             }
             return null;
         }
+        public SearchAccount GetDatasOwn(int accountId)
+        {
+            Account account = _context.Accounts.Find(accountId);
+
+            if (account != null)
+            {
+                SearchAccount searchItem = new SearchAccount(); //result model
+
+                searchItem.Id = account.Id;
+                searchItem.Friendship = SearchAccountFriendship.OwnProfile;
+                searchItem.Label = account.Fullname;
+                searchItem.Img = account.ProfileImg;
+                searchItem.Email = account.Email;
+                searchItem.Phone = account.Phone;
+                searchItem.Birthday = account.Birthday;
+                searchItem.Address = account.Address;
+                searchItem.Website = account.Website;
+                searchItem.StatusText = account.StatusText;
+
+                AccountSocialLink accountSocials = _context.AccountSocialLinks.FirstOrDefault(a => a.AccountId == account.Id);
+
+                searchItem.Facebook = accountSocials.Facebook;
+                searchItem.Twitter = accountSocials.Twitter;
+                searchItem.Instagram = accountSocials.Instagram;
+                searchItem.Linkedin = accountSocials.Linkedin;
+
+                return searchItem;
+            }
+
+            return null;
+        }
+
         public AccountSocialLink GetAccountSocialLink(int id)
         {
             return _context.AccountSocialLinks.Include(a => a.Account).FirstOrDefault(a => a.AccountId == id);

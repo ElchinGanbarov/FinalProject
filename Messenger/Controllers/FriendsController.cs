@@ -68,8 +68,10 @@ namespace Messenger.Controllers
 
         public IActionResult testing()
         {
-            Account account = _friendsRepository.GetFriendById(9025);
-            return Ok(account);
+            //Account account = _friendsRepository.GetFriendById(9025);
+            //return Ok(account);
+
+            return Ok(_accountDetailRepository.GetDatasOwn(3024));
         }
 
         [HttpGet]

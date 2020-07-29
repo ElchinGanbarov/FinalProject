@@ -203,6 +203,42 @@
                 searchedAccountId: selectedUserId
             },
             success: function (res) {
+                let btnSendFriendRequest = $('.btn-send-friend-request');
+                let btnRemoveFriend = $('.btn-remove-friend');
+                //view public profile
+                if (res.friendship == 2) {
+                    if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
+                        $('.account-proccess-wrapper').addClass('d-flex');
+                    }
+                    if (btnSendFriendRequest.hasClass('d-none')) {
+                        btnSendFriendRequest.removeClass('d-none')
+                    }
+                    if (btnRemoveFriend.hasClass('d-none') == false) {
+                        btnRemoveFriend.addClass('d-none')
+                    }
+                }
+                //view friend's profile
+                if (res.friendship == 1) 
+                {
+                    if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
+                        $('.account-proccess-wrapper').addClass('d-flex');
+                    }
+                    if (btnSendFriendRequest.hasClass('d-none') == false) {
+                        btnSendFriendRequest.addClass('d-none')
+                    }
+                    if (btnRemoveFriend.hasClass('d-none')) {
+                        btnRemoveFriend.removeClass('d-none')
+                    }
+                }
+                //view own profile
+                if (res.friendship == 0) 
+                {
+                    if ($('.account-proccess-wrapper').hasClass('d-flex')) {
+                        $('.account-proccess-wrapper').removeClass('d-flex');
+                        $('.account-proccess-wrapper').addClass('d-none');
+                    }
+                }
+
                 //img
                 if (res.img != null) {
                     $(".selected-account-details-img").attr("src", "https://res.cloudinary.com/djmiksiim/v1/" + res.img)

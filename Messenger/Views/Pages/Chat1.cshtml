@@ -3298,7 +3298,7 @@
                                         <!--account's status text-->
                                         <p class="text-white rounded px-2 bg-info selected-account-details-statusText"></p> 
                                         <!--Buttons-->
-                                        <div class="d-flex mt-2">
+                                        <div class="d-flex mt-2 account-proccess-wrapper">
                                             <!--send friend request-->
                                             <div class="btn btn-primary btn-send-friend-request btn-icon rounded-circle text-light mx-2">
                                                 <i class="fas fa-user-plus"></i>
@@ -3320,7 +3320,7 @@
                                                 <!-- <img class="injectable hw-24" src="./~/media/heroicons/outline/phone.svg" alt=""> -->
                                             </div>
                                             <!--remove friend-->
-                                            <div class="btn btn-danger btn-icon rounded-circle text-light mx-2">
+                                            <div class="btn btn-remove-friend btn-danger btn-icon rounded-circle text-light mx-2">
                                                 <i class="fas fa-user-times"></i>
                                                 <!-- <img class="injectable hw-24" src="./~/media/heroicons/outline/chat.svg" alt=""> -->
                                             </div>
@@ -4846,9 +4846,17 @@
                         friendId: accountId
                     },
                     success: function (res) {
-                        //send friend request btn d-none
-                        if (!$('.btn-send-friend-request').hasClass('d-none')) {
-                            $('.btn-send-friend-request').toggleClass('d-none')
+                        let btnSendFriendRequest = $('.btn-send-friend-request');
+                        let btnRemoveFriend = $('.btn-remove-friend');
+
+                        if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
+                            $('.account-proccess-wrapper').addClass('d-flex');
+                        }
+                        if (btnSendFriendRequest.hasClass('d-none') == false) {
+                            btnSendFriendRequest.addClass('d-none')
+                        }
+                        if (btnRemoveFriend.hasClass('d-none')) {
+                            btnRemoveFriend.removeClass('d-none')
                         }
 
                         //img
