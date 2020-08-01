@@ -54,7 +54,7 @@ namespace Repository.Repositories.SearchRepository
                     }
                     else //not friends
                     {
-                        SearchAccount searchItem = _accountDetailRepository.GetDatasPublic(itemId);
+                        SearchAccount searchItem = _accountDetailRepository.GetDatasPublic(currentUserId, itemId);
                         if (searchItem != null)
                         {
                             results.Add(searchItem);

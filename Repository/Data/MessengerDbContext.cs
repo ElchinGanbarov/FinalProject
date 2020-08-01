@@ -22,6 +22,7 @@ namespace Repository.Data
         public DbSet<Hub> Hubs { get; set; }
         public DbSet<HubFile> HubFiles { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
 
         public DbSet<Friend> Friends { get; set; }

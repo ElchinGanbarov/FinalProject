@@ -15,6 +15,7 @@ using Repository.Data;
 using Repository.Repositories.AccountRepository;
 using Repository.Repositories.AuthRepositories;
 using Repository.Repositories.SearchRepository;
+using Repository.Repositories.SignalRepository;
 using Repository.Services;
 
 namespace Messenger
@@ -44,9 +45,12 @@ namespace Messenger
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IFileManager, FileManager>();
             services.AddTransient<ISendEmail, SendEmail>();  //For send email service
-            services.AddTransient<ISearchRepository, SearchRepository>();  
+            services.AddTransient<ISearchRepository, SearchRepository>();
+            services.AddTransient<INotificationRepository, NotificationRepository>();
 
             services.AddTransient<IFriendsRepository, FriendsRepository>();  //testing
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +62,7 @@ namespace Messenger
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/home/error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -77,6 +81,9 @@ namespace Messenger
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=quickymessanger}/{action=index}/{id?}");
+
+                //SignalR
+                endpoints.MapHub<SignalServer>("/signalServer");
             });
         }
     }

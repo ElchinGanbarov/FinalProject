@@ -1,4 +1,8 @@
-﻿$(document).ready(function () {
+﻿"use strict"
+
+//import { signalR } from "../lib/signalr/dist/browser/signalr";
+
+$(document).ready(function () {
     //Privacy Dropdown & Security checkboxs Js
     $('[data-privacy-profile-picture]').on('click', function () {
         $('[data-privacy-profile-picture-text]').text($(this).text());
@@ -142,42 +146,39 @@
     //====================================================================
 
     //Search Accounts with Autocomplete
-    $(document).ready(function () {
+    $("#search-accounts-input").autocomplete({
+        //source: '/api/searchapi/searchaccount',
+        source: '/friends/searchaccount',
 
-        $("#search-accounts-input").autocomplete({
-            //source: '/api/searchapi/searchaccount',
-            source: '/friends/searchaccount',
+        minLength: 2,
+        select: function (event, ui) {
+            event.preventDefault();
+            $("#search-accounts-input").val(ui.item.label);
+            $("#hidden-search-id").val(ui.item.id);
 
-            minLength: 2,
-            select: function (event, ui) {
-                event.preventDefault();
-                $("#search-accounts-input").val(ui.item.label);
-                $("#hidden-search-id").val(ui.item.id);
+            SearchResultUserInfos(ui.item.id); //funtion show selected account's infos
 
-                SearchResultUserInfos(ui.item.id); //funtion show selected account's infos
-
-                $("#search-accounts-input").val("");
-                $("#hidden-search-id").val("");
-            },
-            focus: function (event, ui) {
-                event.preventDefault();
-                $("#search-accounts-input").val(ui.item.label);
-            },
-            html: true,
-            open: function () {
-                $("ul#ui-id-1").css({
-                    top: 110 + "px"
-                });
-            }
-        })
-            .autocomplete("instance")._renderItem = function (ul, item) {
-                let img = "/uploads/default-profile-img.jpg";
-                if (item.img != null) {
-                    img = "https://res.cloudinary.com/djmiksiim/v1/" + item.img;
-                }
-                return $("<li><div><div style='display: inline-block; border-radius: 50%; '><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'></div><span style='font-size: 16px;vertical-align: middle;'>" + item.value + "</span></div></li>").appendTo(ul);
-            };
+            $("#search-accounts-input").val("");
+            $("#hidden-search-id").val("");
+        },
+        focus: function (event, ui) {
+            event.preventDefault();
+            $("#search-accounts-input").val(ui.item.label);
+        },
+        html: true,
+        open: function () {
+            $("ul#ui-id-1").css({
+                top: 110 + "px"
+            });
+        }
     })
+        .autocomplete("instance")._renderItem = function (ul, item) {
+            let img = "/uploads/default-profile-img.jpg";
+            if (item.img != null) {
+                img = "https://res.cloudinary.com/djmiksiim/v1/" + item.img;
+            }
+            return $("<li><div><div style='display: inline-block; border-radius: 50%; '><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'></div><span style='font-size: 16px;vertical-align: middle;'>" + item.value + "</span></div></li>").appendTo(ul);
+        };
 
     //Get Search Result User Infos() Start
     function SearchResultUserInfos(selectedUserId) {
@@ -205,8 +206,19 @@
             success: function (res) {
                 let btnSendFriendRequest = $('.btn-send-friend-request');
                 let btnRemoveFriend = $('.btn-remove-friend');
-                //view public profile
-                if (res.friendship == 2) {
+
+                //id
+                document.querySelector("#hidden-selected-account-id").textContent = res.id;
+
+                //view own profile
+                if (res.friendship == 4) {
+                    if ($('.account-proccess-wrapper').hasClass('d-flex')) {
+                        $('.account-proccess-wrapper').removeClass('d-flex');
+                        $('.account-proccess-wrapper').addClass('d-none');
+                    }
+                }
+                //view public profile (not friend)
+                if (res.friendship == 3) {
                     if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
                         $('.account-proccess-wrapper').addClass('d-flex');
                     }
@@ -230,14 +242,23 @@
                         btnRemoveFriend.removeClass('d-none')
                     }
                 }
-                //view own profile
-                if (res.friendship == 0) 
-                {
-                    if ($('.account-proccess-wrapper').hasClass('d-flex')) {
-                        $('.account-proccess-wrapper').removeClass('d-flex');
-                        $('.account-proccess-wrapper').addClass('d-none');
+
+                //new friendship request sendded account's profile (fromCurrentUser)
+                if (res.friendship == 0 && res.IsFriendRequestSender == true) {
+                    if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
+                        $('.account-proccess-wrapper').addClass('d-flex');
+                    }
+                    if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
+                        $('.account-proccess-wrapper').addClass('d-flex');
+                    }
+                    if (btnSendFriendRequest.hasClass('d-none') == false) {
+                        btnSendFriendRequest.addClass('d-none')
+                    }
+                    if (btnRemoveFriend.hasClass('d-none')) {
+                        btnRemoveFriend.removeClass('d-none')
                     }
                 }
+
 
                 //img
                 if (res.img != null) {
@@ -311,4 +332,152 @@
             }
         });
     }
+
+    //=====================================================================
+
+    //Remove Friend
+    if ($(".btn-remove-friend").length) {
+        $(".btn-remove-friend").click(function (ev) {
+
+            let selectedAccountName = $('.selected-account-details-fullname').text();
+
+            Swal.fire({
+                icon: 'info',
+                title: 'Remove ' + selectedAccountName + ' from friend list ?',
+                text: 'If you get out of friendship, you may not see the information shared with friends',
+                reverseButtons: true,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonColor: '#ff005b',
+                cancelButtonColor: '#858796',
+                cancelButtonText: 'No',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.value) {
+                    //remove friend db request
+                    $.ajax({
+                        url: '/friends/removefromfriendship',
+                        type: "POST",
+                        dataType: "json",
+                        data:
+                        {
+                            friendId: $('#hidden-selected-account-id').text()
+                        },
+                        success: function (res) {
+                            if (res.status) {
+                                $.toast({
+                                    heading: 'Info',
+                                    text: selectedAccountName + " removed from your friend list!",
+                                    icon: 'info',
+                                    loader: true,
+                                    bgColor: '#3988ff',
+                                    loaderBg: '#f7d40d',
+                                    position: 'top-right',
+                                    hideAfter: 4000
+                                });
+                                setTimeout(function () { location.reload(true); }, 4000); //reload page
+                            };
+                            if (res.status == false) {
+                                $.toast({
+                                    heading: 'Info',
+                                    text: "Bad Request! Friendship Not Found!",
+                                    icon: 'info',
+                                    loader: true,
+                                    bgColor: '#3988ff',
+                                    loaderBg: '#f7d40d',
+                                    position: 'top-right',
+                                    hideAfter: 7000
+                                });
+                            };
+                        }
+                    });
+                };
+            });
+        });
+    };
+
+    //New Friend Request
+    if ($(".btn-send-friend-request").length) {
+        $(".btn-send-friend-request").click(function (ev) {
+
+            let selectedAccountName = $('.selected-account-details-fullname').text();
+            let selectedAccountId = $('#hidden-selected-account-id').text()
+
+            if (selectedAccountId != "") {
+                $.ajax({
+                    url: '/friends/newfriendrequest',
+                    type: "POST",
+                    dataType: "json",
+                    data:
+                    {
+                        accountId: selectedAccountId
+                    },
+                    success: function (res) {
+                        if (res.status) {
+                            $.toast({
+                                heading: 'Info',
+                                text: "Friendship request has been sent to " + selectedAccountName,
+                                icon: 'info',
+                                loader: true,
+                                bgColor: '#3988ff',
+                                loaderBg: '#f7d40d',
+                                position: 'top-right',
+                                hideAfter: 7000
+                            });
+                            $(".btn-send-friend-request").toggleClass('d-none')
+                        };
+                        if (res.status == false) {
+                            $.toast({
+                                heading: 'Error',
+                                text: "Bad Request! Friendship Not Found!",
+                                icon: 'info',
+                                loader: true,
+                                bgColor: '#3988ff',
+                                loaderBg: '#f7d40d',
+                                position: 'top-right',
+                                hideAfter: 7000
+                            });
+                        };
+                    }
+                });
+            }
+            else {
+                $.toast({
+                    heading: 'Info',
+                    text: "System Error! Unexpected error ocoured while sending friend request selected account!",
+                    icon: 'info',
+                    loader: true,
+                    bgColor: '#3988ff',
+                    loaderBg: '#f7d40d',
+                    position: 'top-right',
+                    hideAfter: 7000
+                });
+            }
+        });
+    };
+
+    //======================================================================
+
+    function getNotification() {
+        $.ajax({
+            url: "notification/GetUserNotifications",
+            method: "GET",
+            data: $('#hidden-account-id').val(),
+            success: function (res) {
+                alert("ok");
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    //let connection = new signalR.HubConnection("/signalServer");
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/signalServer").build();
+
+    connection.on('displayNewFriendRequestNotification', () => {
+        getNotification();
+    })
+    connection.start();
 });

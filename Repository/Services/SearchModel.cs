@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Repository.Services
         //public string Label { get; set; }
         public int Id { get; set; }
         //is friends
-        public SearchAccountFriendship Friendship { get; set; }
+        public FriendshipStatus Friendship { get; set; }
         public string Img { get; set; }
         [MaxLength(101)]
         public string Label { get; set; } //fullname
@@ -35,12 +36,14 @@ namespace Repository.Services
         public string Twitter { get; set; }
         public string Instagram { get; set; }
         public string Linkedin { get; set; }
+
+        public bool IsFriendRequestSender { get; set; }
     }
 
-    public enum SearchAccountFriendship
-    {
-        OwnProfile = 0,
-        Friends = 1,
-        NotFriend = 2
-    }
+    //public enum SearchAccountFriendship
+    //{
+    //    OwnProfile = 0,
+    //    Friends = 1,
+    //    NotFriend = 2
+    //}
 }

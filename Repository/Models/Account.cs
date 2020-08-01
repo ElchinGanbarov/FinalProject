@@ -55,5 +55,6 @@ namespace Repository.Models
         public ICollection<AccountFavMessages> AccountFavMessages { get; set; }
         public ICollection<GroupMembers> GroupMembers { get; set; }
         public ICollection<FriendShip> Friendships { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
     }
 }

@@ -6,15 +6,17 @@ namespace Repository.Models
     {
         public int FromUserId { get; set; }
         public int ToUserId { get; set; }
-        public StatusCode StatusCode { get; set; }
+        public FriendshipStatus StatusCode { get; set; }
         public bool IsConfirmed { get; set; }
     }
 
-    public enum StatusCode
+    public enum FriendshipStatus
     {
         Pending = 0,
         Accepted = 1,
-        Declined = 2
-        //Blocked = 3
+        Rejected = 2,
+        NotFriend = 3,
+        OwnProfile = 4,
+        Error = 5 //system error
     }
 }

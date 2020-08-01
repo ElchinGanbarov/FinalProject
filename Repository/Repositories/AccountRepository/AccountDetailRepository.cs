@@ -9,7 +9,7 @@ namespace Repository.Repositories.AccountRepository
 {
     public interface IAccountDetailRepository
     {
-        SearchAccount GetDatasPublic(int accountId);
+        SearchAccount GetDatasPublic(int currentAccountId, int accountId);
         SearchAccount GetDatasFriend(int friendId);
         SearchAccount GetDatasOwn(int accountId);
         AccountSocialLink GetAccountSocialLink(int id); //private friends
@@ -26,9 +26,12 @@ namespace Repository.Repositories.AccountRepository
     public class AccountDetailRepository : IAccountDetailRepository
     {
         private readonly MessengerDbContext _context;
-        public AccountDetailRepository(MessengerDbContext context)
+        private readonly IFriendsRepository _friendsRepository;
+        public AccountDetailRepository(MessengerDbContext context,
+                                       IFriendsRepository friendsRepository)
         {
             _context = context;
+            _friendsRepository = friendsRepository;
         }
 
         public SearchAccount GetDatasFriend(int friendId)
@@ -40,7 +43,7 @@ namespace Repository.Repositories.AccountRepository
                 SearchAccount searchItem = new SearchAccount(); //result model
 
                 searchItem.Id = friend.Id;
-                searchItem.Friendship = SearchAccountFriendship.Friends;
+                searchItem.Friendship = FriendshipStatus.Accepted;
                 searchItem.Label = friend.Fullname;
                 searchItem.Img = friend.ProfileImg;
                 searchItem.Email = friend.Email;
@@ -63,7 +66,7 @@ namespace Repository.Repositories.AccountRepository
             return null;
         }
 
-        public SearchAccount GetDatasPublic(int accountId)
+        public SearchAccount GetDatasPublic(int currentAccountId, int accountId)
         {
             Account account = _context.Accounts.Find(accountId);
             AccountPrivacy accountPrivacy = _context.AccountPrivacies.FirstOrDefault(p => p.AccountId == account.Id);
@@ -76,7 +79,28 @@ namespace Repository.Repositories.AccountRepository
                 //fullname
                 searchItem.Label = account.Fullname;
                 //friendship
-                searchItem.Friendship = SearchAccountFriendship.NotFriend;
+
+                //FriendshipStatus friendshipStatus = _friendsRepository.GetFriendshipStatus(currentAccountId, accountId);
+                Friend friendship = _friendsRepository.GetFriendship(currentAccountId, accountId);
+
+                if (friendship != null)
+                {
+                    if (friendship.StatusCode != FriendshipStatus.Error)
+                    {
+                        searchItem.Friendship = friendship.StatusCode;
+                    }
+                    else
+                    {
+                        //static for if error ocoured
+                        searchItem.Friendship = FriendshipStatus.NotFriend;
+                    }
+
+                    if (friendship.FromUserId == currentAccountId)
+                    {
+                        searchItem.IsFriendRequestSender = true;
+                    }
+                }
+
                 //email
                 searchItem.Email = account.Email; // static public
                 //address
@@ -168,7 +192,7 @@ namespace Repository.Repositories.AccountRepository
                 SearchAccount searchItem = new SearchAccount(); //result model
 
                 searchItem.Id = account.Id;
-                searchItem.Friendship = SearchAccountFriendship.OwnProfile;
+                searchItem.Friendship = FriendshipStatus.OwnProfile;
                 searchItem.Label = account.Fullname;
                 searchItem.Img = account.ProfileImg;
                 searchItem.Email = account.Email;

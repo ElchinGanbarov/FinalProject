@@ -362,7 +362,7 @@ namespace Messenger.Controllers
                 }
                 else //not friends
                 {
-                    return Ok(_accountDetailRepository.GetDatasPublic(searchedAccountId));
+                    return Ok(_accountDetailRepository.GetDatasPublic(currentAccountId, searchedAccountId));
                 }
             }
             else //view own profile

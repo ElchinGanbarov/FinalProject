@@ -71,7 +71,7 @@ namespace Messenger.Controllers
             //Account account = _friendsRepository.GetFriendById(9025);
             //return Ok(account);
 
-            return Ok(_accountDetailRepository.GetDatasOwn(3024));
+            return Ok(_accountDetailRepository.GetDatasPublic(3024, 9025));
         }
 
         [HttpGet]
@@ -88,5 +88,39 @@ namespace Messenger.Controllers
                 return BadRequest();
             }
         }
+
+        #region Friendship Requests
+
+        [HttpPost]
+        public IActionResult RemoveFromFriendship(int friendId)
+        {
+            if (_friendsRepository.IsFriends(_user.Id, friendId))
+            {
+                _friendsRepository.RemoveFriend(_user.Id, friendId);
+                return Ok(new { status = true });
+            }
+            else
+            {
+                return Ok(new { status = false });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult NewFriendRequest(int accountId)
+        {
+            if (_friendsRepository.IsFriends(_user.Id, accountId) == false)
+            {
+                _friendsRepository.NewFriendRequest(_user.Id, accountId);
+                return Ok(new { status = true });
+            }
+            else
+            {
+                return Ok(new { status = false });
+            }
+        }
+
+        #endregion
+
+
     }
 }
