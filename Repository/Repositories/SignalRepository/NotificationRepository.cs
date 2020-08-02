@@ -39,7 +39,7 @@ namespace Repository.Repositories.SignalRepository
         //Get Account's All Notifications
         public List<Notification> GetUserNotifications(int userId)
         {
-            return _context.Notifications.Where(n => n.AccountId == userId && !n.IsRead && n.Status)
+            return _context.Notifications.Where(n => n.ReceiverId == userId && !n.IsRead && n.Status)
                                          .ToList();
         }
     }

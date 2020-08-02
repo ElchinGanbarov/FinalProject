@@ -497,18 +497,87 @@ $(document).ready(function () {
         });
     };
 
+    //Accept Friend Request
+    if ($(".btn-accept-friend-request").length) {
+        $(".btn-accept-friend-request").click(function (ev) {
+
+            let selectedAccountName = $('.selected-account-details-fullname').text();
+            let selectedAccountId = $('#hidden-selected-account-id').text()
+
+            if (selectedAccountId != "") {
+                $.ajax({
+                    url: '/friends/acceptfriendrequest',
+                    type: "POST",
+                    dataType: "json",
+                    data:
+                    {
+                        senderId: selectedAccountId,
+                        receiverId: $('#hidden-account-id')
+                    },
+                    success: function (res) {
+                        if (res.status) {
+                            $.toast({
+                                heading: 'Info',
+                                text: "Friendship request has been sent to " + selectedAccountName,
+                                icon: 'info',
+                                loader: true,
+                                bgColor: '#3988ff',
+                                loaderBg: '#f7d40d',
+                                position: 'top-right',
+                                hideAfter: 7000
+                            });
+                            $(".btn-send-friend-request").toggleClass('d-none')
+                        };
+                        if (res.status == false) {
+                            $.toast({
+                                heading: 'Error',
+                                text: "Bad Request! Friendship Not Found!",
+                                icon: 'info',
+                                loader: true,
+                                bgColor: '#3988ff',
+                                loaderBg: '#f7d40d',
+                                position: 'top-right',
+                                hideAfter: 7000
+                            });
+                        };
+                    }
+                });
+            }
+            else {
+                $.toast({
+                    heading: 'Info',
+                    text: "System Error! Unexpected error ocoured while accept friend request!",
+                    icon: 'info',
+                    loader: true,
+                    bgColor: '#3988ff',
+                    loaderBg: '#f7d40d',
+                    position: 'top-right',
+                    hideAfter: 7000
+                });
+            }
+        });
+    };
+
     //======================================================================
 
     function getNotification() {
         $.ajax({
             url: "notification/GetUserNotifications",
-            method: "GET",
+            method: "POST",
+            //method: "GET",
             data: $('#hidden-account-id').val(),
-            success: function (res) {
-                alert("ok");
+            success: function (result) {
+
+                if (result.count != 0) {
+                    console.log(result.count);
+                }
+                if (result.count < 1) {
+                    console.log("empty result");
+                }
+                alert("new friend request from system successfully");
             },
             error: function () {
-                alert("error");
+                alert("friend request error ocoured");
             }
         });
     }

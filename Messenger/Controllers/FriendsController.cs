@@ -64,16 +64,6 @@ namespace Messenger.Controllers
             return Ok(StatusCode(404));
         }
 
-        //testing
-
-        public IActionResult testing()
-        {
-            //Account account = _friendsRepository.GetFriendById(9025);
-            //return Ok(account);
-
-            return Ok(_accountDetailRepository.GetDatasPublic(3024, 9025));
-        }
-
         [HttpGet]
         public async Task<IActionResult> SearchAccount()
         {
@@ -119,8 +109,32 @@ namespace Messenger.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult AcceptFriendRequest(int senderId, int receiverId)
+        {
+            if (senderId != _user.Id) return Ok(new { status = false });
+
+            if (_friendsRepository.IsFriends(receiverId, senderId) == false)
+            {
+                _friendsRepository.AcceptFriendRequest(senderId, receiverId);
+                return Ok(new { status = true });
+            }
+            else
+            {
+                return Ok(new { status = false });
+            }
+        }
+
         #endregion
 
+        //testing
 
+        public IActionResult testing()
+        {
+            //Account account = _friendsRepository.GetFriendById(9025);
+            //return Ok(account);
+
+            return Ok(_accountDetailRepository.GetDatasPublic(3024, 9025));
+        }
     }
 }

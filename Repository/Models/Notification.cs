@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Repository.Models
 {
     public class Notification : BaseEntity
     {
-        public int AccountId { get; set; }
+        public string SenderId { get; set; }
+
+        [ForeignKey("Account")]
+        public int ReceiverId { get; set; }
         public NotificationType Type { get; set; }
         public string Text { get; set; }
         public bool IsRead { get; set; }

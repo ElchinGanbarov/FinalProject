@@ -21,6 +21,8 @@ namespace Messenger.Controllers
         public IActionResult GetUserNotifications(int userId)
         {
             var notification = _notificationRepository.GetUserNotifications(userId);
+
+            //return Ok(notification.Count);
             return Ok(new { userNotifications = notification, count = notification.Count });
         }
 
@@ -31,5 +33,18 @@ namespace Messenger.Controllers
 
         //    return Ok();
         //}
+
+        //testing
+
+        [HttpGet]
+        public IActionResult testing()
+        {
+            //Account account = _friendsRepository.GetFriendById(9025);
+            //return Ok(account);
+
+            //return Ok(_accountDetailRepository.GetDatasPublic(3024, 9025));
+
+            return Ok(_notificationRepository.GetUserNotifications(9025));
+        }
     }
 }

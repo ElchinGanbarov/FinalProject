@@ -1,5 +1,6 @@
 ﻿using Repository.Data;
 using Repository.Models;
+using Repository.Repositories.SignalRepository;
 using Repository.Services;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Repository.Repositories.AccountRepository
         bool IsFriends(int currentAccountId, int searchedAccountId);
         void RemoveFriend(int currentUserId, int friendId);
         void NewFriendRequest(int fromUserId, int toUserId);
+        void AcceptFriendRequest(int senderId, int receiverId);
         Account GetFriendById(int friendId);
         AccountSocialLink GetFriendSocialLinks(int friendId);
         ICollection<Account> GetAllFriends(int userId);
@@ -24,9 +26,13 @@ namespace Repository.Repositories.AccountRepository
     public class FriendsRepository : IFriendsRepository
     {
         private readonly MessengerDbContext _context;
-        public FriendsRepository(MessengerDbContext context)
+        private readonly INotificationRepository _notificationRepository;
+
+        public FriendsRepository(MessengerDbContext context,
+                                 INotificationRepository notificationRepository)
         {
             _context = context;
+            _notificationRepository = notificationRepository;
         }
 
         public ICollection<Account> GetAllFriends(int userId)
@@ -71,7 +77,9 @@ namespace Repository.Repositories.AccountRepository
             Friend friendship = _context.Friends.FirstOrDefault(f => (f.FromUserId == currentAccountId && f.ToUserId == searchedAccountId)
                                                                  || f.FromUserId == searchedAccountId && f.ToUserId == currentAccountId);
 
-            if (friendship != null && friendship.StatusCode == FriendshipStatus.Accepted && friendship.Status)
+            if (friendship != null && friendship.StatusCode == FriendshipStatus.Accepted 
+                                   && friendship.Status 
+                                   && friendship.IsConfirmed)
             {
                 return true;
             }
@@ -122,6 +130,7 @@ namespace Repository.Repositories.AccountRepository
 
             if (fromUser != null && ToUser != null)
             {
+                //creating new friend data (status pending)
                 Friend friendRequest = new Friend
                 {
                     AddedDate = DateTime.Now,
@@ -134,8 +143,62 @@ namespace Repository.Repositories.AccountRepository
                     IsConfirmed = false,
                     StatusCode = 0 //pending
                 };
-
                 _context.Friends.Add(friendRequest);
+                _context.SaveChanges();
+
+                //creating new notification toUser
+                Notification newNotification = new Notification
+                {
+                    AddedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    AddedBy = fromUser.Fullname,
+                    ModifiedBy = "System",
+                    Status = true,
+                    SenderId = fromUserId.ToString(), //int to string Static problem!
+                    ReceiverId = toUserId,
+                    Type = NotificationType.NewFriendRequest,
+                    Text = fromUser.Fullname + " send you a friend request",
+                    IsRead = false
+                };
+
+                _notificationRepository.Create(newNotification, toUserId);
+            }
+        }
+
+        public void AcceptFriendRequest(int senderId, int receiverId)
+        {
+            var sender = _context.Accounts.FirstOrDefault(s => s.Id == senderId);
+            var receiver = _context.Accounts.FirstOrDefault(r => r.Id == receiverId);
+            Friend friendship = _context.Friends.FirstOrDefault(f => (f.FromUserId == senderId && f.ToUserId == receiverId)
+                                                     || f.FromUserId == receiverId && f.ToUserId == senderId);
+
+            if (sender != null && receiver != null
+                && friendship != null
+                && (friendship.StatusCode != FriendshipStatus.Accepted || friendship.StatusCode != FriendshipStatus.Error))
+            {
+                //accepting friend request
+                friendship.ModifiedDate = DateTime.Now;
+                friendship.ModifiedBy = receiver.Fullname;
+                friendship.StatusCode = FriendshipStatus.Accepted;
+                friendship.IsConfirmed = true;
+                _context.SaveChanges();
+
+                //creating notification for friend request sender account
+                Notification acceptedNotification = new Notification
+                {
+                    AddedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    AddedBy = "System",
+                    ModifiedBy = "System",
+                    Status = true,
+                    SenderId = receiverId.ToString(), //int to string Static problem!
+                    ReceiverId = senderId,
+                    Type = NotificationType.FriendRequestAccepted,
+                    Text = receiver.Fullname + " accepted your friend request",
+                    IsRead = false
+                };
+
+                _context.Notifications.Add(acceptedNotification);
                 _context.SaveChanges();
             }
         }
