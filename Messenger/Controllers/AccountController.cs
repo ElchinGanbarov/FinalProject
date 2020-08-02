@@ -62,6 +62,7 @@ namespace Messenger.Controllers
             if (ModelState.IsValid)
             {
                 var user = _mapper.Map<RegisterViewModel, Account>(model);
+                user.Fullname = model.Name + " " + model.Surname;
                 user.Token = Guid.NewGuid().ToString();
                 user.Status = true;
                 user.IsEmailVerified = false;

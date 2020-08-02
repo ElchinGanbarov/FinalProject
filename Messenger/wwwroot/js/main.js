@@ -206,6 +206,8 @@ $(document).ready(function () {
             success: function (res) {
                 let btnSendFriendRequest = $('.btn-send-friend-request');
                 let btnRemoveFriend = $('.btn-remove-friend');
+                let btnRejectFriendRequest = $('.btn-reject-friend-request');
+                let btnAcceptFriendRequest = $('.btn-accept-friend-request');
 
                 //id
                 document.querySelector("#hidden-selected-account-id").textContent = res.id;
@@ -217,6 +219,26 @@ $(document).ready(function () {
                         $('.account-proccess-wrapper').addClass('d-none');
                     }
                 }
+
+                //view friend's profile
+                if (res.friendship == 1) {
+                    if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
+                        $('.account-proccess-wrapper').addClass('d-flex');
+                    }
+                    if (btnSendFriendRequest.hasClass('d-none') == false) {
+                        btnSendFriendRequest.addClass('d-none')
+                    }
+                    if (btnAcceptFriendRequest.hasClass('d-none') == false) {
+                        btnAcceptFriendRequest.addClass('d-none')
+                    }
+                    if (btnRemoveFriend.hasClass('d-none')) {
+                        btnRemoveFriend.removeClass('d-none')
+                    }
+                    if (btnRejectFriendRequest.hasClass('d-none') == false) {
+                        btnRejectFriendRequest.addClass('d-none')
+                    }
+                }
+
                 //view public profile (not friend)
                 if (res.friendship == 3) {
                     if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
@@ -228,36 +250,55 @@ $(document).ready(function () {
                     if (btnRemoveFriend.hasClass('d-none') == false) {
                         btnRemoveFriend.addClass('d-none')
                     }
-                }
-                //view friend's profile
-                if (res.friendship == 1) 
-                {
-                    if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
-                        $('.account-proccess-wrapper').addClass('d-flex');
+                    if (btnRejectFriendRequest.hasClass('d-none') == false) {
+                        btnRejectFriendRequest.addClass('d-none')
                     }
-                    if (btnSendFriendRequest.hasClass('d-none') == false) {
-                        btnSendFriendRequest.addClass('d-none')
-                    }
-                    if (btnRemoveFriend.hasClass('d-none')) {
-                        btnRemoveFriend.removeClass('d-none')
+                    if (btnAcceptFriendRequest.hasClass('d-none') == false) {
+                        btnAcceptFriendRequest.addClass('d-none')
                     }
                 }
 
                 //new friendship request sendded account's profile (fromCurrentUser)
-                if (res.friendship == 0 && res.IsFriendRequestSender == true) {
+                if (res.friendship == 0 && res.isFriendRequestSender == true) {
                     if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
                         $('.account-proccess-wrapper').addClass('d-flex');
                     }
-                    if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
-                        $('.account-proccess-wrapper').addClass('d-flex');
+                    if (btnRemoveFriend.hasClass('d-none') == false) {
+                        btnRemoveFriend.addClass('d-none')
                     }
                     if (btnSendFriendRequest.hasClass('d-none') == false) {
                         btnSendFriendRequest.addClass('d-none')
                     }
-                    if (btnRemoveFriend.hasClass('d-none')) {
-                        btnRemoveFriend.removeClass('d-none')
+                    if (btnAcceptFriendRequest.hasClass('d-none') == false) {
+                        btnAcceptFriendRequest.addClass('d-none')
+                    }
+                    if (btnRejectFriendRequest.hasClass('d-none')) {
+                        btnRejectFriendRequest.removeClass('d-none')
                     }
                 }
+
+                //new friendship request received from other useer to current account (toCurrentUser)
+                if (res.friendship == 0 && res.isFriendRequestSender == false) {
+                    if ($('.account-proccess-wrapper').hasClass('d-flex') == false) {
+                        $('.account-proccess-wrapper').addClass('d-flex');
+                    }
+                    if (btnRemoveFriend.hasClass('d-none') == false) {
+                        btnRemoveFriend.addClass('d-none')
+                    }
+                    if (btnSendFriendRequest.hasClass('d-none') == false) {
+                        btnSendFriendRequest.addClass('d-none')
+                    }
+                    if (btnRejectFriendRequest.hasClass('d-none') == false) {
+                        btnRejectFriendRequest.addClass('d-none')
+                    }
+                    if (btnRejectFriendRequest.hasClass('d-none')) {
+                        btnRejectFriendRequest.removeClass('d-none')
+                    }
+                    if (btnAcceptFriendRequest.hasClass('d-none')) {
+                        btnAcceptFriendRequest.removeClass('d-none')
+                    }
+                }
+
 
 
                 //img

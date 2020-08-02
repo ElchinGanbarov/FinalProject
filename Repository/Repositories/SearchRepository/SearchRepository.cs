@@ -63,7 +63,7 @@ namespace Repository.Repositories.SearchRepository
                 }
                 else //search own profile
                 {
-                    SearchAccount searchItem = _accountDetailRepository.GetDatasFriend(itemId);
+                    SearchAccount searchItem = _accountDetailRepository.GetDatasOwn(itemId);
                     if (searchItem != null)
                     {
                         results.Add(searchItem);

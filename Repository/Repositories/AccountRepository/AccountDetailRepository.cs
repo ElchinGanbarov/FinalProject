@@ -89,16 +89,15 @@ namespace Repository.Repositories.AccountRepository
                     {
                         searchItem.Friendship = friendship.StatusCode;
                     }
-                    else
-                    {
-                        //static for if error ocoured
-                        searchItem.Friendship = FriendshipStatus.NotFriend;
-                    }
-
                     if (friendship.FromUserId == currentAccountId)
                     {
                         searchItem.IsFriendRequestSender = true;
                     }
+                }
+                else
+                {
+                    //static for if error ocoured
+                    searchItem.Friendship = FriendshipStatus.NotFriend;
                 }
 
                 //email
