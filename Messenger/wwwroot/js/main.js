@@ -590,4 +590,39 @@ $(document).ready(function () {
         getNotification();
     })
     connection.start();
+
+    $("#search-friends-input").autocomplete({
+        //source: '/api/searchapi/searchaccount',
+        source: '/friends/searchfriends',
+
+        minLength: 2,
+        select: function (event, ui) {
+            event.preventDefault();
+            $("#search-friends-input").val(ui.item.label);
+            $("#hidden-friend-search-id").val(ui.item.id);
+
+         /*   SearchResultUserInfos(ui.item.id);*/ //funtion show selected account's infos
+
+            $("#search-friends-input").val("");
+            $("#hidden-friend-search-id").val("");
+        },
+        focus: function (event, ui) {
+            event.preventDefault();
+            $("#search-friends-input").val(ui.item.label);
+        },
+        html: true,
+        //open: function () {
+        //    $("ul#ui-id-1").css({
+        //        top: 110 + "px"
+        //    });
+        //}
+    })
+        .autocomplete("instance")._renderItem = function (ul, item) {
+            let img = "/uploads/default-profile-img.jpg";
+            if (item.img != null) {
+                img = "https://res.cloudinary.com/djmiksiim/v1/" + item.img;
+            }
+            return $("<li><div><div style='display: inline-block; border-radius: 50%; '><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'></div><span style='font-size: 16px;vertical-align: middle;'>" + item.value + "</span></div></li>").appendTo(ul);
+        };
 });
+

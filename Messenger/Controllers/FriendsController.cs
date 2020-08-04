@@ -65,6 +65,21 @@ namespace Messenger.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> SearchFriends()
+        {
+            try
+            {
+                string term =  HttpContext.Request.Query["term"].ToString();
+                var  results =  _searchRepository.SearchFriendsAccounts(_user.Id, term);
+                return Ok(results);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
         public async Task<IActionResult> SearchAccount()
         {
             try
@@ -78,7 +93,6 @@ namespace Messenger.Controllers
                 return BadRequest();
             }
         }
-
         #region Friendship Requests
 
         [HttpPost]
@@ -134,7 +148,8 @@ namespace Messenger.Controllers
             //Account account = _friendsRepository.GetFriendById(9025);
             //return Ok(account);
 
-            return Ok(_accountDetailRepository.GetDatasPublic(3024, 9025));
+            //return Ok(_accountDetailRepository.GetDatasPublic(3024, 9025));
+            return Ok(_searchRepository.SearchFriendsAccounts(_user.Id, "pe"));
         }
     }
 }
