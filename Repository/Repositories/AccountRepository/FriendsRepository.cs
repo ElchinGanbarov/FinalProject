@@ -11,6 +11,7 @@ namespace Repository.Repositories.AccountRepository
 {
     public interface IFriendsRepository
     {
+
         int GetAllFriendsCount(int userId);
         Friend GetFriendship(int currentUserId, int accountId);
         FriendshipStatus GetFriendshipStatus(int currentUserId, int accountId);

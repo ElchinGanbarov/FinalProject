@@ -40,10 +40,4 @@ namespace Repository.Services
         public bool IsFriendRequestSender { get; set; }
     }
 
-    //public enum SearchAccountFriendship
-    //{
-    //    OwnProfile = 0,
-    //    Friends = 1,
-    //    NotFriend = 2
-    //}
 }
