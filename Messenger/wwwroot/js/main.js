@@ -414,7 +414,7 @@ $(document).ready(function () {
                                     bgColor: '#3988ff',
                                     loaderBg: '#f7d40d',
                                     position: 'top-right',
-                                    hideAfter: 4000
+                                    hideAfter: 3000
                                 });
                                 setTimeout(function () { location.reload(true); }, 4000); //reload page
                             };
@@ -466,11 +466,12 @@ $(document).ready(function () {
                                 hideAfter: 7000
                             });
                             $(".btn-send-friend-request").toggleClass('d-none')
+                            $(".btn-reject-friend-request").toggleClass('d-none')
                         };
                         if (res.status == false) {
                             $.toast({
                                 heading: 'Error',
-                                text: "Bad Request! Friendship Not Found!",
+                                text: "Bad Request! Unexpected Error Occoured!",
                                 icon: 'info',
                                 loader: true,
                                 bgColor: '#3988ff',
@@ -497,66 +498,9 @@ $(document).ready(function () {
         });
     };
 
-    //Accept Friend Request
-    if ($(".btn-accept-friend-request").length) {
-        $(".btn-accept-friend-request").click(function (ev) {
 
-            let selectedAccountName = $('.selected-account-details-fullname').text();
-            let selectedAccountId = $('#hidden-selected-account-id').text()
 
-            if (selectedAccountId != "") {
-                $.ajax({
-                    url: '/friends/acceptfriendrequest',
-                    type: "POST",
-                    dataType: "json",
-                    data:
-                    {
-                        senderId: selectedAccountId,
-                        receiverId: $('#hidden-account-id')
-                    },
-                    success: function (res) {
-                        if (res.status) {
-                            $.toast({
-                                heading: 'Info',
-                                text: "Friendship request has been sent to " + selectedAccountName,
-                                icon: 'info',
-                                loader: true,
-                                bgColor: '#3988ff',
-                                loaderBg: '#f7d40d',
-                                position: 'top-right',
-                                hideAfter: 7000
-                            });
-                            $(".btn-send-friend-request").toggleClass('d-none')
-                        };
-                        if (res.status == false) {
-                            $.toast({
-                                heading: 'Error',
-                                text: "Bad Request! Friendship Not Found!",
-                                icon: 'info',
-                                loader: true,
-                                bgColor: '#3988ff',
-                                loaderBg: '#f7d40d',
-                                position: 'top-right',
-                                hideAfter: 7000
-                            });
-                        };
-                    }
-                });
-            }
-            else {
-                $.toast({
-                    heading: 'Info',
-                    text: "System Error! Unexpected error ocoured while accept friend request!",
-                    icon: 'info',
-                    loader: true,
-                    bgColor: '#3988ff',
-                    loaderBg: '#f7d40d',
-                    position: 'top-right',
-                    hideAfter: 7000
-                });
-            }
-        });
-    };
+
 
     //======================================================================
 

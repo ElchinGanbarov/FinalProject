@@ -112,11 +112,27 @@ namespace Messenger.Controllers
         [HttpPost]
         public IActionResult AcceptFriendRequest(int senderId, int receiverId)
         {
-            if (senderId != _user.Id) return Ok(new { status = false });
+            //if (senderId != _user.Id) return Ok(new { status = false });
 
             if (_friendsRepository.IsFriends(receiverId, senderId) == false)
             {
                 _friendsRepository.AcceptFriendRequest(senderId, receiverId);
+                return Ok(new { status = true });
+            }
+            else
+            {
+                return Ok(new { status = false });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult RejectFriendRequest(int currentId, int userId)
+        {
+            if (userId == _user.Id) return Ok(new { status = false });
+
+            if (_friendsRepository.IsFriends(currentId, userId) == false)
+            {
+                _friendsRepository.RejectFriendRequest(currentId, userId);
                 return Ok(new { status = true });
             }
             else

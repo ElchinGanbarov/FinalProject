@@ -18,6 +18,7 @@ namespace Repository.Repositories.AccountRepository
         void RemoveFriend(int currentUserId, int friendId);
         void NewFriendRequest(int fromUserId, int toUserId);
         void AcceptFriendRequest(int senderId, int receiverId);
+        void RejectFriendRequest(int currentId, int userId);
         Account GetFriendById(int friendId);
         AccountSocialLink GetFriendSocialLinks(int friendId);
         ICollection<Account> GetAllFriends(int userId);
@@ -122,6 +123,19 @@ namespace Repository.Repositories.AccountRepository
             return friendship; //not friend
         }
 
+        public void RejectFriendRequest(int currentId, int userId)
+        {
+            //same as remove friend method
+
+            Friend friendship = _context.Friends.FirstOrDefault(f => (f.FromUserId == currentId && f.ToUserId == userId)
+                                                                 || f.FromUserId == userId && f.ToUserId == currentId);
+
+            if (friendship != null && friendship.StatusCode == FriendshipStatus.Pending)
+            {
+                _context.Friends.Remove(friendship);
+                _context.SaveChanges();
+            }
+        }
 
         public void NewFriendRequest(int fromUserId, int toUserId)
         {
