@@ -12,6 +12,7 @@ namespace Repository.Repositories.SearchRepository
     public interface ISearchRepository
     {
         ICollection<SearchAccount> SearchAccounts(int currentUserId, string term);
+        ICollection<SearchAccount> SearchFriendsAccounts(int currentUserId, string term);
     }
 
     public class SearchRepository : ISearchRepository
@@ -69,6 +70,51 @@ namespace Repository.Repositories.SearchRepository
                         results.Add(searchItem);
                     }
                 } 
+            }
+
+            return results;
+        }
+        public ICollection<SearchAccount> SearchFriendsAccounts(int currentUserId, string term)
+        {
+            //final search results
+            List<SearchAccount> results = new List<SearchAccount>();
+
+            ICollection<Account> friendslist = _friendsRepository.GetAllFriends(currentUserId);
+
+            foreach (var item in friendslist)
+            {
+                if (item.Fullname.Contains(term))
+                {
+
+                    if (currentUserId != item.Id) //don't show current user 2x
+                    {
+                 
+                        SearchAccount searchItem = _accountDetailRepository.GetDatasFriend(item.Id);
+                        if (searchItem != null)
+                        {
+                            results.Add(searchItem);
+                        }
+
+                    }
+                      
+                    
+                    //else //not friends
+                    //{
+                    //    SearchAccount searchItem = _accountDetailRepository.GetDatasPublic(currentUserId, item.Id);
+                    //    if (searchItem != null)
+                    //    {
+                    //        results.Add(searchItem);
+                    //    }
+                    //}
+                }
+                //else //search own profile
+                //{
+                //    SearchAccount searchItem = _accountDetailRepository.GetDatasOwn(item.Id);
+                //    if (searchItem != null)
+                //    {
+                //        results.Add(searchItem);
+                //    }
+                //}
             }
 
             return results;

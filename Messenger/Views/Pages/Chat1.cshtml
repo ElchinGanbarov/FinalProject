@@ -1,5 +1,8 @@
 ﻿@model GeneralViewModel
 @inject ICloudinaryService _cloudinaryService
+@{
+ Account account = ViewBag.User as Account;
+ }
     <body class="chats-tab-open">
 
         <!-- Main Layout Start -->
@@ -3954,7 +3957,8 @@
                                     <!-- Search Start -->
                                     <form class="form-inline w-100 p-2 border-bottom">
                                         <div class="input-group w-100 bg-light">
-                                            <input type="text" class="form-control form-control-md search border-right-0 transparent-bg pr-0" placeholder="Search...">
+                                            <input id="search-friends-input" type="text" class="form-control form-control-md search border-right-0 transparent-bg pr-0" placeholder="Search...">
+                                            <input id="hidden-friend-search-id" type="hidden" />
                                             <div class="input-group-append">
                                                 <div class="input-group-text transparent-bg border-left-0" role="button">
                                                     <!-- Default :: Inline SVG -->
@@ -3976,83 +3980,34 @@
                                     <ul class="list-group list-group-flush">
 
                                         <!-- List Group Item Start -->
+                                        @foreach(var item in Model.AccountViewModels)
+                                        {
                                         <li class="list-group-item">
                                             <div class="media">
                                                 <div class="avatar avatar-online mr-2">
-                                                    <img src="~/media/avatar/1.png" alt="">
+                                                    @if(item.ProfileImg==null){
+                                                    <img src="~/uploads/default-profile-img.jpg" alt="~/uploads/default-profile-img.jpg">
+                                                    }else{
+                                                    <img src="@_cloudinaryService.BuildUrl(item.ProfileImg)" alt="@_cloudinaryService.BuildUrl(item.ProfileImg)">
+                                                    }
+                                                    
                                                 </div>
 
                                                 <div class="media-body">
                                                     <h6 class="text-truncate">
-                                                        <a href="#" class="text-reset">Catherine Richardson</a>
+                                                        <a href="#" class="text-reset">@item.Fullname</a>
                                                     </h6>
 
                                                     <p class="text-muted mb-0">Online</p>
                                                 </div>
                                             </div>
                                         </li>
+                                        }
+                                        
                                         <!-- List Group Item End -->
-                                        <!-- List Group Item Start -->
-                                        <li class="list-group-item">
-                                            <div class="media">
-                                                <div class="avatar avatar-online mr-2">
-                                                    <img src="~/media/avatar/2.png" alt="">
-                                                </div>
-
-                                                <div class="media-body">
-                                                    <h6 class="text-truncate">
-                                                        <a href="#" class="text-reset">Katherine Schneider</a>
-                                                    </h6>
-
-                                                    <p class="text-muted mb-0">Online</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- List Group Item End -->
-                                        <!-- List Group Item Start -->
-                                        <li class="list-group-item">
-                                            <div class="media">
-                                                <div class="avatar avatar-offline mr-2">
-                                                    <img src="~/media/avatar/3.png" alt="">
-                                                </div>
-
-                                                <div class="media-body">
-                                                    <h6 class="text-truncate">
-                                                        <a href="#" class="text-reset">Brittany K. Williams</a>
-                                                    </h6>
-
-                                                    <p class="text-muted mb-0">Offline</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- List Group Item End -->
-                                        <!-- List Group Item Start -->
-                                        <li class="list-group-item">
-                                            <div class="media">
-                                                <div class="avatar avatar-busy mr-2">
-                                                    <img src="~/media/avatar/4.png" alt="">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="text-truncate"><a href="#" class="text-reset">Christina Turner</a></h6>
-                                                    <p class="text-muted mb-0">Busy</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- List Group Item End -->
-                                        <!-- List Group Item Start -->
-                                        <li class="list-group-item">
-                                            <div class="media">
-                                                <div class="avatar avatar-away mr-2">
-                                                    <img src="~/media/avatar/5.png" alt="">
-                                                </div>
-
-                                                <div class="media-body">
-                                                    <h6 class="text-truncate"><a href="#" class="text-reset">Annie Richardson</a></h6>
-                                                    <p class="text-muted mb-0">Away</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- List Group Item End -->
+                                        
+                                        
+         
 
                                     </ul>
                                     <!-- List Group End -->
