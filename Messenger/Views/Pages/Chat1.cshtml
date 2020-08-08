@@ -3976,38 +3976,45 @@
                                 </div>
 
                                 <div class="col-12">
+                                    <!--test autocomplete results-->
+                                    <input type="hidden" id="hidden-search-friends-result-count" value="0" />
+                                    <ul id="search-friend-accounts-results" class="list-group list-group-flush"></ul>
+
                                     <!-- List Group Start -->
-                                    <ul class="list-group list-group-flush">
+                                    <ul id="search-friend-accounts-wrapper" class="list-group list-group-flush">
 
-                                        <!-- List Group Item Start -->
-                                        @foreach(var item in Model.AccountViewModels)
+                                        <!-- Friends List Start -->
+                                        @foreach (var item in Model.AccountViewModels)
                                         {
-                                        <li class="list-group-item">
-                                            <div class="media">
-                                                <div class="avatar avatar-online mr-2">
-                                                    @if(item.ProfileImg==null){
-                                                    <img src="~/uploads/default-profile-img.jpg" alt="~/uploads/default-profile-img.jpg">
-                                                    }else{
-                                                    <img src="@_cloudinaryService.BuildUrl(item.ProfileImg)" alt="@_cloudinaryService.BuildUrl(item.ProfileImg)">
-                                                    }
-                                                    
-                                                </div>
+                                            <li class="list-group-item">
+                                                <div class="media">
+                                                    <div class="avatar avatar-online mr-2">
+                                                        @if (item.ProfileImg == null)
+                                                        {
+                                                            <img src="~/uploads/default-profile-img.jpg" alt="~/uploads/default-profile-img.jpg">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="@_cloudinaryService.BuildUrl(item.ProfileImg)" alt="@_cloudinaryService.BuildUrl(item.ProfileImg)">
+                                                        }
 
-                                                <div class="media-body">
-                                                    <h6 class="text-truncate">
-                                                        <a href="#" class="text-reset">@item.Fullname</a>
-                                                    </h6>
+                                                    </div>
 
-                                                    <p class="text-muted mb-0">Online</p>
+                                                    <div class="media-body">
+                                                        <h6 class="text-truncate">
+                                                            <a href="#" class="text-reset">@item.Fullname</a>
+                                                        </h6>
+
+                                                        <p class="text-muted mb-0">Online</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
                                         }
-                                        
+
                                         <!-- List Group Item End -->
-                                        
-                                        
-         
+
+
+
 
                                     </ul>
                                     <!-- List Group End -->
@@ -4949,7 +4956,10 @@
                     }
                 })
             }
+        </script>
 
+        <!--Friendship methods-->
+        <script>
             //Reject Friend Request
             if ($(".btn-reject-friend-request").length) {
                 $(".btn-reject-friend-request").click(function (ev) {
@@ -5028,8 +5038,8 @@
                             data:
                             {
                                 //sender ; receiver static!
-                                senderId: selectedAccountId,
-                                receiverId: @Model.AccountDetailViewModel.Id
+                                receiverId: @Model.AccountDetailViewModel.Id,
+                                senderId: selectedAccountId
                             },
                             success: function (res) {
                                 if (res.status) {

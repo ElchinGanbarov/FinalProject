@@ -83,7 +83,7 @@ namespace Repository.Repositories.SearchRepository
 
             foreach (var item in friendslist)
             {
-                if (item.Fullname.Contains(term))
+                if (item.Fullname.ToLower().Contains(term.ToLower()))
                 {
 
                     if (currentUserId != item.Id) //don't show current user 2x

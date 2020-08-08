@@ -145,7 +145,7 @@ $(document).ready(function () {
 
     //====================================================================
 
-    //Search Accounts with Autocomplete
+    //Search All Accounts with Autocomplete
     $("#search-accounts-input").autocomplete({
         //source: '/api/searchapi/searchaccount',
         source: '/friends/searchaccount',
@@ -498,10 +498,6 @@ $(document).ready(function () {
         });
     };
 
-
-
-
-
     //======================================================================
 
     function getNotification() {
@@ -535,38 +531,78 @@ $(document).ready(function () {
     })
     connection.start();
 
-    $("#search-friends-input").autocomplete({
-        //source: '/api/searchapi/searchaccount',
-        source: '/friends/searchfriends',
+    //testing!
+    async function checkSearchFriendsInput() {
 
-        minLength: 2,
+        let input = document.getElementById('search-friends-input')
+
+        if (input.text == "5") {
+            alert("ok");
+        }
+
+    }
+
+
+
+    //input.onkeydown = function () {
+    //    var key = event.keyCode || event.charCode;
+
+    //    if ((key == 8 || key == 46) && input.text == "") {
+    //        alert("ok")
+    //    }
+
+    //    //return false;
+    //};
+
+    //Search Friend Accounts Autocomplete
+    $("#search-friends-input").autocomplete({
+        source: '/friends/searchfriends',
+        minLength: 0,
         select: function (event, ui) {
             event.preventDefault();
             $("#search-friends-input").val(ui.item.label);
             $("#hidden-friend-search-id").val(ui.item.id);
 
-         /*   SearchResultUserInfos(ui.item.id);*/ //funtion show selected account's infos
+            //SearchResultUserInfos(ui.item.id) //funtion - send message to selected account's hub
 
-            $("#search-friends-input").val("");
-            $("#hidden-friend-search-id").val("");
+            //$("#search-friends-input").val("");
+            //$("#hidden-friend-search-id").val("");
         },
         focus: function (event, ui) {
             event.preventDefault();
             $("#search-friends-input").val(ui.item.label);
         },
         html: true,
-        //open: function () {
-        //    $("ul#ui-id-1").css({
-        //        top: 110 + "px"
-        //    });
-        //}
+        open: function () {
+            $("ul#ui-id-2").css("z-index", "1041");
+            $("#hidden-search-friends-result-count").val = $('ul#ui-id-2 > li').length;
+        }
     })
-        .autocomplete("instance")._renderItem = function (ul, item) {
+
+    $("#search-friends-input").autocomplete("instance")._renderItem = function (ul, item) {
+
+        console.log($('ul#ui-id-2 > li').length)
+
+            //if (item.label != null) {
+            //    let img = "/uploads/default-profile-img.jpg";
+            //    if (item.img != null) {
+            //        img = "https://res.cloudinary.com/djmiksiim/v1/" + item.img;
+            //    }
+            //    $('#search-friend-accounts-wrapper').addClass('d-none');
+            //    return $('#search-friend-accounts-results').empty().append("<li style='z-index: 1042;' class='list-group-item'><div class='media'><div class='avatar avatar-online mr-2'><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'/></div><div class='media-body'><h6 class='text-truncate'><a href='#' class='text-reset'>" + item.value + "</a></h6><p class='text-muted mb-0'>Online</p></div></div></li>");
+            //} else {
+            //    $('#search-friend-accounts-results').empty();
+            //    $('#search-friend-accounts-results').addClass('d-none');
+            //    $('#search-friend-accounts-wrapper').removeClass('d-none');
+            //}
+            
             let img = "/uploads/default-profile-img.jpg";
             if (item.img != null) {
                 img = "https://res.cloudinary.com/djmiksiim/v1/" + item.img;
             }
-            return $("<li><div><div style='display: inline-block; border-radius: 50%; '><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'></div><span style='font-size: 16px;vertical-align: middle;'>" + item.value + "</span></div></li>").appendTo(ul);
+            $('#search-friend-accounts-wrapper').addClass('d-none');
+            return $('#search-friend-accounts-results').append("<li style='z-index: 1042;' class='list-group-item'><div class='media'><div class='avatar avatar-online mr-2'><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'/></div><div class='media-body'><h6 class='text-truncate'><a href='#' class='text-reset'>" + item.value + "</a></h6><p class='text-muted mb-0'>Online</p></div></div></li>");
+
         };
 });
 
