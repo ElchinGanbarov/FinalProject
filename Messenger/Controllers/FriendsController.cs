@@ -65,11 +65,17 @@ namespace Messenger.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SearchFriends()
+        public async Task<IActionResult> SearchFriends(string term)
         {
             try
             {
-                string term =  HttpContext.Request.Query["term"].ToString();
+                //string term =  HttpContext.Request.Query["term"].ToString();
+
+                //if (string.IsNullOrEmpty(term))
+                //{
+                //    return Ok(new { isError = true });
+                //}
+
                 var  results =  _searchRepository.SearchFriendsAccounts(_user.Id, term);
                 return Ok(results);
             }

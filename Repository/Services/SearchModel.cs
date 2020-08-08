@@ -12,6 +12,9 @@ namespace Repository.Services
 
     public class SearchAccount
     {
+        //testing
+        public bool IsError { get; set; }
+
         //public string Label { get; set; }
         public int Id { get; set; }
         //is friends

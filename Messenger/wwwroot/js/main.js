@@ -531,32 +531,67 @@ $(document).ready(function () {
     })
     connection.start();
 
-    //testing!
-    async function checkSearchFriendsInput() {
-
-        let input = document.getElementById('search-friends-input')
-
-        if (input.text == "5") {
-            alert("ok");
-        }
-
-    }
-
-
-
-    //input.onkeydown = function () {
-    //    var key = event.keyCode || event.charCode;
-
-    //    if ((key == 8 || key == 46) && input.text == "") {
-    //        alert("ok")
-    //    }
-
-    //    //return false;
-    //};
-
     //Search Friend Accounts Autocomplete
     $("#search-friends-input").autocomplete({
-        source: '/friends/searchfriends',
+        //source: '/friends/searchfriends',
+
+        source: function (request, response) {
+            $.ajax({
+                url: "/friends/searchfriends",
+                dataType: "json",
+                data: { term: request.term },
+                success: function (data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        let img = "/uploads/default-profile-img.jpg";
+                        //clear old datas
+                        if (i == 0) {
+                            $('#search-friend-accounts-results').empty();
+                            $('#search-friend-accounts-results').removeClass('d-none');
+                            $('#search-friend-accounts-wrapper').addClass('d-none');
+                        }
+
+                        if (data[i].img != null) {
+                            img = "https://res.cloudinary.com/djmiksiim/v1/" + data[i].img;
+                        }
+                        $('#search-friend-accounts-wrapper').addClass('d-none');
+                        $('#search-friend-accounts-results').append("<li style='z-index: 1042;' class='list-group-item'><div class='media'><div class='avatar avatar-online mr-2'><img style='width: 48px; height: 48px; object-fit: cover; border-radius: 50%' src='" + img + "'/></div><div class='media-body'><h6 class='text-truncate'><a href='#' class='text-reset'>" + data[i].label + "</a></h6><p class='text-muted mb-0'>Online</p></div></div></li>");
+
+                    }
+
+                    //if (!data.isError) {
+                    //    let img = "/uploads/default-profile-img.jpg";
+
+                    //    for (var i = 0; i < data.length; i++) {
+
+                    //        //clear old datas
+                    //        if (i == 0) {
+                    //            $('#search-friend-accounts-results').empty();
+                    //            $('#search-friend-accounts-results').removeClass('d-none');
+                    //            $('#search-friend-accounts-wrapper').addClass('d-none');
+                    //        }
+
+                    //        if (data[i].img != null) {
+                    //            img = "https://res.cloudinary.com/djmiksiim/v1/" + data[i].img;
+                    //        }
+                    //        $('#search-friend-accounts-wrapper').addClass('d-none');
+                    //        $('#search-friend-accounts-results').append("<li style='z-index: 1042;' class='list-group-item'><div class='media'><div class='avatar avatar-online mr-2'><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'/></div><div class='media-body'><h6 class='text-truncate'><a href='#' class='text-reset'>" + data[i].label + "</a></h6><p class='text-muted mb-0'>Online</p></div></div></li>");
+
+                    //    }
+                    //} else {
+                    //    $('#search-friend-accounts-results').empty();
+                    //    $('#search-friend-accounts-results').addClass('d-none');
+                    //    $('#search-friend-accounts-wrapper').removeClass('d-none');
+                    //}
+                },
+                error: function () {
+                    $('#search-friend-accounts-results').empty();
+                    $('#search-friend-accounts-results').addClass('d-none');
+                    $('#search-friend-accounts-wrapper').removeClass('d-none');
+                }
+            });
+        },
+
         minLength: 0,
         select: function (event, ui) {
             event.preventDefault();
@@ -603,6 +638,11 @@ $(document).ready(function () {
             $('#search-friend-accounts-wrapper').addClass('d-none');
             return $('#search-friend-accounts-results').append("<li style='z-index: 1042;' class='list-group-item'><div class='media'><div class='avatar avatar-online mr-2'><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'/></div><div class='media-body'><h6 class='text-truncate'><a href='#' class='text-reset'>" + item.value + "</a></h6><p class='text-muted mb-0'>Online</p></div></div></li>");
 
-        };
+    };
+
+    //======================================================================================
+
+    //logger console errors
+
 });
 
