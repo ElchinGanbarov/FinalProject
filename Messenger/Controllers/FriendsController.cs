@@ -69,13 +69,6 @@ namespace Messenger.Controllers
         {
             try
             {
-                //string term =  HttpContext.Request.Query["term"].ToString();
-
-                //if (string.IsNullOrEmpty(term))
-                //{
-                //    return Ok(new { isError = true });
-                //}
-
                 var  results =  _searchRepository.SearchFriendsAccounts(_user.Id, term);
                 return Ok(results);
             }
