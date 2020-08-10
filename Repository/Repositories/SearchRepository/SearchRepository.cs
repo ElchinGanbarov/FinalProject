@@ -95,26 +95,9 @@ namespace Repository.Repositories.SearchRepository
                             results.Add(searchItem);
                         }
 
-                    }
-                      
-                    
-                    //else //not friends
-                    //{
-                    //    SearchAccount searchItem = _accountDetailRepository.GetDatasPublic(currentUserId, item.Id);
-                    //    if (searchItem != null)
-                    //    {
-                    //        results.Add(searchItem);
-                    //    }
-                    //}
+                    }   
                 }
-                //else //search own profile
-                //{
-                //    SearchAccount searchItem = _accountDetailRepository.GetDatasOwn(item.Id);
-                //    if (searchItem != null)
-                //    {
-                //        results.Add(searchItem);
-                //    }
-                //}
+
             }
 
             return results;
