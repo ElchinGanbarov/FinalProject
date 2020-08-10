@@ -533,7 +533,6 @@ $(document).ready(function () {
 
     //Search Friend Accounts Autocomplete
     $("#search-friends-input").autocomplete({
-        //source: '/friends/searchfriends',
 
         source: function (request, response) {
             $.ajax({
@@ -558,31 +557,6 @@ $(document).ready(function () {
                         $('#search-friend-accounts-results').append("<li style='z-index: 1042;' class='list-group-item'><div class='media'><div class='avatar avatar-online mr-2'><img style='width: 48px; height: 48px; object-fit: cover; border-radius: 50%' src='" + img + "'/></div><div class='media-body'><h6 class='text-truncate'><a href='#' class='text-reset'>" + data[i].label + "</a></h6><p class='text-muted mb-0'>Online</p></div></div></li>");
 
                     }
-
-                    //if (!data.isError) {
-                    //    let img = "/uploads/default-profile-img.jpg";
-
-                    //    for (var i = 0; i < data.length; i++) {
-
-                    //        //clear old datas
-                    //        if (i == 0) {
-                    //            $('#search-friend-accounts-results').empty();
-                    //            $('#search-friend-accounts-results').removeClass('d-none');
-                    //            $('#search-friend-accounts-wrapper').addClass('d-none');
-                    //        }
-
-                    //        if (data[i].img != null) {
-                    //            img = "https://res.cloudinary.com/djmiksiim/v1/" + data[i].img;
-                    //        }
-                    //        $('#search-friend-accounts-wrapper').addClass('d-none');
-                    //        $('#search-friend-accounts-results').append("<li style='z-index: 1042;' class='list-group-item'><div class='media'><div class='avatar avatar-online mr-2'><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'/></div><div class='media-body'><h6 class='text-truncate'><a href='#' class='text-reset'>" + data[i].label + "</a></h6><p class='text-muted mb-0'>Online</p></div></div></li>");
-
-                    //    }
-                    //} else {
-                    //    $('#search-friend-accounts-results').empty();
-                    //    $('#search-friend-accounts-results').addClass('d-none');
-                    //    $('#search-friend-accounts-wrapper').removeClass('d-none');
-                    //}
                 },
                 error: function () {
                     $('#search-friend-accounts-results').empty();
@@ -616,21 +590,6 @@ $(document).ready(function () {
 
     $("#search-friends-input").autocomplete("instance")._renderItem = function (ul, item) {
 
-        console.log($('ul#ui-id-2 > li').length)
-
-            //if (item.label != null) {
-            //    let img = "/uploads/default-profile-img.jpg";
-            //    if (item.img != null) {
-            //        img = "https://res.cloudinary.com/djmiksiim/v1/" + item.img;
-            //    }
-            //    $('#search-friend-accounts-wrapper').addClass('d-none');
-            //    return $('#search-friend-accounts-results').empty().append("<li style='z-index: 1042;' class='list-group-item'><div class='media'><div class='avatar avatar-online mr-2'><img style='width: 50px; height: 50px; object-fit: cover; border-radius: 50%' src='" + img + "'/></div><div class='media-body'><h6 class='text-truncate'><a href='#' class='text-reset'>" + item.value + "</a></h6><p class='text-muted mb-0'>Online</p></div></div></li>");
-            //} else {
-            //    $('#search-friend-accounts-results').empty();
-            //    $('#search-friend-accounts-results').addClass('d-none');
-            //    $('#search-friend-accounts-wrapper').removeClass('d-none');
-            //}
-            
             let img = "/uploads/default-profile-img.jpg";
             if (item.img != null) {
                 img = "https://res.cloudinary.com/djmiksiim/v1/" + item.img;
@@ -642,7 +601,50 @@ $(document).ready(function () {
 
     //======================================================================================
 
-    //logger console errors
+    //Call List
+    $(document).ready(function () {
+        $('#callLogTab').on('click', 'li', function (e) {
+            e.preventDefault();
 
+            //call-list-own-wrap
+
+            //call-list-selected-account-wrap
+
+            //call-list-user-photo
+
+            if ($('#callLogTab li.active').hasClass('active')) {
+                $('#callLogTab li.active').removeClass('active')
+            }
+            $(this).addClass('active');
+
+            //show selected accounts's details
+            if ($('.call-list-own-wrap').hasClass('d-none') == false ) {
+                $('.call-list-own-wrap').addClass('d-none')
+                $('.call-list-selected-account-wrap').removeClass('d-none');
+            }
+
+            //selected-account-details-img
+
+            let callLogTab = $('#friendsTab li.active').attr('data-id')
+
+        });
+    })
+
+    // hide selected account's details
+    if ($('.call-list-selected-account-wrap').hasClass('d-none') == false) {
+        $('.hide-call-selected-user-options').click(function (e) {
+            e.preventDefault();
+            if ($('.call-list-own-wrap').hasClass('d-none')) {
+                $('.call-list-own-wrap').removeClass('d-none');
+                $('.call-list-selected-account-wrap').toggleClass('d-none')
+                $('#callLogTab li.active').removeClass('active');
+
+                //reset inputs
+                $(".call-list-user-photo").attr("src", "/uploads/default-profile-img.jpg") //img
+                document.querySelector(".call-list-user-fullname").textContent = ""; //fullname
+                document.querySelector(".call-list-user-phone").textContent = ""; //phone
+            }
+        })
+    }
 });
 
