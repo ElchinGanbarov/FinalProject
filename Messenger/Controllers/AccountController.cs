@@ -226,17 +226,15 @@ namespace Messenger.Controllers
                 {
                     return Ok(new
                     {
-                        message = "Sifre Yanlisdir",
+                        message = "Password is Not Valid!",
                         status=false
                     });
                 }
-
-                
                 if(_authRepository.UpdatePassword(_user.Id, UpdatePasswordViewModel.Password))
                 {
                     return Ok(new
                     {
-                        message = "Sifreniz deisdirildi.",
+                        message = "Password Updated Successfully!",
                         status = true
                     });
                 }

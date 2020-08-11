@@ -105,6 +105,7 @@ namespace Repository.Repositories.AuthRepositories
         {
             _user.Name = user.Name;
             _user.Surname = user.Surname;
+            _user.Fullname = user.Name + " " + user.Surname;
             _user.Email = user.Email;
             _user.Phone = user.Phone;
             _user.Website = user.Website;
