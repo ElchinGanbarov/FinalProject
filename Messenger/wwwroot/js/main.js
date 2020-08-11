@@ -143,6 +143,19 @@ $(document).ready(function () {
         e.preventDefault();
     })
 
+    //Sweet Alert Voice Buttons (STATIC !!!)
+    $(".voice-call-now").click(function (e) {
+
+        Swal.fire({
+            type: 'info',
+            title: 'Oops...',
+            text: 'You are using a basic account. Switch to Premium Messenger App Account to use voice and video calls!',
+            footer: '<a href>Get Premium Account Now!</a>'
+        })
+        e.preventDefault();
+
+    })
+
     //====================================================================
 
     //Search All Accounts with Autocomplete
@@ -601,16 +614,11 @@ $(document).ready(function () {
 
     //======================================================================================
 
+
     //Call List
     $(document).ready(function () {
         $('#callLogTab').on('click', 'li', function (e) {
             e.preventDefault();
-
-            //call-list-own-wrap
-
-            //call-list-selected-account-wrap
-
-            //call-list-user-photo
 
             if ($('#callLogTab li.active').hasClass('active')) {
                 $('#callLogTab li.active').removeClass('active')
@@ -623,28 +631,87 @@ $(document).ready(function () {
                 $('.call-list-selected-account-wrap').removeClass('d-none');
             }
 
-            //selected-account-details-img
+            let accountId = $('#callLogTab li.active').attr('data-id')
+            $.ajax({
+                url: '/friends/getfriendinfo',
+                type: "POST",
+                dataType: "json",
+                data:
+                {
+                    friendId: accountId
+                },
+                success: function (res) {
 
-            let callLogTab = $('#friendsTab li.active').attr('data-id')
+                    //let btnSendFriendRequest = $('.btn-send-friend-request');
+                    //let btnRemoveFriend = $('.btn-remove-friend');
+                    //let btnCancelFriendRequest = $('.btn-reject-friend-request');
+                    //let btnAcceptFriendRequest = $('.btn-accept-friend-request');
+
+
+                    if ($('.call-list-own-wrap').hasClass('d-none') == false) {
+                        $('.call-list-own-wrap').addClass('d-none');
+                        $('.call-list-selected-account-wrap').removeClass('d-none');
+                    }
+
+
+                    //if (btnSendFriendRequest.hasClass('d-none') == false) {
+                    //    btnSendFriendRequest.addClass('d-none')
+                    //}
+                    //if (btnCancelFriendRequest.hasClass('d-none') == false) {
+                    //    btnCancelFriendRequest.addClass('d-none')
+                    //}
+                    //if (btnAcceptFriendRequest.hasClass('d-none') == false) {
+                    //    btnAcceptFriendRequest.addClass('d-none')
+                    //}
+                    //if (btnRemoveFriend.hasClass('d-none')) {
+                    //    btnRemoveFriend.removeClass('d-none')
+                    //}
+
+
+                    //id
+                    document.querySelector("#call-hidden-selected-user-id").textContent = res.id;
+                    //img
+                    if (res.img != null) {
+                        $(".call-list-user-photo").attr("src", "https://res.cloudinary.com/djmiksiim/v1/" + res.img)
+                    } else {
+                        $(".call-list-user-photo").attr("src", "/uploads/default-profile-img.jpg")
+                    }
+
+                    document.querySelector(".call-list-user-fullname").textContent = res.label; //fullname
+                    document.querySelector(".call-list-user-phone").textContent = res.phone;
+
+                },
+                error: function (res) {
+                    $.toast({
+                        heading: 'Error',
+                        text: "System Error 500 ! All Friends Not Response!",
+                        icon: 'error',
+                        loader: true,
+                        bgColor: '#dc3545',
+                        loaderBg: '#f7d40d',
+                        position: 'top-right',
+                        hideAfter: 6000
+                    });
+                }
+            });
 
         });
     })
 
     // hide selected account's details
-    if ($('.call-list-selected-account-wrap').hasClass('d-none') == false) {
-        $('.hide-call-selected-user-options').click(function (e) {
-            e.preventDefault();
-            if ($('.call-list-own-wrap').hasClass('d-none')) {
-                $('.call-list-own-wrap').removeClass('d-none');
-                $('.call-list-selected-account-wrap').toggleClass('d-none')
-                $('#callLogTab li.active').removeClass('active');
+    $('.hide-call-selected-user-options').click(function (e) {
+        e.preventDefault();
+        if ($('.call-list-own-wrap').hasClass('d-none')) {
+            $('.call-list-own-wrap').removeClass('d-none');
+            $('.call-list-selected-account-wrap').toggleClass('d-none')
+            $('#callLogTab li.active').removeClass('active');
 
-                //reset inputs
-                $(".call-list-user-photo").attr("src", "/uploads/default-profile-img.jpg") //img
-                document.querySelector(".call-list-user-fullname").textContent = ""; //fullname
-                document.querySelector(".call-list-user-phone").textContent = ""; //phone
-            }
-        })
-    }
+            //reset inputs
+            $(".call-list-user-photo").attr("src", "/uploads/default-profile-img.jpg") //img
+            document.querySelector(".call-list-user-fullname").textContent = ""; //fullname
+            document.querySelector(".call-list-user-phone").textContent = ""; //phone
+            document.querySelector("#call-hidden-selected-user-id").textContent = "";
+        }
+    })
 });
 

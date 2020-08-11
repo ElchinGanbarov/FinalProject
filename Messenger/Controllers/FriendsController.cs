@@ -69,13 +69,6 @@ namespace Messenger.Controllers
         {
             try
             {
-                //string term =  HttpContext.Request.Query["term"].ToString();
-
-                //if (string.IsNullOrEmpty(term))
-                //{
-                //    return Ok(new { isError = true });
-                //}
-
                 var  results =  _searchRepository.SearchFriendsAccounts(_user.Id, term);
                 return Ok(results);
             }
@@ -169,9 +162,9 @@ namespace Messenger.Controllers
         {
             //Account account = _friendsRepository.GetFriendById(9025);
             //return Ok(account);
-
+            return Ok(_accountDetailRepository.GetDatasFriend(9025));
             //return Ok(_accountDetailRepository.GetDatasPublic(3024, 9025));
-            return Ok(_searchRepository.SearchFriendsAccounts(_user.Id, "pe"));
+            //return Ok(_searchRepository.SearchFriendsAccounts(_user.Id, "pe"));
         }
     }
 }
