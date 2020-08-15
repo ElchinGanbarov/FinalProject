@@ -1138,5 +1138,134 @@ $(document).ready(function () {
             document.querySelector("#call-hidden-selected-user-id").textContent = "";
         }
     })
+
+
+
+    //=======================================================================================
+
+    //send invitation mail
+    $("#btn-send-invitation-email").click(function (e) {
+        e.preventDefault();
+
+        var isValidEmail = true;
+        var isValidText = true;
+
+        var regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        if (regex.test($("#InvitationEmailViewModel_ReceiverEmail").val()) == false) {
+            $('.send-invitation-email-error').css("display", "block")
+
+            $.toast({
+                heading: 'Error',
+                text: "Please, enter valid email address",
+                icon: 'error',
+                loader: true,
+                bgColor: '#dc3545',
+                loaderBg: '#f7d40d',
+                position: 'top-right',
+                hideAfter: 6000
+            });
+
+            isValidEmail = false;
+        }
+
+        if ($("#InvitationEmailViewModel_Text").val().trim().length < 10) {
+            $.toast({
+                heading: 'Error',
+                text: "Message text must be minimum 10 characters",
+                icon: 'error',
+                loader: true,
+                bgColor: '#dc3545',
+                loaderBg: '#f7d40d',
+                position: 'top-right',
+                hideAfter: 6000
+            });
+
+            isValidEmail = false;
+        }
+
+        if ($("#InvitationEmailViewModel_Text").val().trim().length > 200) {
+            $.toast({
+                heading: 'Error',
+                text: "Message text must be maximum 200 characters",
+                icon: 'error',
+                loader: true,
+                bgColor: '#dc3545',
+                loaderBg: '#f7d40d',
+                position: 'top-right',
+                hideAfter: 6000
+            });
+
+            isValidEmail = false;
+        }
+
+        if (isValidEmail == true && isValidText == true) {
+            $.ajax({
+                url: '/friends/SendInvitationEmail',
+                type: "POST",
+                dataType: "json",
+                data:
+                {
+                    senderFullname: "",
+                    receiverEmail: $("#InvitationEmailViewModel_ReceiverEmail").val().trim(),
+                    text: $("#InvitationEmailViewModel_Text").val().trim()
+                },
+                beforeSend: function () {
+                    $.toast({
+                        heading: 'Sending email...',
+                        text: "Please, wait for sending email",
+                        icon: 'info',
+                        loader: true,
+                        bgColor: '#3988ff',
+                        loaderBg: '#f7d40d',
+                        position: 'top-right',
+                        hideAfter: 10000
+                    });
+
+                    $("#inviteOthers").modal('hide');
+                },
+                success: function (res) {
+                    if (res.status) {
+                        $.toast({
+                            heading: 'Info',
+                            text: "The invitation mail has been sent successfully!",
+                            icon: 'info',
+                            loader: true,
+                            bgColor: '#3988ff',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 6000
+                        });
+                        $('.send-invitation-email-error').css("display", "none")
+                        $("#InvitationEmailViewModel_ReceiverEmail").val("");
+                        $("#InvitationEmailViewModel_Text").val("This application awesome and useful! You can use this free! Sign up now and enjoy...");
+                    };
+                    if (res.status == false) {
+                        $.toast({
+                            heading: 'Error',
+                            text: "Send invitation mail has been failed!",
+                            icon: 'error',
+                            loader: true,
+                            bgColor: '#dc3545',
+                            loaderBg: '#f7d40d',
+                            position: 'top-right',
+                            hideAfter: 6000
+                        });
+                    }
+                },
+                error: function (res) {
+                    $.toast({
+                        heading: 'Error',
+                        text: "System Error 500 !",
+                        icon: 'error',
+                        loader: true,
+                        bgColor: '#dc3545',
+                        loaderBg: '#f7d40d',
+                        position: 'top-right',
+                        hideAfter: 6000
+                    });
+                }
+            });
+        }
+    })
 });
 

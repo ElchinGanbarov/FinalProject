@@ -4,11 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Messenger.Filters;
+using Messenger.Models.AccountDetail;
+using Messenger.Models.Email;
+using Messenger.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AccountRepository;
 using Repository.Repositories.AuthRepositories;
 using Repository.Repositories.SearchRepository;
+using Repository.Services;
 
 namespace Messenger.Controllers
 {
@@ -20,6 +24,7 @@ namespace Messenger.Controllers
         private readonly IMapper _mapper;
         private readonly IFriendsRepository _friendsRepository;
         private readonly ISearchRepository _searchRepository;
+        private readonly ISendEmail _sendEmailRepository;
         private Repository.Models.Account _user => RouteData.Values["User"] as Repository.Models.Account;
 
 
@@ -27,13 +32,15 @@ namespace Messenger.Controllers
                                        IMapper mapper,
                                        IAccountDetailRepository accountDetailRepository,
                                        IFriendsRepository friendsRepository,
-                                       ISearchRepository searchRepository)
+                                       ISearchRepository searchRepository,
+                                       ISendEmail sendEmail)
         {
             _authRepository = authRepository;
             _accountDetailRepository = accountDetailRepository;
             _mapper = mapper;
             _friendsRepository = friendsRepository;
             _searchRepository = searchRepository;
+            _sendEmailRepository = sendEmail;
         }
 
         [HttpPost]
@@ -155,6 +162,26 @@ namespace Messenger.Controllers
         }
 
         #endregion
+
+        //Send invitation messages
+        [HttpPost]
+        public IActionResult SendInvitationEmail(InvitationEmailViewModel invitationEmailViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                invitationEmailViewModel.SenderFullname = _user.Fullname;
+                string link = HttpContext.Request.Scheme + "://" + Request.Host;
+
+                _sendEmailRepository.InvitationEmail(invitationEmailViewModel.ReceiverEmail, invitationEmailViewModel.Text, invitationEmailViewModel.SenderFullname, link);
+
+                return Ok(new { status = true });
+
+            }
+            else
+            {
+                return Ok(new { status = false });
+            }
+        }
 
         //testing
 

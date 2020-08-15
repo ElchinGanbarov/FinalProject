@@ -49,20 +49,27 @@ using Messenger.Models.Friend;
 #nullable disable
 #nullable restore
 #line 6 "C:\Users\User\Desktop\FinalProject\Messenger\Views\_ViewImports.cshtml"
-using Repository.Services;
+using Messenger.Models.Email;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "C:\Users\User\Desktop\FinalProject\Messenger\Views\_ViewImports.cshtml"
+using Repository.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "C:\Users\User\Desktop\FinalProject\Messenger\Views\_ViewImports.cshtml"
 using Repository.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5ccd11b23335c1b96cd71158b3d2c8af5614ffe9", @"/Views/Account/VerifyEmail.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5e2294ef8717b546cc550f87ac9013c75924594b", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d8975dfcb4398d0541ceea45d1904c00e4b2d34c", @"/Views/_ViewImports.cshtml")]
     public class Views_Account_VerifyEmail : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("font-weight-semibold"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -109,7 +116,7 @@ using Repository.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe97269", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe97451", async() => {
                 WriteLiteral(@"
 
     <!-- Main Layout Start -->
@@ -127,7 +134,7 @@ using Repository.Models;
 #line hidden
 #nullable disable
                 WriteLiteral("                        <h1 class=\"font-weight-bold\">Your account already verified !</h1>\r\n                        <p>\r\n                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe98231", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe98413", async() => {
                     WriteLiteral("Continue");
                 }
                 );
@@ -174,7 +181,7 @@ using Repository.Models;
 #line hidden
 #nullable disable
                 WriteLiteral("                            <p class=\"text-dark mb-3\">\r\n                                If you are having trouble getting a confirmation link or signin your account \r\n                                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe910929", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe911111", async() => {
                     WriteLiteral("\r\n                                    try again to get a confirmation link\r\n                                ");
                 }
                 );
@@ -203,7 +210,7 @@ using Repository.Models;
 #line hidden
 #nullable disable
                 WriteLiteral("                            <p>\r\n                                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe912938", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe913120", async() => {
                     WriteLiteral("Start");
                 }
                 );
@@ -246,7 +253,7 @@ using Repository.Models;
             WriteLiteral("\r\n");
             DefineSection("Scripts", async() => {
                 WriteLiteral("\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe915841", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe916023", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -260,7 +267,7 @@ using Repository.Models;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe916941", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ccd11b23335c1b96cd71158b3d2c8af5614ffe917123", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

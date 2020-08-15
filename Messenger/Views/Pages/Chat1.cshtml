@@ -3660,6 +3660,7 @@
             </main>
             <!-- Main End -->
             <!-- All Modals Start -->
+
             <!-- Modal 1 :: Start a Conversation-->
             <div class="modal modal-lg-fullscreen fade" id="startConversation" tabindex="-1" role="dialog" aria-labelledby="startConversationLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -3731,9 +3732,6 @@
                                         }
 
                                         <!-- List Group Item End -->
-
-
-
 
                                     </ul>
                                     <!-- List Group End -->
@@ -3979,7 +3977,7 @@
                 </div>
             </div>
 
-            <!-- Modal 3 :: Invite Others -->
+            <!-- Modal 3 :: Invite Others (email)-->
             <div class="modal modal-lg-fullscreen fade" id="inviteOthers" tabindex="-1" role="dialog" aria-labelledby="inviteOthersLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
@@ -3990,29 +3988,41 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body hide-scrollbar">
-                            <form>
+                        <form method="post" asp-controller="friends" asp-action="SendInvitationEmail">
+                            <div class="modal-body hide-scrollbar">
+
                                 <div class="row">
                                     <div class="col-12">
+                                        <!--current user-->
+                                        <input type="hidden" class="test-hidden-account-fullname"
+                                               asp-for="@Model.InvitationEmailViewModel.SenderFullname" value="@account.Fullname" />
                                         <div class="form-group">
-                                            <label for="inviteEmailAddress">Email address</label>
-                                            <input type="email" class="form-control form-control-md" id="inviteEmailAddress" placeholder="Type email address here" value="">
+                                            <label asp-for="@Model.InvitationEmailViewModel.ReceiverEmail">Email address</label>
+                                            <input required type="email"
+                                                   asp-for="@Model.InvitationEmailViewModel.ReceiverEmail"
+                                                   class="form-control js-email-validation-email form-control-md" placeholder="Type email address here" value="">
+                                            @*<span class="text-danger" asp-validation-for="@Model.InvitationEmailViewModel.ReceiverEmail"></span>*@
+                                            <span class="text-danger send-invitation-email-error" style="display: none;">Please, enter valid email address</span>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="inviteMessage">Invitation message</label>
-                                            <textarea class="form-control form-control-md no-resize hide-scrollbar" id="inviteMessage" placeholder="Write your message here" rows="3"></textarea>
+                                            <label asp-for="@Model.InvitationEmailViewModel.Text">Invitation message</label>
+                                            <input asp-for="@Model.InvitationEmailViewModel.Text"
+                                                      class="form-control form-control-md no-resize hide-scrollbar"
+                                                      placeholder="Write your message here"
+                                                   value="This application awesome and useful! You can use this free! Sign up now and enjoy..."/>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-link text-muted" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send Invitation</button>
-                        </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link text-muted" data-dismiss="modal">Close</button>
+                                <button type="submit" id="btn-send-invitation-email" class="btn btn-primary">Send Invitation</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

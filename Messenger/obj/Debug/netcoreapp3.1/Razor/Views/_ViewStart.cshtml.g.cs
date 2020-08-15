@@ -49,20 +49,27 @@ using Messenger.Models.Friend;
 #nullable disable
 #nullable restore
 #line 6 "C:\Users\User\Desktop\FinalProject\Messenger\Views\_ViewImports.cshtml"
-using Repository.Services;
+using Messenger.Models.Email;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "C:\Users\User\Desktop\FinalProject\Messenger\Views\_ViewImports.cshtml"
+using Repository.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "C:\Users\User\Desktop\FinalProject\Messenger\Views\_ViewImports.cshtml"
 using Repository.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5e2294ef8717b546cc550f87ac9013c75924594b", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d8975dfcb4398d0541ceea45d1904c00e4b2d34c", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

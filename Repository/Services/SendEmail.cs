@@ -14,6 +14,9 @@ namespace Repository.Services
 
         //reset password
         void ResetPassword(Account account);
+
+        //invitation Email
+        void InvitationEmail(string receiverEmail, string text, string senderFullname, string link);
     }
 
     public class SendEmail : ISendEmail
@@ -22,6 +25,46 @@ namespace Repository.Services
         public SendEmail(MessengerDbContext context)
         {
             _context = context;
+        }
+
+        //invitation Email
+        public void InvitationEmail(string receiverEmail, string text, string senderFullname, string link)
+        {
+            var fromEmail = new MailAddress("parvinkhp@code.edu.az", "Messenger App");
+            var fromEmailPassword = "Pervin_1997";
+            var toEmail = new MailAddress(receiverEmail);
+            var appeal = "Hi, " + receiverEmail + ". ";
+            var subject = senderFullname + " invites you to use Messenger App!";
+            //Talk to Your Friends Voice and Video Calls
+            var messageBody = "</br> " +
+                "<div style=' background-color: #665dfe; padding: 20px 0px;'> " +
+                "<h2 style='padding: 10px 30px; font-size: 29px; color: #fff;'>" + appeal + 
+                senderFullname + " invites you to use Messenger App! " + "</br>" +
+                text + "</br>" +
+                "<p style='font-size=16px; color: #fff;'>In Messenger Application you can Talk to Your Friends, Send Voice messages and Video Calls</p> " +
+                "<center><a style='display: inline-block; background-color: #28a745; font-weight: bold; color: #fff; padding: 10px; " +
+                "text-align: center; text-decoration: none; border: 1px solid transparent; font-size: 22px; border-radius: 5px; line-height: 1.5;' " +
+                "href=" + link + ">Get Started</a></center>" +
+                "</br><h3 style='margin: 0px; padding: 10px 30px; font-size: 15px; color: #fff;'>" + DateTime.Now.Year +
+                " Messenger Application © by Elchin Ganbarov & Pervin Pashazade </h3>";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = messageBody,
+                IsBodyHtml = true
+            };
+            smtp.Send(message);
         }
 
         //sign up - verificarion email

@@ -2,6 +2,7 @@
 using Messenger.Models.AccountDetail;
 using Messenger.Models.AccountPrivacySecurity;
 using Messenger.Models.Friend;
+using Messenger.Models.Email;
 using Repository.Models;
 using System.Collections.Generic;
 
@@ -16,6 +17,7 @@ namespace Messenger.Models.General
         public AccountSecurityViewModel AccountSecurityViewModel { get; set; }
         public FriendViewModel FriendViewModel { get; set; }
         public ICollection<AccountViewModel> AccountViewModels { get; set; }
-      
+        public InvitationEmailViewModel InvitationEmailViewModel { get; set; }
+
     }
 }
