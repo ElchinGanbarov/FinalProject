@@ -28,13 +28,13 @@ namespace Repository.Repositories.AccountRepository
     public class FriendsRepository : IFriendsRepository
     {
         private readonly MessengerDbContext _context;
-        private readonly INotificationRepository _notificationRepository;
+        //private readonly INotificationRepository _notificationRepository;
 
-        public FriendsRepository(MessengerDbContext context,
-                                 INotificationRepository notificationRepository)
+        public FriendsRepository(MessengerDbContext context
+                                 /*INotificationRepository notificationRepository*/)
         {
             _context = context;
-            _notificationRepository = notificationRepository;
+            //_notificationRepository = notificationRepository;
         }
 
         public ICollection<Account> GetAllFriends(int userId)
@@ -176,7 +176,7 @@ namespace Repository.Repositories.AccountRepository
                     IsRead = false
                 };
 
-                _notificationRepository.Create(newNotification, toUserId);
+                //_notificationRepository.Create(newNotification, toUserId);
             }
         }
 

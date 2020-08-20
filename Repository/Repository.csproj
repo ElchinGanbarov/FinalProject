@@ -5,17 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200628234041_AccountEmailVerificationPropsAdded.cs" />
-    <Compile Remove="Migrations\20200628234041_AccountEmailVerificationPropsAdded.Designer.cs" />
-    <Compile Remove="Migrations\20200628234208_AccountEmailVerificationPropsAdded.cs" />
-    <Compile Remove="Migrations\20200628234208_AccountEmailVerificationPropsAdded.Designer.cs" />
-    <Compile Remove="Migrations\20200628235601_AccountVerifyEmailPropsAdded.cs" />
-    <Compile Remove="Migrations\20200628235601_AccountVerifyEmailPropsAdded.Designer.cs" />
-    <Compile Remove="Migrations\20200629001036_AccountVerifyEmailAdded.cs" />
-    <Compile Remove="Migrations\20200629001036_AccountVerifyEmailAdded.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.11.0" />
     <PackageReference Include="CryptoHelper" Version="3.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />

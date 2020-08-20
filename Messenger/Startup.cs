@@ -17,6 +17,7 @@ using Repository.Repositories.AuthRepositories;
 using Repository.Repositories.SearchRepository;
 using Repository.Repositories.SignalRepository;
 using Repository.Services;
+using Website.Hubs;
 
 namespace Messenger
 {
@@ -46,9 +47,10 @@ namespace Messenger
             services.AddTransient<IFileManager, FileManager>();
             services.AddTransient<ISendEmail, SendEmail>();  //For send email service
             services.AddTransient<ISearchRepository, SearchRepository>();
-            services.AddTransient<INotificationRepository, NotificationRepository>();
+            //services.AddTransient<INotificationRepository, NotificationRepository>();
+            services.AddTransient<IFriendsRepository, FriendsRepository>();
 
-            services.AddTransient<IFriendsRepository, FriendsRepository>();  //testing
+            services.AddTransient<ISignalrRepository, SignalrRepository>();  //testing
 
             services.AddSignalR();
         }
@@ -83,7 +85,7 @@ namespace Messenger
                     pattern: "{controller=quickymessanger}/{action=index}/{id?}");
 
                 //SignalR
-                endpoints.MapHub<SignalServer>("/signalServer");
+                endpoints.MapHub<RealTimeHub>("/realTimeHub");
             });
         }
     }

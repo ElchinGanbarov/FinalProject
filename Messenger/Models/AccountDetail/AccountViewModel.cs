@@ -7,9 +7,9 @@ namespace Messenger.Models.AccountDetail
 {
     public class AccountViewModel
     {
+        public int Id { get; set; }
         public string Fullname { get; set; }
         public string ProfileImg { get; set; }
-
 
     }
 }

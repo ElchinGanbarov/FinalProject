@@ -163,40 +163,6 @@ namespace Repository.Migrations
                     b.ToTable("AccountFavMessages");
                 });
 
-            modelBuilder.Entity("Repository.Models.AccountFriend", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AddedBy")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("AddedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("AccountFriend");
-                });
-
             modelBuilder.Entity("Repository.Models.AccountHubs", b =>
                 {
                     b.Property<int>("Id")
@@ -432,45 +398,6 @@ namespace Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Friends");
-                });
-
-            modelBuilder.Entity("Repository.Models.FriendShip", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountFriendId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AddedBy")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("AddedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountFriendId");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("FriendShip");
                 });
 
             modelBuilder.Entity("Repository.Models.Group", b =>
@@ -773,15 +700,6 @@ namespace Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Repository.Models.AccountFriend", b =>
-                {
-                    b.HasOne("Repository.Models.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Repository.Models.AccountHubs", b =>
                 {
                     b.HasOne("Repository.Models.Account", "Account")
@@ -819,21 +737,6 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Repository.Models.Account", "Account")
                         .WithMany("AccountSocialLinks")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Repository.Models.FriendShip", b =>
-                {
-                    b.HasOne("Repository.Models.AccountFriend", "AccountFriend")
-                        .WithMany("Friendships")
-                        .HasForeignKey("AccountFriendId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Repository.Models.Account", "Account")
-                        .WithMany("Friendships")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

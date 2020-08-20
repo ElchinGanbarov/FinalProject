@@ -5,6 +5,7 @@ using Messenger.Models.Friend;
 using Messenger.Models.Email;
 using Repository.Models;
 using System.Collections.Generic;
+using Messenger.Models.Chat;
 
 namespace Messenger.Models.General
 {
@@ -18,6 +19,7 @@ namespace Messenger.Models.General
         public FriendViewModel FriendViewModel { get; set; }
         public ICollection<AccountViewModel> AccountViewModels { get; set; }
         public InvitationEmailViewModel InvitationEmailViewModel { get; set; }
+        public ICollection<AccountHubsViewModel> AccountHubsViewModel { get; set; }
 
     }
 }

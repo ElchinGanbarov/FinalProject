@@ -960,15 +960,6 @@ $(document).ready(function () {
         });
     }
 
-    //let connection = new signalR.HubConnection("/signalServer");
-
-    var connection = new signalR.HubConnectionBuilder().withUrl("/signalServer").build();
-
-    connection.on('displayNewFriendRequestNotification', () => {
-        getNotification();
-    })
-    connection.start();
-
     //Search Friend Accounts Autocomplete
     $("#search-friends-input").autocomplete({
 
@@ -1138,7 +1129,6 @@ $(document).ready(function () {
             document.querySelector("#call-hidden-selected-user-id").textContent = "";
         }
     })
-
 
 
     //=======================================================================================

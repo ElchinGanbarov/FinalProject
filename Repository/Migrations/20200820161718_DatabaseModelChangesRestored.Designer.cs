@@ -10,8 +10,8 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    [Migration("20200630142635_UpdateDatabase")]
-    partial class UpdateDatabase
+    [Migration("20200820161718_DatabaseModelChangesRestored")]
+    partial class DatabaseModelChangesRestored
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,10 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<string>("Fullname")
+                        .HasColumnType("nvarchar(101)")
+                        .HasMaxLength(101);
+
                     b.Property<bool>("IsEmailVerified")
                         .HasColumnType("bit");
 
@@ -92,6 +96,10 @@ namespace Repository.Migrations
                     b.Property<string>("ProfileImg")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
+
+                    b.Property<string>("ResetPasswordCode")
+                        .HasColumnType("nvarchar(6)")
+                        .HasMaxLength(6);
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
@@ -202,6 +210,9 @@ namespace Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("AcceptAllMessages")
+                        .HasColumnType("bit");
 
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
@@ -348,6 +359,47 @@ namespace Repository.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("AccountSocialLinks");
+                });
+
+            modelBuilder.Entity("Repository.Models.Friend", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FromUserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("StatusCode")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Friends");
                 });
 
             modelBuilder.Entity("Repository.Models.Group", b =>
@@ -589,6 +641,52 @@ namespace Repository.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("Repository.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("Repository.Models.AccountFavMessages", b =>
                 {
                     b.HasOne("Repository.Models.Account", "Account")
@@ -705,6 +803,15 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Models.Hub", "Hub")
                         .WithMany("Messages")
                         .HasForeignKey("HubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Repository.Models.Notification", b =>
+                {
+                    b.HasOne("Repository.Models.Account", "Account")
+                        .WithMany("Notifications")
+                        .HasForeignKey("ReceiverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

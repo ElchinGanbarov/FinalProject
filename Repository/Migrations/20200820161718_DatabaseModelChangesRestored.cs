@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class firstMigration : Migration
+    public partial class DatabaseModelChangesRestored : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,17 +13,29 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Surname = table.Column<string>(maxLength: 50, nullable: false),
+                    Fullname = table.Column<string>(maxLength: 101, nullable: true),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
                     Phone = table.Column<string>(maxLength: 15, nullable: false),
                     Password = table.Column<string>(maxLength: 100, nullable: false),
-                    Token = table.Column<string>(maxLength: 100, nullable: false),
-                    ForgetToken = table.Column<string>(maxLength: 100, nullable: false),
+                    Birthday = table.Column<DateTime>(nullable: true),
+                    ProfileImg = table.Column<string>(maxLength: 100, nullable: true),
+                    Token = table.Column<string>(maxLength: 100, nullable: true),
+                    ForgetToken = table.Column<string>(maxLength: 100, nullable: true),
+                    ResetPasswordCode = table.Column<string>(maxLength: 6, nullable: true),
+                    IsEmailVerified = table.Column<bool>(nullable: false),
+                    EmailActivationCode = table.Column<string>(maxLength: 100, nullable: true),
+                    Address = table.Column<string>(maxLength: 50, nullable: true),
+                    Website = table.Column<string>(maxLength: 100, nullable: true),
+                    LastLogin = table.Column<DateTime>(nullable: true),
+                    LastSeen = table.Column<DateTime>(nullable: true),
+                    StatusText = table.Column<string>(maxLength: 50, nullable: true),
                     IsOnline = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -32,53 +44,41 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Friends",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    FromUserId = table.Column<int>(nullable: false),
+                    ToUserId = table.Column<int>(nullable: false),
+                    StatusCode = table.Column<int>(nullable: false),
+                    IsConfirmed = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friends", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Hubs",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true)
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Hubs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AccountDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    AccountId = table.Column<int>(nullable: false),
-                    Birthday = table.Column<DateTime>(nullable: false),
-                    Website = table.Column<string>(maxLength: 100, nullable: true),
-                    Address = table.Column<string>(maxLength: 50, nullable: true),
-                    ProfileImg = table.Column<string>(maxLength: 100, nullable: true),
-                    LastLogin = table.Column<DateTime>(nullable: false),
-                    LastSeen = table.Column<DateTime>(nullable: false),
-                    StatusText = table.Column<string>(maxLength: 50, nullable: true),
-                    Facebook = table.Column<string>(maxLength: 100, nullable: true),
-                    Twitter = table.Column<string>(maxLength: 100, nullable: true),
-                    Instagram = table.Column<string>(maxLength: 100, nullable: true),
-                    Linkedin = table.Column<string>(maxLength: 100, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AccountDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AccountDetails_Accounts_AccountId",
-                        column: x => x.AccountId,
-                        principalTable: "Accounts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,11 +87,13 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     AccountId = table.Column<int>(nullable: false),
+                    AcceptAllMessages = table.Column<bool>(nullable: false),
                     Birthday = table.Column<bool>(nullable: false),
                     Website = table.Column<bool>(nullable: false),
                     Phone = table.Column<bool>(nullable: false),
@@ -101,10 +103,7 @@ namespace Repository.Migrations
                     LastLogin = table.Column<bool>(nullable: false),
                     LastSeen = table.Column<bool>(nullable: false),
                     StatusText = table.Column<bool>(nullable: false),
-                    Facebook = table.Column<bool>(nullable: false),
-                    Twitter = table.Column<bool>(nullable: false),
-                    Instagram = table.Column<bool>(nullable: false),
-                    Linkedin = table.Column<bool>(nullable: false)
+                    SocialLink = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,10 +122,11 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     AccountId = table.Column<int>(nullable: false),
                     TwoFactoryAuth = table.Column<bool>(nullable: false),
                     LoginAlerts = table.Column<bool>(nullable: false)
@@ -143,15 +143,72 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AccountSocialLinks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    AccountId = table.Column<int>(nullable: false),
+                    Facebook = table.Column<string>(maxLength: 100, nullable: true),
+                    Twitter = table.Column<string>(maxLength: 100, nullable: true),
+                    Instagram = table.Column<string>(maxLength: 100, nullable: true),
+                    Linkedin = table.Column<string>(maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccountSocialLinks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AccountSocialLinks_Accounts_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    SenderId = table.Column<string>(nullable: true),
+                    ReceiverId = table.Column<int>(nullable: false),
+                    Type = table.Column<int>(nullable: false),
+                    Text = table.Column<string>(nullable: true),
+                    IsRead = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Accounts_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AccountHubs",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     AccountId = table.Column<int>(nullable: false),
                     HubId = table.Column<int>(nullable: false)
                 },
@@ -178,10 +235,11 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Photo = table.Column<string>(maxLength: 100, nullable: false),
                     HubId = table.Column<int>(nullable: false)
@@ -203,10 +261,11 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     HubId = table.Column<int>(nullable: false),
                     AccountId = table.Column<int>(nullable: false),
                     File = table.Column<string>(maxLength: 100, nullable: false),
@@ -235,10 +294,11 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     HubId = table.Column<int>(nullable: false),
                     AccountId = table.Column<int>(nullable: false),
                     Text = table.Column<string>(maxLength: 300, nullable: false)
@@ -266,10 +326,11 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     GroupId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -289,10 +350,11 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     AccountId = table.Column<int>(nullable: false),
                     MessageId = table.Column<int>(nullable: false)
                 },
@@ -319,10 +381,11 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    ModifiedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 100, nullable: true),
-                    ModifiedBy = table.Column<string>(maxLength: 100, nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(maxLength: 50, nullable: true),
                     AccountId = table.Column<int>(nullable: false),
                     GroupAccountId = table.Column<int>(nullable: false)
                 },
@@ -342,11 +405,6 @@ namespace Repository.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AccountDetails_AccountId",
-                table: "AccountDetails",
-                column: "AccountId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AccountFavMessages_AccountId",
@@ -376,6 +434,11 @@ namespace Repository.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AccountSecurities_AccountId",
                 table: "AccountSecurities",
+                column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccountSocialLinks_AccountId",
+                table: "AccountSocialLinks",
                 column: "AccountId");
 
             migrationBuilder.CreateIndex(
@@ -417,13 +480,15 @@ namespace Repository.Migrations
                 name: "IX_Messages_HubId",
                 table: "Messages",
                 column: "HubId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifications_ReceiverId",
+                table: "Notifications",
+                column: "ReceiverId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AccountDetails");
-
             migrationBuilder.DropTable(
                 name: "AccountFavMessages");
 
@@ -437,10 +502,19 @@ namespace Repository.Migrations
                 name: "AccountSecurities");
 
             migrationBuilder.DropTable(
+                name: "AccountSocialLinks");
+
+            migrationBuilder.DropTable(
+                name: "Friends");
+
+            migrationBuilder.DropTable(
                 name: "GroupMembers");
 
             migrationBuilder.DropTable(
                 name: "HubFiles");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "Messages");

@@ -18,17 +18,17 @@ namespace Messenger.Controllers
     {
         private Repository.Models.Account _user => RouteData.Values["User"] as Repository.Models.Account;
         private IAuthRepository _authRepository;
-        private INotificationRepository _notificationRepository;
+        //private INotificationRepository _notificationRepository;
         private readonly IMapper _mapper;
         private ISendEmail _sendEmailRepository;
 
-        public NotificationController(INotificationRepository notificationRepository,
+        public NotificationController(/*INotificationRepository notificationRepository,*/
                                       IMapper mapper,
                                       IAuthRepository authRepository,
                                       ISendEmail sendEmail)
         {
             _authRepository = authRepository;
-            _notificationRepository = notificationRepository;
+            //_notificationRepository = notificationRepository;
             _mapper = mapper;
             _sendEmailRepository = sendEmail;
         }
@@ -60,10 +60,11 @@ namespace Messenger.Controllers
         [HttpGet]
         public IActionResult GetUserNotifications(int userId)
         {
-            var notification = _notificationRepository.GetUserNotifications(userId);
+            //var notification = _notificationRepository.GetUserNotifications(userId);
 
-            //return Ok(notification.Count);
-            return Ok(new { userNotifications = notification, count = notification.Count });
+            ////return Ok(notification.Count);
+            //return Ok(new { userNotifications = notification, count = notification.Count });
+            return Ok();
         }
 
         //public IActionResult ReadNotification(int notificationId)
@@ -84,7 +85,9 @@ namespace Messenger.Controllers
 
             //return Ok(_accountDetailRepository.GetDatasPublic(3024, 9025));
 
-            return Ok(_notificationRepository.GetUserNotifications(9025));
+            return Ok();
+
+            //return Ok(_notificationRepository.GetUserNotifications(9025));
         }
     }
 }
