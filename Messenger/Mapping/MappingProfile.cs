@@ -28,8 +28,14 @@ namespace Messenger.Mapping
             CreateMap<AccountSecurity, AccountSecurityViewModel>();
             CreateMap<AccountSecurityViewModel, AccountSecurity>();
 
+            CreateMap<Hub, HubViewModel>();
+            CreateMap<HubViewModel, Hub>();
+
             CreateMap<AccountHubs, AccountHubsViewModel>();
             CreateMap<AccountHubsViewModel, AccountHubs>();
+
+            CreateMap<Message, MessageViewModel>();
+            CreateMap<MessageViewModel, Message>();
 
         }
     }

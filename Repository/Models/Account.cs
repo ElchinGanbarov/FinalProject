@@ -51,7 +51,10 @@ namespace Repository.Models
         public ICollection<AccountPrivacy> Privacy { get; set; }
         public ICollection<AccountSecurity> Security { get; set; }
 
+
         public ICollection<AccountHubs> AccountHubs { get; set; }
+
+
         public ICollection<AccountFavMessages> AccountFavMessages { get; set; }
         public ICollection<GroupMembers> GroupMembers { get; set; }
         public ICollection<Notification> Notifications { get; set; }

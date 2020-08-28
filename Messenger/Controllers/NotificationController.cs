@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Messenger.Models.AccountDetail;
 using Messenger.Models.Email;
 using Messenger.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Models;
 using Repository.Repositories.AuthRepositories;
-using Repository.Repositories.SignalRepository;
 using Repository.Services;
 
 namespace Messenger.Controllers

@@ -46,7 +46,8 @@ namespace Messenger.Controllers
                 AccountPrivacyViewModel = _mapper.Map<AccountPrivacy, AccountPrivacyViewModel>(_accountDetailRepository.GetAccountPrivacy(_user.Id)),
                 AccountSecurityViewModel = _mapper.Map<AccountSecurity, AccountSecurityViewModel>(_accountDetailRepository.GetAccountSecurity(_user.Id)),
                 AccountViewModels = _mapper.Map<ICollection<Account>, ICollection<AccountViewModel>>(_friendsRepository.GetAllFriends(_user.Id)),
-                AccountHubsViewModel = _mapper.Map<ICollection<AccountHubs>, ICollection<AccountHubsViewModel>>(_chatRepository.GetAllHubs(_user.Id))
+                //AccountHubsViewModel = _mapper.Map<ICollection<AccountHubs>, ICollection<AccountHubsViewModel>>(_chatRepository.GetAccountHubsAll(_user.Id)),
+                MessageViewModel = _mapper.Map<ICollection<Message>, ICollection<MessageViewModel>>(_chatRepository.GetAccountMessagesAll(_user.Id))
             };
             return View(model);
         }

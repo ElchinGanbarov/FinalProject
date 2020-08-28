@@ -20,6 +20,7 @@ namespace Messenger.Models.General
         public ICollection<AccountViewModel> AccountViewModels { get; set; }
         public InvitationEmailViewModel InvitationEmailViewModel { get; set; }
         public ICollection<AccountHubsViewModel> AccountHubsViewModel { get; set; }
+        public ICollection<MessageViewModel> MessageViewModel { get; set; }
 
     }
 }

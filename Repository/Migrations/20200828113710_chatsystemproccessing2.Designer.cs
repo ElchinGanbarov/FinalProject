@@ -10,8 +10,8 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    [Migration("20200820161718_DatabaseModelChangesRestored")]
-    partial class DatabaseModelChangesRestored
+    [Migration("20200828113710_chatsystemproccessing2")]
+    partial class chatsystemproccessing2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -532,6 +532,9 @@ namespace Repository.Migrations
 
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("HubType")
+                        .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(50)")

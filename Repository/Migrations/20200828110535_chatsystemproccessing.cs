@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class DatabaseModelChangesRestored : Migration
+    public partial class chatsystemproccessing : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

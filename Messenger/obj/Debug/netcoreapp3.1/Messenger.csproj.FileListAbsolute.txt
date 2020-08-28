@@ -308,6 +308,6 @@ C:\Users\Admin\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\libman.jso
 C:\Users\User\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\libman.json
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassConfirm.cshtml.g.cs
 C:\Users\Admin\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassConfirm.cshtml.g.cs
+C:\Users\User\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\System.Net.WebSockets.WebSocketProtocol.dll
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\FinalProject\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\User\Desktop\FinalProject\Messenger\bin\Debug\netcoreapp3.1\System.Net.WebSockets.WebSocketProtocol.dll
