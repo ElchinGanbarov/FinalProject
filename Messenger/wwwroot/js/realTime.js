@@ -12,15 +12,10 @@ connection.on("ReceiveMessage", function (user, message) {
     if (user == document.getElementById("current-user-id-msg").textContent) {
         var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         var encodedMsg = /*user+"says"+*/ msg;
-        alert(encodedMsg);
-    }
 
-    //var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    //var encodedMsg = /*user+"says"+*/ msg;
-    //alert(encodedMsg);
-    //var li = document.createElement("li");
-    //li.textContent = encodedMsg;
-    //document.getElementById("messagesList").appendChild(li);
+
+        $(".message-day").append("<div class='message'><div class='message-wrapper'><div class='message-content'><span>" + encodedMsg + "</span></div></div></div>")
+    }
 
 });
 
@@ -31,8 +26,16 @@ connection.start().then(function () {
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
+
+
+
     var user = document.getElementById("msg-receiver-user-id").textContent;
     var message = document.getElementById("send-message-input").value;
+
+    $(".message-day").append("<div class='message self'><div class='message-wrapper'><div class='message-content'><span>" + message + "</span></div></div></div>")
+
+    document.getElementById("send-message-input").value = "";
+
     connection.invoke("SendMessage", user, message).catch(function (err) {
         return console.error(err.toString());
     });

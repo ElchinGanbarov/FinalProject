@@ -51,14 +51,10 @@ namespace Messenger.Controllers
 
             return Ok(json);
 
-
-            //var chatHubs = _mapper.Map<ICollection<AccountHubs>, ICollection<AccountHubsViewModel>>(hubs);
-
-            //return Ok(new { chatHubs });
         }
 
-
-        public IActionResult GetHubMessagesAll()
+        [HttpPost]
+        public IActionResult GetHubMessagesAll(int userId, int hubId)
         {
 
             //var messages = _chatRepository.GetHubMessagesAll(1);
@@ -67,15 +63,17 @@ namespace Messenger.Controllers
 
             //return Ok(new { status = true, messages = hubMessages });
 
-            var checkHubAccess = _chatRepository.CheckHubAccess(1, 1);
+            var checkHubAccess = _chatRepository.CheckHubAccess(userId, hubId);
+
+            userId = _user.Id;
 
             if (checkHubAccess)
             {
-                var messages = _chatRepository.GetHubMessagesAll(1);
+                var hubMessages = _chatRepository.GetHubMessagesAll(hubId);
 
-                var hubMessages = _mapper.Map<ICollection<Message>, ICollection<MessageViewModel>>(messages);
+                string json = JsonConvert.SerializeObject(hubMessages);
 
-                return Ok(new { status = true, messages = hubMessages });
+                return Ok(json);
             }
             else
             {
@@ -85,11 +83,28 @@ namespace Messenger.Controllers
 
         public IActionResult Test()
         {
+
             var hubs = _chatRepository.GetAccountHubsAll(1);
 
             string json = JsonConvert.SerializeObject(hubs);
 
             return Ok(json);
+
+
+            //var checkHubAccess = _chatRepository.CheckHubAccess(1, 1);
+
+            //if (checkHubAccess)
+            //{
+            //    var hubMessages = _chatRepository.GetHubMessagesAll(1);
+
+            //    string json = JsonConvert.SerializeObject(hubMessages);
+
+            //    return Ok(json);
+            //}
+            //else
+            //{
+            //    return Ok(new { status = false });
+            //}
         }
     }
 }

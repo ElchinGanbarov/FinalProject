@@ -1236,90 +1236,68 @@ $(document).ready(function () {
         }
     })
 
-    //=======================================================================================
+    //========================================================================================
 
-    //Chat Hub Click event
-    $(document).ready(function () {
-        $('#chatContactTab').on('click', 'li', function (e) {
-            e.preventDefault();
+    //Show / Hide selected chat hub's message & details (chat List)
+    $('#chatContactTab').on('click', 'li', function (e) {
+        e.preventDefault();
 
-            if ($('#callLogTab li.active').hasClass('active')) {
-                $('#callLogTab li.active').removeClass('active')
-            }
-            $(this).addClass('active');
+        if ($('#chatContactTab li.active').hasClass('active')) {
+            $('#chatContactTab li.active').removeClass('active')
+        }
+        $(this).addClass('active');
 
-            //show selected message hub's details
-            if ($('.chat-body-introduction').hasClass('d-flex')) {
-                $('.chat-body-introduction').removeClass('d-flex').addClass('d-none');
-                $('.chat-body').removeClass('d-none');
-            }
+        //show selected message hub's details
+        if ($('.chat-body-introduction').hasClass('d-flex')) {
+            $('.chat-body-introduction').removeClass('d-flex').addClass('d-none');
+            $('.chat-body').removeClass('d-none');
+        }
 
-            let hubId = $('#callLogTab li.active').attr('data-id')
+        let chatHubId = $('#chatContactTab li.active').attr('data-id') //hub id
 
-            $.ajax({
-                url: '/chat/gethubmessagesall',
-                type: "POST",
-                dataType: "json",
-                data:
-                {
-                    friendId: accountId
-                },
-                success: function (res) {
+        //$.ajax({
+        //    url: '/chat/gethubmessagesall',
+        //    type: "POST",
+        //    dataType: "json",
+        //    data:
+        //    {
+        //        userId: accountId,
+        //        hubId: chatHubId
+        //    },
+        //    success: function (res) {
 
-                    //let btnSendFriendRequest = $('.btn-send-friend-request');
-                    //let btnRemoveFriend = $('.btn-remove-friend');
-                    //let btnCancelFriendRequest = $('.btn-reject-friend-request');
-                    //let btnAcceptFriendRequest = $('.btn-accept-friend-request');
+        //        if ($('.chat-body-introduction').hasClass('d-flex')) {
+        //            $('.chat-body-introduction').removeClass('d-flex').addClass('d-none');
+        //            $('.chat-body').removeClass('d-none');
+        //        }
 
+        //        //id
+        //        document.querySelector("#call-hidden-selected-user-id").textContent = res.id;
+        //        //img
+        //        if (res.img != null) {
+        //            $(".call-list-user-photo").attr("src", "https://res.cloudinary.com/djmiksiim/v1/" + res.img)
+        //        } else {
+        //            $(".call-list-user-photo").attr("src", "/uploads/default-profile-img.jpg")
+        //        }
 
-                    if ($('.call-list-own-wrap').hasClass('d-none') == false) {
-                        $('.call-list-own-wrap').addClass('d-none');
-                        $('.call-list-selected-account-wrap').removeClass('d-none');
-                    }
+        //        document.querySelector(".call-list-user-fullname").textContent = res.label; //fullname
+        //        document.querySelector(".call-list-user-phone").textContent = res.phone;
 
+        //    },
+        //    error: function (res) {
+        //        $.toast({
+        //            heading: 'Error',
+        //            text: "System Error 500 ! All Friends Not Response!",
+        //            icon: 'error',
+        //            loader: true,
+        //            bgColor: '#dc3545',
+        //            loaderBg: '#f7d40d',
+        //            position: 'top-right',
+        //            hideAfter: 6000
+        //        });
+        //    }
+        //});
 
-                    //if (btnSendFriendRequest.hasClass('d-none') == false) {
-                    //    btnSendFriendRequest.addClass('d-none')
-                    //}
-                    //if (btnCancelFriendRequest.hasClass('d-none') == false) {
-                    //    btnCancelFriendRequest.addClass('d-none')
-                    //}
-                    //if (btnAcceptFriendRequest.hasClass('d-none') == false) {
-                    //    btnAcceptFriendRequest.addClass('d-none')
-                    //}
-                    //if (btnRemoveFriend.hasClass('d-none')) {
-                    //    btnRemoveFriend.removeClass('d-none')
-                    //}
-
-
-                    //id
-                    document.querySelector("#call-hidden-selected-user-id").textContent = res.id;
-                    //img
-                    if (res.img != null) {
-                        $(".call-list-user-photo").attr("src", "https://res.cloudinary.com/djmiksiim/v1/" + res.img)
-                    } else {
-                        $(".call-list-user-photo").attr("src", "/uploads/default-profile-img.jpg")
-                    }
-
-                    document.querySelector(".call-list-user-fullname").textContent = res.label; //fullname
-                    document.querySelector(".call-list-user-phone").textContent = res.phone;
-
-                },
-                error: function (res) {
-                    $.toast({
-                        heading: 'Error',
-                        text: "System Error 500 ! All Friends Not Response!",
-                        icon: 'error',
-                        loader: true,
-                        bgColor: '#dc3545',
-                        loaderBg: '#f7d40d',
-                        position: 'top-right',
-                        hideAfter: 6000
-                    });
-                }
-            });
-
-        });
-    })
+    });
 });
 

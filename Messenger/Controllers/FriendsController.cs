@@ -189,9 +189,28 @@ namespace Messenger.Controllers
         {
             //Account account = _friendsRepository.GetFriendById(9025);
             //return Ok(account);
-            return Ok(_accountDetailRepository.GetDatasFriend(9025));
+            //return Ok(_accountDetailRepository.GetDatasFriend(9025));
             //return Ok(_accountDetailRepository.GetDatasPublic(3024, 9025));
             //return Ok(_searchRepository.SearchFriendsAccounts(_user.Id, "pe"));
+
+            int currentAccountId = 1;
+            int searchedAccountId = 2;
+
+            if (currentAccountId != searchedAccountId)
+            {
+                if (_friendsRepository.IsFriends(currentAccountId, searchedAccountId)) //friends true
+                {
+                    return Ok(_accountDetailRepository.GetDatasFriend(searchedAccountId));
+                }
+                else //not friends
+                {
+                    return Ok(_accountDetailRepository.GetDatasPublic(currentAccountId, searchedAccountId));
+                }
+            }
+            else //view own profile
+            {
+                return Ok(_accountDetailRepository.GetDatasOwn(searchedAccountId));
+            }
         }
     }
 }

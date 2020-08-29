@@ -369,5 +369,6 @@ namespace Messenger.Controllers
                 return Ok(_accountDetailRepository.GetDatasOwn(searchedAccountId));
             }
         }
+
     }
 }

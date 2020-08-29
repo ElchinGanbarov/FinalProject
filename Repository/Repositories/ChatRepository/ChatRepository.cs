@@ -47,12 +47,27 @@ namespace Repository.Repositories.ChatRepository
         {
             var accountHubs = _context.AccountHubs.Include(h => h.Hub).Where(a => a.AccountId == userId).ToList();
 
-            ICollection<Hub> resultHubs = new List<Hub>();
+            ICollection<int> HubIdList = new List<int>();
 
-            foreach (var item in accountHubs)
+            List<Hub> resultHubs = new List<Hub>();
+
+            foreach (var userHub in accountHubs)
             {
-                var hubItem = _context.Hubs.Find(item.HubId);
-                resultHubs.Add(hubItem);
+                List<AccountHubs> accountHubs1 = _context.AccountHubs.Where(h => h.HubId == userHub.HubId).ToList();
+
+                List<Hub> hubs = _context.Hubs.Where(h => h.Id == userHub.HubId).ToList();
+
+                foreach (var item in hubs)
+                {
+                    HubIdList.Add(item.Id);
+                }
+            }
+
+            foreach (var hubId in HubIdList)
+            {
+                var hub = _context.Hubs.Find(hubId);
+
+                resultHubs.Add(hub);
             }
 
             return resultHubs;
